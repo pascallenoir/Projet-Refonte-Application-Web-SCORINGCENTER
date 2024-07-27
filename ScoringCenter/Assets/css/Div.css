@@ -1,0 +1,19 @@
+﻿.DivParagraph {
+    visibility:hidden;
+    height:0px;
+}
+
+.DivSearch {
+    /*border:1px #4197ee solid;*/
+    height:100px;
+}
+
+.DivGrid {
+    width: 800px; 
+    max-width  : 800px; 
+    /*border:2px black solid;*/
+    border:1px #4197ee solid;
+    margin-left:auto; 
+    margin-right:auto;
+    text-align:left;
+}

@@ -1,0 +1,85 @@
+USE [ScoringDB]
+GO
+
+/****** Object:  Trigger [SCOR_UTILISATEUR_INSERT]    Script Date: 03/03/2023 04:02:31 ******/
+DROP TRIGGER [dbo].[SCOR_UTILISATEUR_INSERT]
+GO
+
+/****** Object:  Trigger [dbo].[SCOR_UTILISATEUR_INSERT]    Script Date: 03/03/2023 04:02:31 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+CREATE TRIGGER [dbo].[SCOR_UTILISATEUR_INSERT] 
+ON [dbo].[SCOR_UTILISATEUR]
+AFTER INSERT AS
+BEGIN
+	DECLARE @ID_USER [dbo].[T_CODE_6] 
+	DECLARE @ID_PROFIL [dbo].[T_CODE_8]
+	DECLARE @CODE_AGENCE [dbo].[T_CODE_10]
+	DECLARE @NOM_USER [dbo].[T_LIBEL_MOYEN_35] 
+	DECLARE @PRENOM_USER [dbo].[T_LIBEL_GRAND_60]
+	DECLARE @EMAIL_USER [dbo].[T_LIBEL_GRAND_60] 
+	DECLARE @LOGIN_USER [dbo].[T_LIBEL_MOYEN_35]
+	DECLARE @PASSWORD_USER [dbo].[T_LIBEL_MOYEN_35] 
+	DECLARE @DATE_USER [dbo].[T_DATE] 
+	DECLARE @STATUT_USER [dbo].[T_BOOLEEN] 
+	DECLARE @PARENT_SUPP [varchar](max) 
+	DECLARE @PCHNG [varchar](50)
+
+		select @ID_USER= isnull(ID_USER,''),@ID_PROFIL=isnull(ID_PROFIL,'')
+		,@CODE_AGENCE = isnull(CODE_AGENCE,''), @NOM_USER= isnull(NOM_USER,'')
+		,@PRENOM_USER=isnull(PRENOM_USER,''),@EMAIL_USER = isnull(EMAIL_USER,'')  
+		,@LOGIN_USER=isnull(LOGIN_USER,''),@PASSWORD_USER = isnull(PASSWORD_USER,'')  
+		,@DATE_USER=DATE_USER,@STATUT_USER = STATUT_USER  
+		,@PARENT_SUPP=isnull(PARENT_SUPP,''),@PCHNG = isnull(PCHNG,'')  
+		from inserted
+	 BEGIN TRY	
+		INSERT INTO WEB_BILAN_DB.[dbo].[SCOR_UTILISATEUR]
+           ([ID_USER]
+           ,[ID_PROFIL]
+           ,[CODE_AGENCE]
+           ,[NOM_USER]
+           ,[PRENOM_USER]
+           ,[EMAIL_USER]
+           ,[LOGIN_USER]
+           ,[PASSWORD_USER]
+           ,[DATE_USER]
+           ,[STATUT_USER]
+           ,[PARENT_SUPP]
+           ,[PCHNG]
+		   )
+     VALUES
+           (
+		    REPLACE(RTRIM(LTRIM(@ID_USER)),' ','')
+           ,REPLACE(RTRIM(LTRIM(@ID_PROFIL)),' ','')
+           ,REPLACE(RTRIM(LTRIM(@CODE_AGENCE)),' ','')
+           ,RTRIM(LTRIM(@NOM_USER))
+           ,RTRIM(LTRIM(@PRENOM_USER))
+           ,RTRIM(LTRIM(@EMAIL_USER))
+           ,RTRIM(LTRIM(@LOGIN_USER))
+           ,RTRIM(LTRIM(@PASSWORD_USER))
+           ,@DATE_USER
+           ,@STATUT_USER
+           ,@PARENT_SUPP
+           ,@PCHNG
+		   )
+
+	END TRY
+	BEGIN CATCH
+		 
+	END CATCH
+
+END
+
+
+GO
+
+ALTER TABLE [dbo].[SCOR_UTILISATEUR] ENABLE TRIGGER [SCOR_UTILISATEUR_INSERT]
+GO
+

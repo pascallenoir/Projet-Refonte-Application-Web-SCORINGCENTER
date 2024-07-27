@@ -1,0 +1,1116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 36, 36" name="ScoringEntity">
+  <DataContextMoniker Name="/ScoringEntityDataContext" />
+  <nestedChildShapes>
+    <classShape Id="a8472ab2-59bf-44d3-a556-d2b982835ae4" absoluteBounds="14.25, 31.625, 2, 1.578595377604163">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_AUTRE_RATIO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6ed2d5de-baad-45d7-9849-ab40ba41360d" absoluteBounds="14.265, 32.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ca657680-7c0c-4c04-91e5-3d98880c8a40" absoluteBounds="14.75, 12.5, 2, 2.5401025390624987">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_VALIDATION" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a3e464d8-f3ce-4132-8030-4b52298365be" absoluteBounds="14.765, 12.96, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="947f8b97-9b7d-491a-9c51-c2cb6c1f9bd4" absoluteBounds="11.75, 3.75, 2, 1.7708968098958326">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_AUTRE_RATIO_DETAIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="caa55b5c-d84b-41f4-8381-2fce4ad347e2" absoluteBounds="11.765, 4.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="df28b97c-98ef-48f7-a034-fcb2265cec2e" absoluteBounds="14.25, 19.75, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_BILAN" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a8420403-0d56-4c58-9789-c969dbc0923e" absoluteBounds="14.265, 20.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cb26772e-d924-4850-9db7-8d41811121f5" absoluteBounds="17, 19.625, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_BILAN_DETAIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b369807a-8c72-4c4d-b228-b7d80e08434b" absoluteBounds="17.015, 20.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="81dfbb39-a6da-4a26-896d-b6b0852a824c" absoluteBounds="14.25, 22.125, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_BILAN_GRANDE_MASSE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ef12e25a-6528-4d61-be81-10ef2ff6cfff" absoluteBounds="14.265, 22.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="70bc62f4-2716-47eb-9e40-83d325957e39" absoluteBounds="17, 22, 2, 1.7708968098958309">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_BILAN_GRANDE_MASSE_DETAIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4c8201e2-3591-49d2-be06-c85ec2ef940e" absoluteBounds="17.015, 22.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="eefc9a7b-9f51-4873-b917-91b3f8946e88" absoluteBounds="14.25, 24.625, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_COMPTE_RESULTAT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dd3f935b-0473-40a7-8d24-137789fe5653" absoluteBounds="14.265, 25.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d4be3838-e5fa-45c3-8f2b-c15341643231" absoluteBounds="17, 24.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_COMPTE_RESULTAT_DETAIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b05d8c63-4d72-4e9f-aab5-e8ad15601516" absoluteBounds="17.015, 24.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0e416cc9-7b66-48b5-baa6-3973fcdcaef2" absoluteBounds="14.75, 3.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_CORRESPONDANCE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4ae18ac1-2982-4419-90c3-f6fcb63954c6" absoluteBounds="14.765, 4.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2a4e72ef-6c32-4e71-8378-99973a320b04" absoluteBounds="14.75, 15.75, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_NORME_RATIO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5393e737-8cda-4fe0-b8ec-c5ec55f4903b" absoluteBounds="14.765, 16.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="82973b8c-f698-494d-8faf-ae9ba749a074" absoluteBounds="8.75, 26.625, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_PARAMETRE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cdf68093-7029-4ca3-a95e-981780ad305c" absoluteBounds="8.765, 27.085, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4d55423d-e4b5-4388-909a-6afdb3a1af0c" absoluteBounds="11.5, 25.5, 2, 4.4631168619791666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_PARAMETRE_DETAIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="30f25d7b-d3e0-45f9-b9cf-66defd37da77" absoluteBounds="11.515, 25.96, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b9e88cce-a648-4975-8558-cd2f1ec0ee5e" absoluteBounds="14.25, 34.125, 2, 1.5785953776041737">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_RATIO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="017666a5-b9e6-408e-82b4-0f5825cef7aa" absoluteBounds="14.265, 34.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6ef3cfd3-8f27-4d38-8f97-fb1aed0316d1" absoluteBounds="17, 34, 2, 1.7708968098958309">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_RATIO_DETAIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="68126ba2-a5c7-47ac-8043-c0d0fe43365e" absoluteBounds="17.015, 34.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9dda8147-d2b9-45b0-9543-6c3e788888a3" absoluteBounds="20.25, 13.625, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_AUTRE_RATIO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bfb38274-4d3b-4adc-be89-adb12d865138" absoluteBounds="20.265, 14.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="83f91d34-4cd8-424c-8009-6339a193e147" absoluteBounds="8.75, 21.75, 2, 1.7708968098958309">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_AUTRE_RATIO_DETAIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7ba8bb18-a903-4b29-841e-4e9b5425d904" absoluteBounds="8.765, 22.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a79bad8b-e934-4356-b791-47ff85afee41" absoluteBounds="20.25, 1.75, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_BILAN" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9b5335dc-0916-4ba7-a443-ddacc05774ad" absoluteBounds="20.265, 2.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d8c9d856-98e8-4eff-b948-9bdd9de6f355" absoluteBounds="23, 1.625, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_BILAN_DETAIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="470b88dd-87eb-4a9c-860c-2225d2cc5f67" absoluteBounds="23.015, 2.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="74f39a65-6ac8-49e3-997c-7622c7afd870" absoluteBounds="20.25, 4.125, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_BILAN_GRANDE_MASSE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8050295d-0c19-4a4f-b943-2010387f1dc6" absoluteBounds="20.265, 4.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="07f992b9-9dc6-4066-b8f6-d1f946d5d3b9" absoluteBounds="23, 4, 2, 1.7708968098958326">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_BILAN_GRANDE_MASSE_DETAIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="947e767c-9efc-4b9a-ac40-a1c99ba19d74" absoluteBounds="23.015, 4.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e28c80b6-c5e0-4fd8-9076-517df03f877e" absoluteBounds="20.25, 6.625, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_COMPTE_RESULTAT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="479ef2a1-fb7c-46ca-b961-6038a045b16d" absoluteBounds="20.265, 7.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="252ae524-38f0-4484-9971-57aad5028726" absoluteBounds="23, 6.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_COMPTE_RESULTAT_DETAIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b9d0f2f8-3faf-4078-afdb-954a5da0be3b" absoluteBounds="23.015, 6.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="53bc2415-db63-47bd-b7e5-816468049a1a" absoluteBounds="0.75, 22.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_CORRESPONDANCE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="576dc37d-3816-48a3-b449-a48ada94a1da" absoluteBounds="0.765, 23.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="07394ea0-f03b-41a6-a514-427c98dbb819" absoluteBounds="22.75, 13.75, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_NORME_RATIO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d818366f-790a-4546-bc25-e088a952e3e3" absoluteBounds="22.765, 14.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d1f6282e-4dea-401b-a888-46bdeac60d38" absoluteBounds="14.75, 8.625, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_PARAMETRE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1b3df32a-68eb-4666-ab70-93ed602fddfb" absoluteBounds="14.765, 9.085, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b8bd4220-d99b-49d7-9c0e-1a8744f5ab69" absoluteBounds="17.5, 7.5, 2, 4.4631168619791666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_PARAMETRE_DETAIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ee01d1d9-eaa6-4a2e-acb2-6b6214590e35" absoluteBounds="17.515, 7.96, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fb02216a-a725-4c85-8dce-638f34df6ced" absoluteBounds="20.25, 16.125, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_RATIO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f155201f-633d-4a24-8b77-77112c38fc20" absoluteBounds="20.265, 16.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4656ede6-5bd0-4220-8511-bd1cae3e2b4f" absoluteBounds="23, 16, 2, 1.7708968098958326">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_RATIO_DETAIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="900198a4-f047-4f9b-b032-93c29feff064" absoluteBounds="23.015, 16.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4b32cda0-2848-45ac-8a73-bf10f57869b0" absoluteBounds="20.25, 9, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_TABLEAU_SYNTHETIQUE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3ce0fb0a-7ef5-481e-95d8-cedfedbefdb8" absoluteBounds="20.265, 9.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3519f312-7a3a-4cff-8a8b-0034bfd6dbc1" absoluteBounds="23, 8.75, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_TABLEAU_SYNTHETIQUE_DETAIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="177cd21c-1cd0-40b7-8d2a-f6f0ab4ecf0f" absoluteBounds="23.015, 9.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f97de74f-0598-438e-9b4b-aa3e93420068" absoluteBounds="20.25, 11.375, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_TDR" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2b7d9be5-5ee5-4a28-961a-9b64259f9753" absoluteBounds="20.265, 11.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8caf9dbb-66af-489a-a2ea-caa7741f5528" absoluteBounds="23, 11.375, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_TDR_DETAIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="72bee2f2-ac62-492e-a29f-e47300e5e301" absoluteBounds="23.015, 11.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="019ca00c-4fae-4ed0-b0f9-3c814dfe9c69" absoluteBounds="14.25, 27, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_TABLEAU_SYNTHETIQUE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="28cadd1d-e1c6-4a19-b8fb-d3d7129304e1" absoluteBounds="14.265, 27.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4d729ac8-bee1-4757-9b33-2e0db757aff4" absoluteBounds="17, 26.75, 2, 1.7708968098958309">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_TABLEAU_SYNTHETIQUE_DETAIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1ddf96be-809f-4703-8543-013b6cb1c83a" absoluteBounds="17.015, 27.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a86ce740-2f59-4e6f-a918-38dc8c4dee94" absoluteBounds="14.25, 29.375, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_TDR" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dc0c9b86-fa99-4094-aba8-ec4b22f81667" absoluteBounds="14.265, 29.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="71a34353-1098-4775-88f9-6a83ea5378fa" absoluteBounds="17, 29.375, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANAFI_TDR_DETAIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fd98ca7b-a9d2-4c3b-96db-6818b07adb62" absoluteBounds="17.015, 29.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9b0302e6-e351-4ef1-91a6-f5ad3dc55c8f" absoluteBounds="0.75, 25.75, 2, 2.9247054036458309">
+      <DataClassMoniker Name="/ScoringEntityDataContext/ANFI_RUBRIQUE_ETAT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8b85f152-9de4-47a3-96ca-56cc2fa0a7f5" absoluteBounds="0.765, 26.21, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="84038c49-afbe-4dcd-a209-21ed6aec557f" absoluteBounds="19.75, 18.75, 2, 1.1939925130208309">
+      <DataClassMoniker Name="/ScoringEntityDataContext/CEMAC_COMPOS_INI" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d8350de7-1cc9-451f-8b1b-f33538a14eb2" absoluteBounds="19.765, 19.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8c9ac543-6b9c-4c23-be6a-3539fa4c5d5d" absoluteBounds="3.75, 25.75, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/LESENCOURSBMS" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5085ff52-015e-4d2f-954a-49f98725bf83" absoluteBounds="3.765, 26.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ae4d8ad5-5216-49de-be32-6fbb5701a611" absoluteBounds="25.75, 7.75, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/LESENCOURSBMS_18092022" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a9e11b90-39d1-49cb-b48b-c655d41a3cdb" absoluteBounds="25.765, 8.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="eaf2332d-2eb1-439a-9b6b-9b9bf5e63434" absoluteBounds="6.25, 22.875, 2, 1.7708968098958309">
+      <DataClassMoniker Name="/ScoringEntityDataContext/LOG_CONTREPARTIE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7d90e96f-3a6a-4c56-9e54-cba71057ccb1" absoluteBounds="6.265, 23.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6c0057b8-919a-4a86-8b45-6add89c50d39" absoluteBounds="25.75, 11.75, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_ACTIVITE_BCEAO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2304aaf1-4bf8-40f5-909d-14ae6dd41e1e" absoluteBounds="25.765, 12.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c2681716-24be-4a92-a9d7-50d7d865672a" absoluteBounds="6.25, 5.375, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_AGENCE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="80382d81-3476-4f18-b9f3-a50dac4b6a71" absoluteBounds="6.265, 5.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="54c22003-04c8-4dd0-9756-1f446509c577" absoluteBounds="25.75, 14.75, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_ALERTE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="440f1e0a-93ed-458b-9b62-f263f1efa6b9" absoluteBounds="25.765, 15.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2b16c439-c887-4498-be7e-dfcc0fa3eebe" absoluteBounds="3.5, 13.375, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_BANQUE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4c7cd449-b264-444b-9370-a4779d141a7d" absoluteBounds="3.515, 13.835, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5dac779a-f6a0-4bb8-a11a-edb328386e2f" absoluteBounds="22.5, 25.875, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_BAREME" />
+      <nestedChildShapes>
+        <elementListCompartment Id="94572e10-edbd-4a42-8e13-5ebc6bc4b210" absoluteBounds="22.515, 26.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e0dbc6a6-a28a-41fa-950e-2930326b58f0" absoluteBounds="22.5, 28.875, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_BAREME_PONDERATION" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fbc25364-c495-47c3-90cd-3ee3694a8b89" absoluteBounds="22.515, 29.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ae032a79-bf28-4776-ad6c-585e705c05ec" absoluteBounds="22.5, 20.75, 2, 1.7708968098958309">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_BAREME_QUESTIONNAIRE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a9946e12-dcce-4742-a6e6-db62604f440f" absoluteBounds="22.515, 21.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8751abdb-f7e0-44d2-ba04-0922d89e5f89" absoluteBounds="25.75, 17.75, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_BRANCHE_ACTIV" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3b08a3bb-46f9-4069-8746-5c8f66f089cb" absoluteBounds="25.765, 18.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1f45d252-4d94-4aba-aec6-53570975a7d4" absoluteBounds="25.5, 23.625, 2, 1.7708968098958309">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_CHAPITRE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="70d10fb5-23db-4cf9-878a-57aca346724a" absoluteBounds="25.515, 24.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3bfea546-5bfd-4533-851b-fcbc2cc89cbd" absoluteBounds="28.5, 1.25, 2, 1.9631982421875003">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_CMPT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6772997c-f71a-4b32-baad-9d0691546c66" absoluteBounds="28.515, 1.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a2b09fd3-818d-4c47-85c5-162399dafc0a" absoluteBounds="25.75, 26.75, 2, 1.9631982421875023">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_COMMENTAIRE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fd76308c-5a4d-4654-839c-2e4af9b00ead" absoluteBounds="25.765, 27.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="04383a95-8677-4bfd-a326-f6e57856b1cc" absoluteBounds="3.5, 17, 2, 4.8477197265625023">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_CONTREPARTIE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="50f1e3c1-5129-4546-adb2-aef5c8067c1b" absoluteBounds="3.515, 17.46, 1.9700000000000002, 4.2877197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d5828202-d332-49c6-8c82-aeaac55967bb" absoluteBounds="31.25, 1, 2, 2.5401025390625005">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_CREDIT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="178a3d87-08a8-4f5b-a2e9-8106f87ff3c2" absoluteBounds="31.265, 1.46, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="28305cd8-35e3-4775-814a-f10297e62f41" absoluteBounds="6.25, 10.75, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_DATE_CHARGEMENT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2da47bcb-b3b9-4656-b9d0-fd781fcc2c07" absoluteBounds="6.265, 11.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7389a6b5-4f74-447f-94c9-eddffee6543a" absoluteBounds="9, 18.75, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_DATE_VALIDATION_ENCOURS" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d8c5ec36-0ec3-434a-bce9-4ee593b0c924" absoluteBounds="9.015, 19.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="47023b86-5659-43b7-934f-2427071d3eef" absoluteBounds="9, 13.625, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_DELEGATION" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3aefe06a-0bb8-47bc-a68f-3988232205c8" absoluteBounds="9.015, 14.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="04a42db6-d6a4-4d0b-a9da-9ed6ce480a4e" absoluteBounds="11.75, 13.625, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_DELEGUER" />
+      <nestedChildShapes>
+        <elementListCompartment Id="200741ce-6395-4c6b-bb27-ee162ba78ccd" absoluteBounds="11.765, 14.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b1a1a183-8ba3-4179-9918-5e3868aab4d3" absoluteBounds="28.75, 7.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_DEVISE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c5f3745c-2aba-4c58-8c98-39ae6958c9a8" absoluteBounds="28.765, 8.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e506101d-50b1-4916-8829-e7b4ac1c2ebf" absoluteBounds="28.75, 10.75, 2, 3.3093082682291666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_DONNEES_COMPTABLES_ENTREPRISE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2a897da9-b3dd-4843-aab6-2843b41f66ee" absoluteBounds="28.765, 11.21, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="57df76ef-6df8-4460-b6f5-4964578677e9" absoluteBounds="28.75, 15.75, 2, 3.8862125651041666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_DONNEES_SIGNALETIQUES_ENTREPRISE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="abc80168-6b40-4c6a-90ea-4971cfd73795" absoluteBounds="28.765, 16.21, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="261ac0f6-cd68-48e4-b8c3-5dece0be9d2d" absoluteBounds="6.25, 17.375, 2, 4.0785139973958309">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_DOSSIER" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1d41d7a2-117c-4c9f-9629-567f31da1547" absoluteBounds="6.265, 17.835, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fdfa1a66-4d32-4ea6-b1b9-62cef07ffd6c" absoluteBounds="14.5, 0.875, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_DOSSIER_FORMULE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="63460b65-8afd-4142-ae7d-96bfb42e858e" absoluteBounds="14.515, 1.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="567257b7-7738-4eb9-ba28-8072f9b11d0d" absoluteBounds="9, 10.625, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_DOSSIER_SEUIL_CREDIT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="139d54f6-4a03-429d-af91-32e2c7049ffa" absoluteBounds="9.015, 11.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="13daa869-ee3f-4b74-9587-1ed8943fd36a" absoluteBounds="9.25, 0.875, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_DROIT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="88a09c6e-1180-413f-80f6-09f031e528dc" absoluteBounds="9.265, 1.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="605a85cf-5511-4507-93f6-5931ee53ee0f" absoluteBounds="12, 7.875, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_DROIT_PROFIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="600a9bca-a2fa-4d90-9270-4955d38aa302" absoluteBounds="12.015, 8.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6dfe1d23-a496-4f9e-8bc6-ef675de9b623" absoluteBounds="3.5, 2.5, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_FITCH_PAYS" />
+      <nestedChildShapes>
+        <elementListCompartment Id="85f7eba2-7253-48d9-966e-a6754884c73a" absoluteBounds="3.515, 2.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f9c8b69d-11d2-484a-9356-34a96214311d" absoluteBounds="11.75, 0.875, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_FORMULE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e898a190-5bd9-44c2-aee1-eea7f9e4de5a" absoluteBounds="11.765, 1.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="73aa5691-ba4a-41fc-bd87-c946475e1f31" absoluteBounds="28.75, 26.75, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_GROUPE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="44ac25f5-d175-47ba-9658-be5e998bd809" absoluteBounds="28.765, 27.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="066c78a7-dff6-45f1-88b5-7a46b51de0d2" absoluteBounds="6.25, 30.375, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_HISTORIQUE_NOTATION" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0d23d92f-291d-46d5-8b3d-5063e186cf5a" absoluteBounds="6.265, 30.835, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="872af3c5-b4b5-4f76-90e3-faba3e21f374" absoluteBounds="22.75, 23.75, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_MODELE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fe91cbb2-002e-472b-a158-d10f6415ad74" absoluteBounds="22.765, 24.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2c513a21-e41f-453c-849a-1729f5e386e5" absoluteBounds="22.75, 31.875, 2, 1.1939925130208309">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_MODELE_PARAM" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7c82db3b-a253-4520-886f-ca6a80eccc62" absoluteBounds="22.765, 32.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4eb033d3-bd36-4735-9195-6294cac79296" absoluteBounds="25.5, 20.5, 2, 1.9631982421875023">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_MODELE_PARAM_VAL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c43a13b7-9a0d-4fc5-8ece-5687ee7aee28" absoluteBounds="25.515, 20.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9e31b7bf-e40c-449b-ae95-186ac008422d" absoluteBounds="3.5, 5.25, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_MOODYS_PAYS" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7f06ce3b-23c7-4044-abf2-c8916fada373" absoluteBounds="3.515, 5.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="119b1280-9608-40d3-8537-7e0f9ae4b230" absoluteBounds="19.75, 23.875, 2, 1.1939925130208309">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_NOTATION" />
+      <nestedChildShapes>
+        <elementListCompartment Id="341ed8ea-b229-409d-a930-f0b190169d78" absoluteBounds="19.765, 24.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="87fddb13-2550-4cac-ba83-7d9048ddda31" absoluteBounds="31, 20.375, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_NOTE_QUESTIONNAIRE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1a284d5a-6e3b-476d-bf92-cdbcae7af626" absoluteBounds="31.015, 20.835, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d916dc3f-5f4b-4773-b745-d4174fba59f2" absoluteBounds="33.75, 23.75, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_NOTE_REPONSE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a7b0dac2-df5c-434d-91c0-b8c6e207589a" absoluteBounds="33.765, 24.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a1e6fd46-93e9-4ec7-97d2-680fd3535370" absoluteBounds="0.75, 7.875, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_PAYS_NATIONAL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c6e43d95-13d0-4509-a26c-6982450af950" absoluteBounds="0.765, 8.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5242887b-a79c-47ed-8efb-dacd6e320a64" absoluteBounds="3.5, 8, 2, 1.9631982421874996">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_PERSO_PAYS" />
+      <nestedChildShapes>
+        <elementListCompartment Id="80375743-0ffe-4681-b4d9-be2683813c55" absoluteBounds="3.515, 8.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b2dbb577-0bee-45ed-889c-8b7b10497360" absoluteBounds="6.25, 7.625, 2, 1.9631982421874996">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_PROFIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="49fa4ab3-a960-4d64-93d7-caaeb57064c1" absoluteBounds="6.265, 8.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="91ec0eee-acc9-4f72-9af2-cdd754faf625" absoluteBounds="11.75, 16.5, 2, 2.5401025390625023">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_PROPOSITION" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1823f611-4c9d-4602-ae00-42c704211059" absoluteBounds="11.765, 16.96, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8f97e466-8234-4687-bcf4-fa25fa3c0085" absoluteBounds="28.25, 23.5, 2, 1.9631982421875023">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_QUESTION" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4c6d8ab7-e48d-4f18-a13d-983861d5a6b3" absoluteBounds="28.265, 23.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c627e2b8-b97d-49ec-8830-2793c3bcfb30" absoluteBounds="31, 23.625, 2, 1.7708968098958309">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_REPONSE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="af9b3049-6af4-44db-b231-e5545fa92428" absoluteBounds="31.015, 24.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="989f5667-9718-47b0-843f-f70f5fedab70" absoluteBounds="0.75, 29.75, 2, 1.9631982421875023">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_RETRANSCRIPTION_POINT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c0e07d96-8daa-48bf-8660-068d6f9c1edb" absoluteBounds="0.765, 30.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="103624d7-0dc9-4ac3-a410-5a5078eb7354" absoluteBounds="25.75, 29.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_SECTEUR_ACTIV" />
+      <nestedChildShapes>
+        <elementListCompartment Id="75157e89-189d-4b9b-94e0-3c7689e2ef00" absoluteBounds="25.765, 30.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ba0331bd-edec-41e7-b2cf-98e9479449c0" absoluteBounds="6.25, 13.5, 2, 1.9631982421874987">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_SEUIL_DELEGUATION" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a7efc1f0-77a9-4394-860a-3369453e254f" absoluteBounds="6.265, 13.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="20cf48f9-567c-4e52-b6bd-4415d9dc20a4" absoluteBounds="28.75, 29.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_SPY" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5def42f3-77b2-45c0-b9fe-ebe5ec7f6eef" absoluteBounds="28.765, 30.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="11f1ff8b-6b12-4980-8180-598d55153257" absoluteBounds="8.75, 30.75, 2, 1.7708968098958309">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_STATUT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="81af51f7-f7c4-4dd7-b957-6730506fddca" absoluteBounds="8.765, 31.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="abf0884d-00b5-4279-b299-bff138f3fc12" absoluteBounds="3.5, 10.625, 2, 1.9631982421874987">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_STPOOR_PAYS" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2dc692a4-e44f-4285-8778-31af4b96597c" absoluteBounds="3.515, 11.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="66172fc2-dbd0-4da9-a2c4-25e76b15695c" absoluteBounds="9.25, 3.875, 2, 1.193992513020834">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_TYPE_DROIT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="77d06d5d-682b-4002-83c2-81db8e0e31aa" absoluteBounds="9.265, 4.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="08c0b245-7e1a-435a-87ca-dd4c171f4859" absoluteBounds="25.75, 1.625, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_TYPECMPT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5ae00c22-680c-4e10-b686-4e9adc9b7c77" absoluteBounds="25.765, 2.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cf647a46-f362-43a3-8e85-3ae5486a28f4" absoluteBounds="28.5, 5.625, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_TYPECREDIT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6379f260-0152-4332-85af-b53f28bba888" absoluteBounds="28.515, 6.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7a56dbaf-8a66-4b65-80dd-acabbc563d84" absoluteBounds="9, 5.875, 2, 3.1170068359375014">
+      <DataClassMoniker Name="/ScoringEntityDataContext/SCOR_UTILISATEUR" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e796ef85-2721-4ffb-9dd6-337a3d874396" absoluteBounds="9.015, 6.335, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(16.25 : 20.4431469726563); (17 : 20.4431469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_BILAN/ANAFI_BILAN_ANAFI_BILAN_DETAIL" />
+      <nodes>
+        <classShapeMoniker Id="df28b97c-98ef-48f7-a034-fcb2265cec2e" />
+        <classShapeMoniker Id="cb26772e-d924-4850-9db7-8d41811121f5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(16.25 : 22.8181469726563); (17 : 22.8181469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_BILAN_GRANDE_MASSE/ANAFI_BILAN_GRANDE_MASSE_ANAFI_BILAN_GRANDE_MASSE_DETAIL" />
+      <nodes>
+        <classShapeMoniker Id="81dfbb39-a6da-4a26-896d-b6b0852a824c" />
+        <classShapeMoniker Id="70bc62f4-2716-47eb-9e40-83d325957e39" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(16.25 : 25.3181469726563); (17 : 25.3181469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_COMPTE_RESULTAT/ANAFI_COMPTE_RESULTAT_ANAFI_COMPTE_RESULTAT_DETAIL" />
+      <nodes>
+        <classShapeMoniker Id="eefc9a7b-9f51-4873-b917-91b3f8946e88" />
+        <classShapeMoniker Id="d4be3838-e5fa-45c3-8f2b-c15341643231" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(12.5 : 29.9631168619792); (12.5 : 32.4142976888021); (14.25 : 32.4142976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_PARAMETRE_DETAIL/ANAFI_PARAMETRE_DETAIL_ANAFI_AUTRE_RATIO" />
+      <nodes>
+        <classShapeMoniker Id="4d55423d-e4b5-4388-909a-6afdb3a1af0c" />
+        <classShapeMoniker Id="a8472ab2-59bf-44d3-a556-d2b982835ae4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(13.0312525 : 29.9631168619792); (13.0312525 : 31.988396344401); (14.25 : 31.988396344401)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_PARAMETRE_DETAIL/ANAFI_PARAMETRE_DETAIL_ANAFI_AUTRE_RATIO1" />
+      <nodes>
+        <classShapeMoniker Id="4d55423d-e4b5-4388-909a-6afdb3a1af0c" />
+        <classShapeMoniker Id="a8472ab2-59bf-44d3-a556-d2b982835ae4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(12.5 : 25.5); (12.5 : 20.4431469726563); (14.25 : 20.4431469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_PARAMETRE_DETAIL/ANAFI_PARAMETRE_DETAIL_ANAFI_BILAN" />
+      <nodes>
+        <classShapeMoniker Id="4d55423d-e4b5-4388-909a-6afdb3a1af0c" />
+        <classShapeMoniker Id="df28b97c-98ef-48f7-a034-fcb2265cec2e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(13.0312525 : 25.5); (13.0312525 : 22.8181469726563); (14.25 : 22.8181469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_PARAMETRE_DETAIL/ANAFI_PARAMETRE_DETAIL_ANAFI_BILAN_GRANDE_MASSE" />
+      <nodes>
+        <classShapeMoniker Id="4d55423d-e4b5-4388-909a-6afdb3a1af0c" />
+        <classShapeMoniker Id="81dfbb39-a6da-4a26-896d-b6b0852a824c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(13.5 : 25.7556469726563); (14.25 : 25.7556469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_PARAMETRE_DETAIL/ANAFI_PARAMETRE_DETAIL_ANAFI_COMPTE_RESULTAT" />
+      <nodes>
+        <classShapeMoniker Id="4d55423d-e4b5-4388-909a-6afdb3a1af0c" />
+        <classShapeMoniker Id="eefc9a7b-9f51-4873-b917-91b3f8946e88" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.75 : 27.7027498372396); (11.5 : 27.7027498372396)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_PARAMETRE/ANAFI_PARAMETRE_ANAFI_PARAMETRE_DETAIL" />
+      <nodes>
+        <classShapeMoniker Id="82973b8c-f698-494d-8faf-ae9ba749a074" />
+        <classShapeMoniker Id="4d55423d-e4b5-4388-909a-6afdb3a1af0c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.9687475 : 29.9631168619792); (11.9687475 : 34.9142976888021); (14.25 : 34.9142976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_PARAMETRE_DETAIL/ANAFI_PARAMETRE_DETAIL_ANAFI_RATIO" />
+      <nodes>
+        <classShapeMoniker Id="4d55423d-e4b5-4388-909a-6afdb3a1af0c" />
+        <classShapeMoniker Id="b9e88cce-a648-4975-8558-cd2f1ec0ee5e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(16.25 : 34.9142976888021); (17 : 34.9142976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_RATIO/ANAFI_RATIO_ANAFI_RATIO_DETAIL" />
+      <nodes>
+        <classShapeMoniker Id="b9e88cce-a648-4975-8558-cd2f1ec0ee5e" />
+        <classShapeMoniker Id="6ef3cfd3-8f27-4d38-8f97-fb1aed0316d1" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(22.25 : 2.44314697265625); (23 : 2.44314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_BILAN/ANAFI_SAVE_BILAN_ANAFI_SAVE_BILAN_DETAIL" />
+      <nodes>
+        <classShapeMoniker Id="a79bad8b-e934-4356-b791-47ff85afee41" />
+        <classShapeMoniker Id="d8c9d856-98e8-4eff-b948-9bdd9de6f355" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(22.25 : 4.81814697265625); (23 : 4.81814697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_BILAN_GRANDE_MASSE/ANAFI_SAVE_BILAN_GRANDE_MASSE_ANAFI_SAVE_BILAN_GRANDE_MASSE_DETAIL" />
+      <nodes>
+        <classShapeMoniker Id="74f39a65-6ac8-49e3-997c-7622c7afd870" />
+        <classShapeMoniker Id="07f992b9-9dc6-4066-b8f6-d1f946d5d3b9" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(22.25 : 7.31814697265625); (23 : 7.31814697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_COMPTE_RESULTAT/ANAFI_SAVE_COMPTE_RESULTAT_ANAFI_SAVE_COMPTE_RESULTAT_DETAIL" />
+      <nodes>
+        <classShapeMoniker Id="e28c80b6-c5e0-4fd8-9076-517df03f877e" />
+        <classShapeMoniker Id="252ae524-38f0-4484-9971-57aad5028726" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(18.5 : 11.9631168619792); (18.5 : 14.4142976888021); (20.25 : 14.4142976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_PARAMETRE_DETAIL/ANAFI_SAVE_PARAMETRE_DETAIL_ANAFI_SAVE_AUTRE_RATIO" />
+      <nodes>
+        <classShapeMoniker Id="b8bd4220-d99b-49d7-9c0e-1a8744f5ab69" />
+        <classShapeMoniker Id="9dda8147-d2b9-45b0-9543-6c3e788888a3" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(19.0312525 : 11.9631168619792); (19.0312525 : 13.988396344401); (20.25 : 13.988396344401)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_PARAMETRE_DETAIL/ANAFI_SAVE_PARAMETRE_DETAIL_ANAFI_SAVE_AUTRE_RATIO1" />
+      <nodes>
+        <classShapeMoniker Id="b8bd4220-d99b-49d7-9c0e-1a8744f5ab69" />
+        <classShapeMoniker Id="9dda8147-d2b9-45b0-9543-6c3e788888a3" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(18.5 : 7.5); (18.5 : 2.44314697265625); (20.25 : 2.44314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_PARAMETRE_DETAIL/ANAFI_SAVE_PARAMETRE_DETAIL_ANAFI_SAVE_BILAN" />
+      <nodes>
+        <classShapeMoniker Id="b8bd4220-d99b-49d7-9c0e-1a8744f5ab69" />
+        <classShapeMoniker Id="a79bad8b-e934-4356-b791-47ff85afee41" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(19.0312525 : 7.5); (19.0312525 : 4.81814697265625); (20.25 : 4.81814697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_PARAMETRE_DETAIL/ANAFI_SAVE_PARAMETRE_DETAIL_ANAFI_SAVE_BILAN_GRANDE_MASSE" />
+      <nodes>
+        <classShapeMoniker Id="b8bd4220-d99b-49d7-9c0e-1a8744f5ab69" />
+        <classShapeMoniker Id="74f39a65-6ac8-49e3-997c-7622c7afd870" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(19.5 : 7.75564697265625); (20.25 : 7.75564697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_PARAMETRE_DETAIL/ANAFI_SAVE_PARAMETRE_DETAIL_ANAFI_SAVE_COMPTE_RESULTAT" />
+      <nodes>
+        <classShapeMoniker Id="b8bd4220-d99b-49d7-9c0e-1a8744f5ab69" />
+        <classShapeMoniker Id="e28c80b6-c5e0-4fd8-9076-517df03f877e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(16.75 : 9.70274983723958); (17.1666666666667 : 9.70274983723958 : JumpStart); (17.3333333333333 : 9.70274983723958 : JumpEnd); (17.5 : 9.70274983723958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_PARAMETRE/ANAFI_SAVE_PARAMETRE_ANAFI_SAVE_PARAMETRE_DETAIL" />
+      <nodes>
+        <classShapeMoniker Id="d1f6282e-4dea-401b-a888-46bdeac60d38" />
+        <classShapeMoniker Id="b8bd4220-d99b-49d7-9c0e-1a8744f5ab69" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(17.9687475 : 11.9631168619792); (17.9687475 : 16.9142976888021); (20.25 : 16.9142976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_PARAMETRE_DETAIL/ANAFI_SAVE_PARAMETRE_DETAIL_ANAFI_SAVE_RATIO" />
+      <nodes>
+        <classShapeMoniker Id="b8bd4220-d99b-49d7-9c0e-1a8744f5ab69" />
+        <classShapeMoniker Id="fb02216a-a725-4c85-8dce-638f34df6ced" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(22.25 : 16.9142976888021); (23 : 16.9142976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_RATIO/ANAFI_SAVE_RATIO_ANAFI_SAVE_RATIO_DETAIL" />
+      <nodes>
+        <classShapeMoniker Id="fb02216a-a725-4c85-8dce-638f34df6ced" />
+        <classShapeMoniker Id="4656ede6-5bd0-4220-8511-bd1cae3e2b4f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(19.5 : 9.69314697265625); (20.25 : 9.69314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_PARAMETRE_DETAIL/ANAFI_SAVE_PARAMETRE_DETAIL_ANAFI_SAVE_TABLEAU_SYNTHETIQUE" />
+      <nodes>
+        <classShapeMoniker Id="b8bd4220-d99b-49d7-9c0e-1a8744f5ab69" />
+        <classShapeMoniker Id="4b32cda0-2848-45ac-8a73-bf10f57869b0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(22.25 : 9.69314697265625); (23 : 9.69314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_TABLEAU_SYNTHETIQUE/ANAFI_SAVE_TABLEAU_SYNTHETIQUE_ANAFI_SAVE_TABLEAU_SYNTHETIQUE_DETAIL" />
+      <nodes>
+        <classShapeMoniker Id="4b32cda0-2848-45ac-8a73-bf10f57869b0" />
+        <classShapeMoniker Id="3519f312-7a3a-4cff-8a8b-0034bfd6dbc1" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(19.5 : 11.6690584309896); (20.25 : 11.6690584309896)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_PARAMETRE_DETAIL/ANAFI_SAVE_PARAMETRE_DETAIL_ANAFI_SAVE_TDR" />
+      <nodes>
+        <classShapeMoniker Id="b8bd4220-d99b-49d7-9c0e-1a8744f5ab69" />
+        <classShapeMoniker Id="f97de74f-0598-438e-9b4b-aa3e93420068" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(22.25 : 12.0681469726562); (23 : 12.0681469726562)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_SAVE_TDR/ANAFI_SAVE_TDR_ANAFI_SAVE_TDR_DETAIL" />
+      <nodes>
+        <classShapeMoniker Id="f97de74f-0598-438e-9b4b-aa3e93420068" />
+        <classShapeMoniker Id="8caf9dbb-66af-489a-a2ea-caa7741f5528" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(13.5 : 27.6931469726563); (14.25 : 27.6931469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_PARAMETRE_DETAIL/ANAFI_PARAMETRE_DETAIL_ANAFI_TABLEAU_SYNTHETIQUE" />
+      <nodes>
+        <classShapeMoniker Id="4d55423d-e4b5-4388-909a-6afdb3a1af0c" />
+        <classShapeMoniker Id="019ca00c-4fae-4ed0-b0f9-3c814dfe9c69" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(16.25 : 27.6931469726563); (17 : 27.6931469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_TABLEAU_SYNTHETIQUE/ANAFI_TABLEAU_SYNTHETIQUE_ANAFI_TABLEAU_SYNTHETIQUE_DETAIL" />
+      <nodes>
+        <classShapeMoniker Id="019ca00c-4fae-4ed0-b0f9-3c814dfe9c69" />
+        <classShapeMoniker Id="4d729ac8-bee1-4757-9b33-2e0db757aff4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(13.5 : 29.6690584309896); (14.25 : 29.6690584309896)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_PARAMETRE_DETAIL/ANAFI_PARAMETRE_DETAIL_ANAFI_TDR" />
+      <nodes>
+        <classShapeMoniker Id="4d55423d-e4b5-4388-909a-6afdb3a1af0c" />
+        <classShapeMoniker Id="a86ce740-2f59-4e6f-a918-38dc8c4dee94" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(16.25 : 30.0681469726563); (17 : 30.0681469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/ANAFI_TDR/ANAFI_TDR_ANAFI_TDR_DETAIL" />
+      <nodes>
+        <classShapeMoniker Id="a86ce740-2f59-4e6f-a918-38dc8c4dee94" />
+        <classShapeMoniker Id="71a34353-1098-4775-88f9-6a83ea5378fa" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.5 : 21.8477197265625); (4.5 : 23.7604484049479); (6.25 : 23.7604484049479)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_CONTREPARTIE/SCOR_CONTREPARTIE_LOG_CONTREPARTIE" />
+      <nodes>
+        <classShapeMoniker Id="04383a95-8677-4bfd-a326-f6e57856b1cc" />
+        <classShapeMoniker Id="eaf2332d-2eb1-439a-9b6b-9b9bf5e63434" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(30.5 : 2.23159912109375); (31.25 : 2.23159912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_CMPT/SCOR_CMPT_SCOR_CREDIT" />
+      <nodes>
+        <classShapeMoniker Id="3bfea546-5bfd-4533-851b-fcbc2cc89cbd" />
+        <classShapeMoniker Id="d5828202-d332-49c6-8c82-aeaac55967bb" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 12.1362939453125); (8.625 : 12.5112939453125); (8.625 : 19.4431469726563); (9 : 19.4431469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_DATE_CHARGEMENT/SCOR_DATE_CHARGEMENT_SCOR_DATE_VALIDATION_ENCOURS" />
+      <nodes>
+        <classShapeMoniker Id="28305cd8-35e3-4775-814a-f10297e62f41" />
+        <classShapeMoniker Id="7389a6b5-4f74-447f-94c9-eddffee6543a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11 : 14.4142976888021); (11.75 : 14.4142976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_DELEGATION/SCOR_DELEGATION_SCOR_DELEGUER" />
+      <nodes>
+        <classShapeMoniker Id="47023b86-5659-43b7-934f-2427071d3eef" />
+        <classShapeMoniker Id="04a42db6-d6a4-4d0b-a9da-9ed6ce480a4e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.25 : 17.375); (7.25 : 15.7131982421875); (8.54166666666667 : 15.7131982421875 : JumpStart); (8.70833333333333 : 15.7131982421875 : JumpEnd); (8.72916666666667 : 15.7131982421875 : JumpStart); (8.89583333333333 : 15.7131982421875 : JumpEnd); (11.2916666666667 : 15.7131982421875 : JumpStart); (11.4583333333333 : 15.7131982421875 : JumpEnd); (14.375 : 15.7131982421875); (14.375 : 13.7700512695312); (14.75 : 13.7700512695312)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_DOSSIER/SCOR_DOSSIER_SCOR_VALIDATION" />
+      <nodes>
+        <classShapeMoniker Id="261ac0f6-cd68-48e4-b8c3-5dece0be9d2d" />
+        <classShapeMoniker Id="ca657680-7c0c-4c04-91e5-3d98880c8a40" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 19.0340734863281); (8.54166666666667 : 19.0340734863281 : JumpStart); (8.70833333333333 : 19.0340734863281 : JumpEnd); (9 : 19.0340734863281)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_DOSSIER/SCOR_DOSSIER_SCOR_DATE_VALIDATION_ENCOURS" />
+      <nodes>
+        <classShapeMoniker Id="261ac0f6-cd68-48e4-b8c3-5dece0be9d2d" />
+        <classShapeMoniker Id="7389a6b5-4f74-447f-94c9-eddffee6543a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 19.4142569986979); (6.25 : 19.4142569986979)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_CONTREPARTIE/SCOR_CONTREPARTIE_SCOR_DOSSIER" />
+      <nodes>
+        <classShapeMoniker Id="04383a95-8677-4bfd-a326-f6e57856b1cc" />
+        <classShapeMoniker Id="261ac0f6-cd68-48e4-b8c3-5dece0be9d2d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 17.4365374615385); (8.56607443490112 : 17.1204630266374 : JumpStart); (8.68392556509888 : 17.0026118964396 : JumpEnd); (8.8125 : 16.8740374615385); (8.8125 : 11.4142976888021); (9 : 11.4142976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_DOSSIER/SCOR_DOSSIER_SCOR_DOSSIER_SEUIL_CREDIT" />
+      <nodes>
+        <classShapeMoniker Id="261ac0f6-cd68-48e4-b8c3-5dece0be9d2d" />
+        <classShapeMoniker Id="567257b7-7738-4eb9-ba28-8072f9b11d0d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.25 : 2.2925439453125); (13.90625 : 2.2925439453125); (13.90625 : 7.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_DROIT/SCOR_DROIT_SCOR_DROIT_PROFIL" />
+      <nodes>
+        <classShapeMoniker Id="13daa869-ee3f-4b74-9587-1ed8943fd36a" />
+        <classShapeMoniker Id="605a85cf-5511-4507-93f6-5931ee53ee0f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(13.75 : 1.47199625651042); (14.5 : 1.47199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_FORMULE/SCOR_FORMULE_SCOR_DOSSIER_FORMULE" />
+      <nodes>
+        <classShapeMoniker Id="f9c8b69d-11d2-484a-9356-34a96214311d" />
+        <classShapeMoniker Id="fdfa1a66-4d32-4ea6-b1b9-62cef07ffd6c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.59375 : 21.8477197265625); (3.59375 : 31.7412019856771); (6.25 : 31.7412019856771)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_CONTREPARTIE/SCOR_CONTREPARTIE_SCOR_HISTORIQUE_NOTATION" />
+      <nodes>
+        <classShapeMoniker Id="04383a95-8677-4bfd-a326-f6e57856b1cc" />
+        <classShapeMoniker Id="066c78a7-dff6-45f1-88b5-7a46b51de0d2" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(24.75 : 24.4431469726563); (25.5 : 24.4431469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_MODELE/SCOR_MODELE_SCOR_CHAPITRE" />
+      <nodes>
+        <classShapeMoniker Id="872af3c5-b4b5-4f76-90e3-faba3e21f374" />
+        <classShapeMoniker Id="1f45d252-4d94-4aba-aec6-53570975a7d4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(24.75 : 31.875); (25.125 : 31.5); (25.125 : 21.4815991210938); (25.5 : 21.4815991210938)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_MODELE_PARAM/SCOR_MODELE_PARAM_SCOR_MODELE_PARAM_VAL" />
+      <nodes>
+        <classShapeMoniker Id="2c513a21-e41f-453c-849a-1729f5e386e5" />
+        <classShapeMoniker Id="4eb033d3-bd36-4735-9195-6294cac79296" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(24.65625 : 23.75); (24.65625 : 20.59375); (25.5 : 20.59375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_MODELE/SCOR_MODELE_SCOR_MODELE_PARAM_VAL" />
+      <nodes>
+        <classShapeMoniker Id="872af3c5-b4b5-4f76-90e3-faba3e21f374" />
+        <classShapeMoniker Id="4eb033d3-bd36-4735-9195-6294cac79296" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(20.75 : 25.0689925130208); (20.75 : 26.9527498372396); (22.5 : 26.9527498372396)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_NOTATION/SCOR_NOTATION_SCOR_BAREME" />
+      <nodes>
+        <classShapeMoniker Id="119b1280-9608-40d3-8537-7e0f9ae4b230" />
+        <classShapeMoniker Id="5dac779a-f6a0-4bb8-a11a-edb328386e2f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(21.2812525 : 25.0689925130208); (21.2812525 : 29.9527498372396); (22.5 : 29.9527498372396)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_NOTATION/SCOR_NOTATION_SCOR_BAREME_PONDERATION" />
+      <nodes>
+        <classShapeMoniker Id="119b1280-9608-40d3-8537-7e0f9ae4b230" />
+        <classShapeMoniker Id="e0dbc6a6-a28a-41fa-950e-2930326b58f0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(20.75 : 23.875); (20.75 : 21.6354484049479); (22.5 : 21.6354484049479)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_NOTATION/SCOR_NOTATION_SCOR_BAREME_QUESTIONNAIRE" />
+      <nodes>
+        <classShapeMoniker Id="119b1280-9608-40d3-8537-7e0f9ae4b230" />
+        <classShapeMoniker Id="ae032a79-bf28-4776-ad6c-585e705c05ec" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(21.75 : 23.875); (22.125 : 23.5); (22.125 : 23.25); (25.125 : 23.25); (25.5 : 23.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_NOTATION/SCOR_NOTATION_SCOR_CHAPITRE" />
+      <nodes>
+        <classShapeMoniker Id="119b1280-9608-40d3-8537-7e0f9ae4b230" />
+        <classShapeMoniker Id="1f45d252-4d94-4aba-aec6-53570975a7d4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(33 : 21.4527498372396); (34.75 : 21.4527498372396); (34.75 : 23.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_NOTE_QUESTIONNAIRE/SCOR_NOTE_QUESTIONNAIRE_SCOR_NOTE_REPONSE" />
+      <nodes>
+        <classShapeMoniker Id="87fddb13-2550-4cac-ba83-7d9048ddda31" />
+        <classShapeMoniker Id="d916dc3f-5f4b-4773-b745-d4174fba59f2" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 10.2228011067708); (1.75 : 14.4527498372396); (3.5 : 14.4527498372396)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_PAYS_NATIONAL/SCOR_PAYS_NATIONAL_SCOR_BANQUE" />
+      <nodes>
+        <classShapeMoniker Id="a1e6fd46-93e9-4ec7-97d2-680fd3535370" />
+        <classShapeMoniker Id="2b16c439-c887-4498-be7e-dfcc0fa3eebe" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 7.875); (1.75 : 3.48159912109375); (3.5 : 3.48159912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_PAYS_NATIONAL/SCOR_PAYS_NATIONAL_SCOR_FITCH_PAYS" />
+      <nodes>
+        <classShapeMoniker Id="a1e6fd46-93e9-4ec7-97d2-680fd3535370" />
+        <classShapeMoniker Id="6dfe1d23-a496-4f9e-8bc6-ef675de9b623" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.2812525 : 7.875); (2.2812525 : 6.23159912109375); (3.5 : 6.23159912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_PAYS_NATIONAL/SCOR_PAYS_NATIONAL_SCOR_MOODYS_PAYS" />
+      <nodes>
+        <classShapeMoniker Id="a1e6fd46-93e9-4ec7-97d2-680fd3535370" />
+        <classShapeMoniker Id="9e31b7bf-e40c-449b-ae95-186ac008422d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 8.98159912109375); (3.5 : 8.98159912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_PAYS_NATIONAL/SCOR_PAYS_NATIONAL_SCOR_PERSO_PAYS" />
+      <nodes>
+        <classShapeMoniker Id="a1e6fd46-93e9-4ec7-97d2-680fd3535370" />
+        <classShapeMoniker Id="5242887b-a79c-47ed-8efb-dacd6e320a64" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 9.25405110677083); (11.1464032451923 : 9.25405110677083 : JumpStart); (11.4407632195513 : 9.25405110677083 : JumpEnd); (11.7604166666667 : 9.25405110677083 : JumpStart); (11.9270833333333 : 9.25405110677083 : JumpEnd); (12 : 9.25405110677083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_PROFIL/SCOR_PROFIL_SCOR_DROIT_PROFIL" />
+      <nodes>
+        <classShapeMoniker Id="b2dbb577-0bee-45ed-889c-8b7b10497360" />
+        <classShapeMoniker Id="605a85cf-5511-4507-93f6-5931ee53ee0f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 18.0932712307692); (8.54166666666667 : 18.0932712307692 : JumpStart); (8.70833333333333 : 18.0932712307692 : JumpEnd); (11.75 : 18.0932712307692)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_DOSSIER/SCOR_DOSSIER_SCOR_PROPOSITION" />
+      <nodes>
+        <classShapeMoniker Id="261ac0f6-cd68-48e4-b8c3-5dece0be9d2d" />
+        <classShapeMoniker Id="91ec0eee-acc9-4f72-9af2-cdd754faf625" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(27.5 : 24.5104484049479); (28.25 : 24.5104484049479)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_CHAPITRE/SCOR_CHAPITRE_SCOR_QUESTION" />
+      <nodes>
+        <classShapeMoniker Id="1f45d252-4d94-4aba-aec6-53570975a7d4" />
+        <classShapeMoniker Id="8f97e466-8234-4687-bcf4-fa25fa3c0085" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(33 : 24.4431469726563); (33.75 : 24.4431469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_REPONSE/SCOR_REPONSE_SCOR_NOTE_REPONSE" />
+      <nodes>
+        <classShapeMoniker Id="c627e2b8-b97d-49ec-8830-2793c3bcfb30" />
+        <classShapeMoniker Id="d916dc3f-5f4b-4773-b745-d4174fba59f2" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(30.25 : 24.5104484049479); (31 : 24.5104484049479)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_QUESTION/SCOR_QUESTION_SCOR_REPONSE" />
+      <nodes>
+        <classShapeMoniker Id="8f97e466-8234-4687-bcf4-fa25fa3c0085" />
+        <classShapeMoniker Id="c627e2b8-b97d-49ec-8830-2793c3bcfb30" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 14.4142976888021); (9 : 14.4142976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_SEUIL_DELEGUATION/SCOR_SEUIL_DELEGUATION_SCOR_DELEGATION" />
+      <nodes>
+        <classShapeMoniker Id="ba0331bd-edec-41e7-b2cf-98e9479449c0" />
+        <classShapeMoniker Id="47023b86-5659-43b7-934f-2427071d3eef" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 13.957148844401); (8.54166666666667 : 13.957148844401 : JumpStart); (8.70833333333333 : 13.957148844401 : JumpEnd); (8.72916666666667 : 13.957148844401 : JumpStart); (8.89583333333333 : 13.957148844401 : JumpEnd); (9 : 13.957148844401)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_SEUIL_DELEGUATION/SCOR_SEUIL_DELEGUATION_SCOR_DELEGATION1" />
+      <nodes>
+        <classShapeMoniker Id="ba0331bd-edec-41e7-b2cf-98e9479449c0" />
+        <classShapeMoniker Id="47023b86-5659-43b7-934f-2427071d3eef" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 14.8714465332031); (8.54166666666667 : 14.8714465332031 : JumpStart); (8.70833333333333 : 14.8714465332031 : JumpEnd); (8.72916666666667 : 14.8714465332031 : JumpStart); (8.89583333333333 : 14.8714465332031 : JumpEnd); (9 : 14.8714465332031)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_SEUIL_DELEGUATION/SCOR_SEUIL_DELEGUATION_SCOR_DELEGATION2" />
+      <nodes>
+        <classShapeMoniker Id="ba0331bd-edec-41e7-b2cf-98e9479449c0" />
+        <classShapeMoniker Id="47023b86-5659-43b7-934f-2427071d3eef" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 14.6428721110026); (8.54166666666667 : 14.6428721110026 : JumpStart); (8.70833333333333 : 14.6428721110026 : JumpEnd); (9 : 14.6428721110026)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_SEUIL_DELEGUATION/SCOR_SEUIL_DELEGUATION_SCOR_DELEGATION3" />
+      <nodes>
+        <classShapeMoniker Id="ba0331bd-edec-41e7-b2cf-98e9479449c0" />
+        <classShapeMoniker Id="47023b86-5659-43b7-934f-2427071d3eef" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 14.1857232666016); (8.54166666666667 : 14.1857232666016 : JumpStart); (8.70833333333333 : 14.1857232666016 : JumpEnd); (8.72916666666667 : 14.1857232666016 : JumpStart); (8.89583333333333 : 14.1857232666016 : JumpEnd); (9 : 14.1857232666016)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_SEUIL_DELEGUATION/SCOR_SEUIL_DELEGUATION_SCOR_DELEGATION4" />
+      <nodes>
+        <classShapeMoniker Id="ba0331bd-edec-41e7-b2cf-98e9479449c0" />
+        <classShapeMoniker Id="47023b86-5659-43b7-934f-2427071d3eef" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 13.7285744222005); (8.54166666666667 : 13.7285744222005 : JumpStart); (8.70833333333333 : 13.7285744222005 : JumpEnd); (8.72916666666667 : 13.7285744222005 : JumpStart); (8.89583333333333 : 13.7285744222005 : JumpEnd); (9 : 13.7285744222005)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_SEUIL_DELEGUATION/SCOR_SEUIL_DELEGUATION_SCOR_DELEGATION5" />
+      <nodes>
+        <classShapeMoniker Id="ba0331bd-edec-41e7-b2cf-98e9479449c0" />
+        <classShapeMoniker Id="47023b86-5659-43b7-934f-2427071d3eef" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 15.1000209554036); (8.54166666666667 : 15.1000209554036 : JumpStart); (8.70833333333333 : 15.1000209554036 : JumpEnd); (8.72916666666667 : 15.1000209554036 : JumpStart); (8.89583333333333 : 15.1000209554036 : JumpEnd); (9 : 15.1000209554036)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_SEUIL_DELEGUATION/SCOR_SEUIL_DELEGUATION_SCOR_DELEGATION6" />
+      <nodes>
+        <classShapeMoniker Id="ba0331bd-edec-41e7-b2cf-98e9479449c0" />
+        <classShapeMoniker Id="47023b86-5659-43b7-934f-2427071d3eef" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 15.4012809899339); (8.56607443490112 : 15.717355424835 : JumpStart); (8.68392556509888 : 15.8352065550328 : JumpEnd); (8.75357443490112 : 15.904855424835 : JumpStart); (8.87142556509888 : 16.0227065550328 : JumpEnd); (8.9375 : 16.0887809899339); (8.9375 : 15.2660953776042); (9 : 15.2035953776042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_SEUIL_DELEGUATION/SCOR_SEUIL_DELEGUATION_SCOR_DELEGATION7" />
+      <nodes>
+        <classShapeMoniker Id="ba0331bd-edec-41e7-b2cf-98e9479449c0" />
+        <classShapeMoniker Id="47023b86-5659-43b7-934f-2427071d3eef" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 13.5619152522536); (8.56607443490112 : 13.2458408173525 : JumpStart); (8.68392556509888 : 13.1279896871547 : JumpEnd); (8.6875 : 13.1244152522536); (8.6875 : 11.8401985332031); (8.72916666666667 : 11.8401985332031 : JumpStart); (8.89583333333333 : 11.8401985332031 : JumpEnd); (9 : 11.8401985332031)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_SEUIL_DELEGUATION/SCOR_SEUIL_DELEGUATION_SCOR_DOSSIER_SEUIL_CREDIT" />
+      <nodes>
+        <classShapeMoniker Id="ba0331bd-edec-41e7-b2cf-98e9479449c0" />
+        <classShapeMoniker Id="567257b7-7738-4eb9-ba28-8072f9b11d0d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 14.4815991210937); (6.25 : 14.4815991210937)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_BANQUE/SCOR_BANQUE_SCOR_SEUIL_DELEGUATION" />
+      <nodes>
+        <classShapeMoniker Id="2b16c439-c887-4498-be7e-dfcc0fa3eebe" />
+        <classShapeMoniker Id="ba0331bd-edec-41e7-b2cf-98e9479449c0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.2812525 : 10.2228011067708); (2.2812525 : 11.6065991210937); (3.5 : 11.6065991210937)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_PAYS_NATIONAL/SCOR_PAYS_NATIONAL_SCOR_STPOOR_PAYS" />
+      <nodes>
+        <classShapeMoniker Id="a1e6fd46-93e9-4ec7-97d2-680fd3535370" />
+        <classShapeMoniker Id="abf0884d-00b5-4279-b299-bff138f3fc12" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.15625 : 5.06899251302083); (11.15625 : 9.12302647135417); (12 : 9.12302647135417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_TYPE_DROIT/SCOR_TYPE_DROIT_SCOR_DROIT_PROFIL" />
+      <nodes>
+        <classShapeMoniker Id="66172fc2-dbd0-4da9-a2c4-25e76b15695c" />
+        <classShapeMoniker Id="605a85cf-5511-4507-93f6-5931ee53ee0f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(27.75 : 2.22199625651042); (28.5 : 2.22199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_TYPECMPT/SCOR_TYPECMPT_SCOR_CMPT" />
+      <nodes>
+        <classShapeMoniker Id="08c0b245-7e1a-435a-87ca-dd4c171f4859" />
+        <classShapeMoniker Id="3bfea546-5bfd-4533-851b-fcbc2cc89cbd" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(30.5 : 6.22199625651042); (32.25 : 6.22199625651042); (32.25 : 3.5401025390625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_TYPECREDIT/SCOR_TYPECREDIT_SCOR_CREDIT" />
+      <nodes>
+        <classShapeMoniker Id="cf647a46-f362-43a3-8e85-3ae5486a28f4" />
+        <classShapeMoniker Id="d5828202-d332-49c6-8c82-aeaac55967bb" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11 : 8.89662122055289); (11.5625 : 9.45912122055289); (11.5625 : 12.125); (11.7604166666667 : 12.125 : JumpStart); (11.9270833333333 : 12.125 : JumpEnd); (14.375 : 12.125); (14.75 : 12.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_UTILISATEUR/SCOR_UTILISATEUR_SCOR_VALIDATION" />
+      <nodes>
+        <classShapeMoniker Id="7a56dbaf-8a66-4b65-80dd-acabbc563d84" />
+        <classShapeMoniker Id="ca657680-7c0c-4c04-91e5-3d98880c8a40" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11 : 6.84375); (11.0729166666667 : 6.84375 : JumpStart); (11.2395833333333 : 6.84375 : JumpEnd); (11.84375 : 6.84375); (11.84375 : 13.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_UTILISATEUR/SCOR_UTILISATEUR_SCOR_DELEGUER" />
+      <nodes>
+        <classShapeMoniker Id="7a56dbaf-8a66-4b65-80dd-acabbc563d84" />
+        <classShapeMoniker Id="04a42db6-d6a4-4d0b-a9da-9ed6ce480a4e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11 : 7.3593775); (17.25 : 7.3593775); (17.25 : 13.3862939453125); (18.9479191666667 : 13.3862939453125 : JumpStart); (19.1145858333333 : 13.3862939453125 : JumpEnd); (28.5 : 13.3862939453125); (28.5 : 14.3093082682292); (32 : 14.3093082682292); (32 : 20.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_UTILISATEUR/SCOR_UTILISATEUR_SCOR_NOTE_QUESTIONNAIRE" />
+      <nodes>
+        <classShapeMoniker Id="7a56dbaf-8a66-4b65-80dd-acabbc563d84" />
+        <classShapeMoniker Id="87fddb13-2550-4cac-ba83-7d9048ddda31" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.9676923076923 : 8.9920068359375); (11.375 : 9.39931452824519); (11.375 : 17.2653836153846); (11.75 : 17.2653836153846)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_UTILISATEUR/SCOR_UTILISATEUR_SCOR_PROPOSITION" />
+      <nodes>
+        <classShapeMoniker Id="7a56dbaf-8a66-4b65-80dd-acabbc563d84" />
+        <classShapeMoniker Id="91ec0eee-acc9-4f72-9af2-cdd754faf625" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 8.30850341796875); (9 : 8.30850341796875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_PROFIL/SCOR_PROFIL_SCOR_UTILISATEUR" />
+      <nodes>
+        <classShapeMoniker Id="b2dbb577-0bee-45ed-889c-8b7b10497360" />
+        <classShapeMoniker Id="7a56dbaf-8a66-4b65-80dd-acabbc563d84" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 6.41429768880208); (9 : 6.41429768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ScoringEntityDataContext/SCOR_AGENCE/SCOR_AGENCE_SCOR_UTILISATEUR" />
+      <nodes>
+        <classShapeMoniker Id="c2681716-24be-4a92-a9d7-50d7d865672a" />
+        <classShapeMoniker Id="7a56dbaf-8a66-4b65-80dd-acabbc563d84" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

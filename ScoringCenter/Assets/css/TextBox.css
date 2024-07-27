@@ -1,0 +1,17 @@
+﻿.TextBox {
+    text-align:center;
+    font-size: 11px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: black;
+    font-style:normal;
+    font-weight:normal;
+}
+
+.TextBox1 {
+    text-align:left;
+    font-size: 11px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: black;
+    font-style:normal;
+    font-weight:normal;
+}

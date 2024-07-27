@@ -1,0 +1,28 @@
+C01  ;Chiffres d'affaires;0;0;0
+C02  ;Autres CA;0;0;0
+C03  ;Total des Consommations intermédiaires;0;0;0
+C0300;Total Conso matières;0;0;0
+C0301;Consommation de matières;0;0;0
+C0302;Matières consommées;0;0;0
+C0303;Emballages consommés;0;0;0
+C0304;Transport consommé;0;0;0
+C0305;Marchandises achetées;0;0;0
+C0306;Matières premières et consommables;0;0;0
+C0307;Autres services consommés;0;0;0
+C0308;Autres charges 1;0;0;0
+C0309;Autres charges 2;0;0;0
+C0310;Autres postes de charges;0;0;0
+C04  ;Valeur ajoutée;0;0;0
+C05  ;Total Charges d'exploitation;0;0;0
+C0501;Frais de personnel;0;0;0
+C0502;Impôt et taxes;0;0;0
+C06  ;Excédent Brut d'Exploitation;0;0;0
+C07  ;Total (CDP+CF+DA);0;0;0
+C0701;Charges et pertes diverses;0;0;0
+C0702;Charges financières;0;0;0
+C0703;Dotations aux amortissements;0;0;0
+C08  ;Résultat d'Exploitation;0;0;0
+C09  ;Impôts sur les sociétés;0;0;0
+C10  ;Résultats nets;0;0;0
+C11  ;Cash flow brut;0;0;0
+C12  ;Cash Flow net;0;0;0

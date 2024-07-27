@@ -1,0 +1,36 @@
+﻿.body 
+{
+    width: 980px;
+    max-width: 980px;
+    min-height: 650px;
+    text-align: center;
+    margin: 0 auto;
+    border: 5px solid #022D65;
+}
+
+.Header {
+    width: 100%;
+    max-width: 100%;
+    height:auto;
+    text-align:center;
+    min-height:74px;
+    border: 2px red black;
+}
+
+.Content {
+    width:100%;
+    max-width:100%;
+    text-align:center;
+    font-size: 12px;
+}
+
+/* Analyse Financière - Centrer les textes des colonnes */
+table.text-center thead th,
+table.text-center thead td {
+	text-align: center !important;
+}
+
+/*table.table-bordered th:last-child,
+table.table-bordered td:last-child {
+	border-right-width: 0;
+}*/

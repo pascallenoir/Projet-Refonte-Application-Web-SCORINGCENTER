@@ -1,0 +1,138 @@
+USE SCORINGDB
+GO
+
+IF OBJECT_ID('SCOR_CONTREPARTIE_UP') IS NOT NULL
+	DROP TRIGGER SCOR_CONTREPARTIE_UP
+GO
+
+CREATE TRIGGER [dbo].[SCOR_CONTREPARTIE_UP] 
+ON [dbo].[SCOR_CONTREPARTIE]
+AFTER UPDATE AS
+BEGIN
+  DECLARE @ID_SCORING [dbo].[T_CODE_12]
+	DECLARE @CODE_AGENCE [dbo].[T_CODE_10] 
+	DECLARE @CODE_BANQUE [dbo].[T_CODE_5] 
+	DECLARE @ETCIV_MATRICULE [dbo].[T_CODE_12]
+	DECLARE @ETCIV_NOMREDUIT [varchar](max) 
+	DECLARE @ETCIV_ADRESSE [varchar](max) 
+	DECLARE @ETCIV_VILLE_RESIDENCE [varchar](max)
+	DECLARE @RCCM [varchar](max)
+	DECLARE @SEGMENT_CLIENT [varchar](max) 
+	DECLARE @MOIS_ARRETE [dbo].[T_DATE] 
+	DECLARE @MODE_ANALYSE [dbo].[T_LIBEL_MOYEN_35] 
+	DECLARE @UNITE [dbo].[T_CODE_GRAND] 
+	DECLARE @DEVISE [dbo].[T_CODE_GRAND] 
+	DECLARE @CA [dbo].[T_NUMERIQUE_GRAND] 
+	DECLARE @PAYS [varchar](max)
+	DECLARE @STATUT [dbo].[T_LIBEL_LONG_120]
+	DECLARE @ACTIVITE_BCEAO [varchar](max)
+	DECLARE @SECTEUR_D_ACTIVITE [varchar](max)
+	DECLARE @TYPE_ANAFI [varchar](max)
+	DECLARE @TYPE_PROSPECT [varchar](max)
+	DECLARE @BRANCHE_ACTIVITE [varchar](max)
+	DECLARE @IDGROUPE [dbo].[T_CODE_12] 
+
+
+			select 
+				@ID_SCORING=isnull(ID_SCORING,'')
+				,@CODE_AGENCE=isnull(CODE_AGENCE,'')
+				,@ETCIV_MATRICULE=isnull(ETCIV_MATRICULE,'')
+				,@ETCIV_NOMREDUIT=isnull(ETCIV_NOMREDUIT,'')
+				,@ETCIV_ADRESSE=isnull(ETCIV_ADRESSE,'')
+				,@ETCIV_VILLE_RESIDENCE=isnull(ETCIV_VILLE_RESIDENCE,'')
+				,@RCCM=isnull(RCCM,'')
+				,@SEGMENT_CLIENT=isnull(SEGMENT_CLIENT,'')
+				,@MOIS_ARRETE=MOIS_ARRETE
+				,@MODE_ANALYSE=isnull(MODE_ANALYSE,'')
+				,@UNITE=isnull(UNITE,'')
+				,@DEVISE=isnull(DEVISE,'')
+				,@CA=CA
+				,@PAYS=isnull(PAYS,'')
+				,@STATUT=isnull(STATUT,'')
+				,@ACTIVITE_BCEAO=isnull(ACTIVITE_BCEAO,'')
+				,@SECTEUR_D_ACTIVITE=isnull(SECTEUR_D_ACTIVITE,'')
+				,@TYPE_ANAFI=isnull(TYPE_ANAFI,'')
+				,@TYPE_PROSPECT=isnull(TYPE_PROSPECT,'')
+				,@BRANCHE_ACTIVITE=isnull(BRANCHE_ACTIVITE,'')
+			from inserted
+
+			SELECT @CODE_BANQUE=isnull(CODE_BANQUE,'') FROM SCOR_AGENCE WHERE rtrim(ltrim(CODE_AGENCE))=@CODE_AGENCE
+
+
+	 BEGIN TRY
+		
+		begin try 
+		UPDATE WEB_BILAN_DB.[dbo].[SCOR_CONTREPARTIE]
+	   SET 
+	      [CODE_AGENCE] = @CODE_AGENCE
+		  ,[ETCIV_NOMREDUIT] = @ETCIV_NOMREDUIT
+		  ,[ETCIV_ADRESSE] = @ETCIV_ADRESSE
+		  ,[ETCIV_VILLE_RESIDENCE] = @ETCIV_VILLE_RESIDENCE
+		  ,[RCCM] = @RCCM
+		  ,[SEGMENT_CLIENT] = @SEGMENT_CLIENT
+		  ,[MOIS_ARRETE] = @MOIS_ARRETE
+		  ,[MODE_ANALYSE] = @MODE_ANALYSE
+		  ,[UNITE] = @UNITE
+		  ,[DEVISE] = @DEVISE
+		  ,[CA] = @CA
+		  ,[PAYS] = @PAYS
+		  ,[STATUT] =@STATUT
+		  ,[ACTIVITE_BCEAO] = @ACTIVITE_BCEAO
+		  ,[SECTEUR_D_ACTIVITE] = @SECTEUR_D_ACTIVITE
+		  ,[TYPE_ANAFI] = @TYPE_ANAFI
+		  ,[TYPE_PROSPECT] = @TYPE_PROSPECT
+		  ,[BRANCHE_ACTIVITE] = @BRANCHE_ACTIVITE
+      WHERE RTRIM(LTRIM(ID_SCORING))=RTRIM(LTRIM(@ID_SCORING)) 
+	  AND  RTRIM(LTRIM([ETCIV_MATRICULE])) = RTRIM(LTRIM(@ETCIV_MATRICULE))
+	  end try 
+	  begin catch 
+		select ''
+	  end catch
+
+
+
+	    DECLARE @Plafont Decimal(18,0) =0
+		  DECLARE @CountInt int =0
+		  SELECT @CountInt=count(*)  FROM [dbo].[SCOR_MODELE_CA] WHERE  ETAT = 1
+		  if @CountInt=0
+		  begin  
+		  	 INSERT INTO  	[SCOR_MODELE_CA] VALUES (100000000,getdate(),1)
+		  end
+		 
+		 SELECT @Plafont=[PLAFOND]  FROM [dbo].[SCOR_MODELE_CA] WHERE  ETAT = 1
+	
+		
+
+	  if(@CA<@Plafont and @CA<>0)		
+			begin
+				UPDATE [dbo].[SCOR_CONTREPARTIE]
+					SET  MODE_ANALYSE ='PMEPMI',
+					TYPE_ANAFI ='Systeme Minimal De Tresorerie'
+					WHERE ID_SCORING=@ID_SCORING
+				 -- et du dossier
+				UPDATE [dbo].[SCOR_DOSSIER] 
+					SET 
+					MODELE_DOSSIER ='PMEPMI'
+					WHERE  ID_DOSSIER=(select max(di.ID_DOSSIER) from SCOR_DOSSIER di
+										where ID_SCORING=@ID_SCORING)
+			end
+
+			else 
+
+			begin
+				UPDATE [dbo].[SCOR_CONTREPARTIE]
+					SET  MODE_ANALYSE ='ENTEXI',
+					TYPE_ANAFI ='Bilan Normal'
+					WHERE ID_SCORING=@ID_SCORING
+				 -- et du dossier
+				UPDATE [dbo].[SCOR_DOSSIER] 
+					SET 
+					MODELE_DOSSIER ='ENTEXI'
+					WHERE  ID_DOSSIER=(select max(di.ID_DOSSIER) from SCOR_DOSSIER di
+										where ID_SCORING=@ID_SCORING)
+			end
+	END TRY
+	BEGIN CATCH
+		 select ''
+	END CATCH
+END

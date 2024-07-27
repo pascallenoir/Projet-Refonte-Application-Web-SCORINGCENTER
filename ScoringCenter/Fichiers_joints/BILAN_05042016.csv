@@ -1,0 +1,27 @@
+BI101;Immobilisations incoporelles brutes;0;0;0
+BI102;Immobilisations coporelles brutes;91800;101800;144000
+BI103;Immobilisations financières brutes;0;0;0
+BI201;Actif circulant HAO;0;0;0
+BI202;Stocks et en-cours;11600;11200;24200
+BI203;Avances fournisseurs;0;0;0
+BI204;Créances clients;85600;115000;131800
+BI205;Autres Créances;2000;7200;10800
+BI301;Titres de placement;0;0;0
+BI302;Valeurs à encaisser;0;0;0
+BI303;Banques, Caisses;0;4200;11800
+BI401;Capitaux propres;34400;46000;67400
+BI402;dont résultat;400;12000;26200
+BI403;Subvention d'investissement et provisions reglémentaires;0;0;0
+BI404;Comptes courants associés bloqués;0;0;0
+BI501;Prov. financières pour risques et charges;0;0;0
+BI502;Amortissements et provisions d'actif;30200;35200;61200
+BI421 ;Dettes structurelles;57000;38400;44800
+BI601;Dettes circulantes HAO;0;0;0
+BI602;Avances clients;0;0;0
+BI603;Fournisseurs;19200;27200;34800
+BI604;Dettes fiscales et sociales;47000;63600;88600
+BI605;Autres dettes et risques provisionnés;0;0;0
+BI701;Crédits d'escompte;0;29000;25800
+BI702;Crédits de trésorerie;0;0;0
+BI703;Découverts;3200;0;0
+CAPP;(1) dont Capital social;20000;20000;20000

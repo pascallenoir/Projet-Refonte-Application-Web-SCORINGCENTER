@@ -1,0 +1,46 @@
+﻿.body {
+    width: 980px;
+    max-width: 980px;
+    min-height: 650px;
+    height: max-content;
+    padding-bottom: 10px;
+    text-align: center;
+    margin: 0 auto;
+    border: 5px solid #022D65;
+    background: linear-gradient(to bottom, #022D65 12%, white, white);
+}
+
+.Header {
+    width: 100%;
+    max-width: 100%;
+    height:auto;
+    text-align:center;
+    min-height:74px;
+    border: 2px red black;
+}
+
+.Content {
+    width:100%;
+    max-width:100%;
+    text-align:center;
+    font-size: 12px;
+}
+
+/* Analyse Financière - Centrer les textes des colonnes */
+table.text-center thead th,
+table.text-center thead td {
+	text-align: center !important;
+}
+
+table tbody td.text-left {
+	text-align: left !important;
+}
+
+table tbody td.text-right {
+	text-align: right !important;
+}
+
+#Menu .active_menu {
+    background-color: #022D65;
+    color: #FFFFFF;
+}

@@ -1,0 +1,27 @@
+﻿
+.TextNormal {
+    font-size: 11px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: black;
+    font-style:normal;
+    font-weight:normal;
+
+}
+
+.TexteTitre
+ {	
+    font-size: 12px;
+    font-family: Geneva, Tahoma, Verdana, sans-serif;
+    color: black;
+    font-weight: bold;
+}
+
+.TexteTitreBig
+ {	
+    font-size: 14px;
+    font-family: Geneva, Tahoma, Verdana, sans-serif;
+
+    color: white;
+    font-weight:bold;
+
+}

@@ -1,0 +1,885 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ScoringCenter.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head" runat="server">
+    
+   <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title>Accueil | Scoring Center</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico"/>
+
+     <%-- structurer et personnaliser le contenu des pages à travers différentes pages enfant.--%>
+    <asp:ContentPlaceHolder ID="ContentHead" runat="server"></asp:ContentPlaceHolder>
+    
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
+
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="~/Content/vendor.min.css"/>
+    <link rel="stylesheet" href="~/Content/icon_set/style.css"/>
+    <script src="../node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    
+    <!-- CSS Front Template -->
+    <link rel="stylesheet" href="~/Content/theme.minc619.css?v=1.0"/>
+
+</head>
+
+<body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl navbar-vertical-aside-mini-mode" onselectstart="return false" oncontextmenu="return false">
+
+     <script src="../Content/vendor/hs-navbar-vertical-aside/hs-navbar-vertical-aside-mini-cache.js"></script>
+         <!-- JS Implementing Plugins -->
+
+
+    <!-- ========== HEADER ========== -->
+    <header id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-flush navbar-container navbar-bordered">
+      <div class="navbar-nav-wrap">
+        <div class="navbar-brand-wrapper">
+        <!-- Logo -->
+          <a class="navbar-brand" href="../index.html" aria-label="Utilisateur">
+            <img class="navbar-brand-logo" src="../Images/Logo/logo40.png" alt="Logo">
+            <img class="navbar-brand-logo-mini" src="../Images/Logo/logo40.png" alt="Logo">
+          </a>            
+        <!-- fin Logo -->
+      </div>
+
+        <div class="navbar-nav-wrap-content-left">
+       <!-- bouton affichage Navbar Vertical  -->
+       <button type="button" class="js-navbar-vertical-aside-toggle-invoker close mr-3">
+         <i class="tio-first-page navbar-vertical-aside-toggle-short-align" data-toggle="tooltip" data-placement="right" title="Réduire"></i>
+         <i class="tio-last-page navbar-vertical-aside-toggle-full-align" data-template='<div class="tooltip d-none d-sm-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-toggle="tooltip" data-placement="right" title="Etendre"></i>
+       </button>
+       <!-- fin bouton affichage Navbar Vertical -->
+
+       <!-- Titre de l'ecran -->
+       <div class="d-none d-md-block">
+            <div class="col-sm mb-2 mb-sm-0">
+              <h1 class="page-header-title">Recherche du tiers</h1>
+            </div>
+        </div>
+        <!-- fin Titre de l'ecran -->
+      </div>
+
+        <!-- Second Contenu -->
+        <div class="navbar-nav-wrap-content-right">
+        <!-- Navbar -->
+        <ul class="navbar-nav align-items-center flex-row">
+          <li class="nav-item">
+            <!-- Profil utilisateur -->
+            <div class="hs-unfold">
+              <a class="js-hs-unfold-invoker navbar-dropdown-account-wrapper" href="javascript:;"
+                 data-hs-unfold-options='{
+                   "target": "#accountNavbarDropdown",
+                   "type": "css-animation"
+                 }'>
+                <!-- Image de profil -->
+                <div class="avatar avatar-sm avatar-circle">
+                  <img class="avatar-img" src="../Images/images/img4.jpg" alt="Image Description">
+                  <span class="avatar-status avatar-sm-status avatar-status-success"></span>
+                </div>
+              </a>
+
+              <!-- Modal menu profil et utilisateur -->
+              <div id="accountNavbarDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right navbar-dropdown-menu navbar-dropdown-account" style="width: 16rem;">
+                <div class="dropdown-item-text">
+                  <div class="media align-items-center">
+                    <div class="avatar avatar-sm avatar-circle mr-2">
+                      <img class="avatar-img" src="../Images/images/img4.jpg" alt="Image Description">
+                    </div>
+                    <div class="media-body">
+                      <span class="card-title h5">Ange-Patrice ADOU</span>
+                      <span class="card-text">Analyste</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="dropdown-divider"></div>
+
+                <a class="dropdown-item" href="#">
+                  <span class="text-truncate pr-2" title="Profil">Profil</span>
+                </a>
+
+               <%-- 
+                   <div class="dropdown-divider"></div>
+                   <a class="dropdown-item" href="#">
+                   <span class="text-truncate pr-2" title="Settings">Settings</span>
+                   </a>
+               --%>
+
+                <div class="dropdown-divider"></div>
+
+                <a class="dropdown-item" href="Connexion.aspx">
+                  <span class="text-truncate pr-2" title="Deconnexion">Déconnexion</span>
+                </a>
+              </div>
+              <!-- fin Modal menu profil et utilisateur -->
+            </div>
+            <!-- fin Profil utilisateur -->
+          </li>
+        </ul>
+        <!-- Fin Navbar -->
+      </div>
+        <!-- Fin Second Contenu -->
+      </div>
+    </header>
+    <!-- ========== END HEADER ========== -->
+
+    <!-- ========== MENU LATERAUX ========== -->
+    <!-- Navbar Vertical -->
+    <aside class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl navbar-bordered">
+      <div class="navbar-vertical-container">
+        <div class="navbar-vertical-footer-offset">
+          <div class="navbar-brand-wrapper justify-content-between">
+            <!-- Logo -->
+              <a class="navbar-brand" href="../index.html" aria-label="Utilisateur">
+                <img class="navbar-brand-logo" src="../Images/Logo/logo40.png" alt="Logo">
+                <img class="navbar-brand-logo-mini" src="../Images/Logo/logo40.png" alt="Logo">
+              </a>            
+            <!-- End Logo -->
+
+            <!-- Bouton de fermeture du Navbar Vertical -->
+            <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-vertical-aside-toggle btn btn-icon btn-xs btn-ghost-dark">
+              <i class="tio-clear tio-lg"></i>
+            </button>
+            <!-- fin Bouton de fermeture Navbar Vertical -->
+          </div>
+
+          <!-- Contenu du Menu -->
+          <div class="navbar-vertical-content">
+            <ul class="navbar-nav navbar-nav-lg nav-tabs">
+               <!-- Tableau de bord -->
+               <li class="nav-item " id="TB" runat="server">
+                 <a class="js-nav-tooltip-link nav-link " href="TableauBordAutreDossier.aspx" title="Tableau de bord" data-placement="left">
+                   <i class="tio-home-vs-1-outlined nav-icon"></i>
+                   <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Tableau de bord</span>
+                 </a>
+               </li>
+               <!-- Tableau de bord -->
+               <!-- Noter -->
+               <li class="nav-item ">
+                 <a class="js-nav-tooltip-link nav-link " href="#" title="Noter" data-placement="left">
+                   <i class="tio-documents-outlined nav-icon"></i>
+                   <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Noter</span>
+                 </a>
+               </li>
+               <!-- Noter -->
+               <!-- Notifications -->
+               <li class="nav-item ">
+                 <a class="js-nav-tooltip-link nav-link " href="#" title="Notifications" data-placement="left">
+                   <i class="tio-notifications-outlined nav-icon"></i>
+                   <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Notifications</span>
+                 </a>
+               </li>
+               <!-- Notifications -->
+               <!-- Reporting -->
+               <li class="nav-item ">
+                 <a class="js-nav-tooltip-link nav-link " href="#" title="Reporting" data-placement="left">
+                   <i class="tio-report-outlined nav-icon"></i>
+                   <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Reporting</span>
+                 </a>
+               </li>
+               <!-- Reporting -->
+               <!-- Documentation -->
+               <li class="nav-item ">
+                 <a class="js-nav-tooltip-link nav-link " href="#" title="Documentation" data-placement="left">
+                   <i class="tio-book-opened nav-icon"></i>
+                   <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Documentation</span>
+                 </a>
+               </li>
+               <!-- Documentation -->
+               <!-- Créer Prospect -->
+               <li class="nav-item " id="Con" runat="server">
+                 <a class="js-nav-tooltip-link nav-link " href="Contrepartie.aspx" title="Créer Prospect" data-placement="left">
+                   <i class="tio-add-circle-outlined nav-icon"></i>
+                   <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Créer Prospect</span>
+                 </a>
+               </li>
+               <!-- Créer Prospect -->
+               <!-- Parametres -->
+               <li class="navbar-vertical-aside-has-menu " id="PARAM" runat="server">
+                 <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle " href="javascript:;" title="Parametres">
+                    <i class="tio-settings-outlined nav-icon"></i>
+                   <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Parametres</span>
+                 </a>
+                 <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
+                   <li class="nav-item" id="DOC" runat="server">
+                     <a class="nav-link " href="../index.html" title="Aide">
+                       <span class="tio-circle nav-indicator-icon"></span>
+                       <span class="text-truncate">Aide</span>
+                     </a>
+                   </li>
+                   <li class="nav-item" id="DOC2" runat="server">
+                     <a class="nav-link " href="../index.html" title="Modèle de notation">
+                       <span class="tio-circle nav-indicator-icon"></span>
+                       <span class="text-truncate">Modèle de notation</span>
+                     </a>
+                   </li>
+                   <li class="nav-item" id="GP" runat="server">
+                     <a class="nav-link " href="../index.html" title="Gestion des profils">
+                       <span class="tio-circle nav-indicator-icon"></span>
+                       <span class="text-truncate">Gestion des profils</span>
+                     </a>
+                   </li>
+                   <li class="nav-item" id="GU" runat="server">
+                     <a class="nav-link " href="../dashboard-alternative.html" title="Gestion des utilisateurs">
+                       <span class="tio-circle nav-indicator-icon"></span>
+                       <span class="text-truncate">Gestion des utilisateurs</span>
+                     </a>
+                   </li>
+                   <li class="nav-item" id="GPA" runat="server">
+                     <a class="nav-link " href="../dashboard-alternative.html" title="Gestion des paramètres">
+                       <span class="tio-circle nav-indicator-icon"></span>
+                       <span class="text-truncate">Gestion des paramètres</span>
+                     </a>
+                   </li>
+                   <li class="nav-item" id="SD" runat="server">
+                     <a class="nav-link " href="../dashboard-alternative.html" title="Schémas délégataires">
+                       <span class="tio-circle nav-indicator-icon"></span>
+                       <span class="text-truncate">Schémas délégataires</span>
+                     </a>
+                   </li>
+                   <li class="nav-item" id="Pay" runat="server">
+                     <a class="nav-link " href="../dashboard-alternative.html" title="Paramètres Pays">
+                       <span class="tio-circle nav-indicator-icon"></span>
+                       <span class="text-truncate">Paramètres Pays</span>
+                     </a>
+                   </li>
+                 </ul>
+               </li>
+               <!-- Parametres -->
+               <!-- Language -->
+               <li class="navbar-vertical-aside-has-menu nav-footer-item ">
+                 <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle " href="javascript:;" title="Langue">
+                   <img class="avatar avatar-xss avatar-circle" src="../Content/vendor/flag-icon-css/flags/1x1/gb.svg" alt="Anglais"/>
+                   <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Langue</span>
+                 </a>
+               
+                 <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
+                   <li class="nav-item">
+                     <a class="nav-link" href="#" title="English (US)">
+                       <img class="avatar avatar-xss avatar-circle mr-2" src="../Content/vendor/flag-icon-css/flags/1x1/gb.svg" alt="Flag"/>
+                       Anglais
+                     </a>
+                   </li>
+                   <li class="nav-item">
+                     <a class="nav-link" href="#" title="English (UK)">
+                       <img class="avatar avatar-xss avatar-circle mr-2" src="../Content/vendor/flag-icon-css/flags/1x1/fr.svg" alt="Flag"/>
+                       Français
+                     </a>
+                   </li>
+                 </ul>
+               </li>
+               <!-- End Language -->
+            </ul>
+          </div>
+          <!-- fin Contenu du Menu -->
+          <!-- Footer -->
+          <div class="navbar-vertical-footer">
+            <ul class="navbar-vertical-footer-list">
+           
+              <li class="navbar-vertical-footer-list-item">
+                <!-- Langue -->
+                <div class="hs-unfold">
+                  <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;"
+                     data-hs-unfold-options='{
+                      "target": "#languageDropdown",
+                      "type": "css-animation",
+                      "animationIn": "slideInDown",
+                      "hideOnScroll": true
+                     }'>
+                    <img class="avatar avatar-xss avatar-circle" src="../Content/vendor/flag-icon-css/flags/1x1/gb.svg" alt="Anglais">
+                  </a>
+
+                  <div id="languageDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu navbar-vertical-footer-dropdown">
+                    <span class="dropdown-header">Selectionnez la langue</span>
+                    <a class="dropdown-item" href="#">
+                      <img class="avatar avatar-xss avatar-circle mr-2" src="../Content/vendor/flag-icon-css/flags/1x1/gb.svg" alt="Flag">
+                      <span class="text-truncate pr-2" title="Anglais">Anglais</span>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                      <img class="avatar avatar-xss avatar-circle mr-2" src="../Content/vendor/flag-icon-css/flags/1x1/fr.svg" alt="Flag">
+                      <span class="text-truncate pr-2" title="Français">Français</span>
+                    </a>
+                  </div>
+                </div>
+                <!-- Fin Langue -->
+              </li>
+            </ul>
+          </div>
+          <!-- Fin Footer -->
+        </div>
+      </div>
+    </aside>
+    <!-- Fin Navbar Vertical -->
+    <!-- ========== FIN MENU LATERAUX ========== -->
+
+    <script src="../Content/js/demo.js"></script>
+
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main id="content" role="main" class="main pointer-event">
+      <!-- Content -->
+      <div class="content container-fluid">
+            <div id="Scriptos1" runat="server">
+             </div>
+          <!-- contenu  des pages ASP -->
+           <asp:ContentPlaceHolder ID="ContentMenu" runat="server">
+           </asp:ContentPlaceHolder>
+
+            <asp:ContentPlaceHolder ID="ContentBody" runat="server">
+            </asp:ContentPlaceHolder>
+        <!-- fin contenu  des pages -->
+      </div>
+      <!-- End Content -->
+
+      <!-- Footer -->
+      <div class="footer">
+        <div class="row justify-content-between align-items-center">
+          <div class="col">
+            <p class="font-size-sm mb-0">&copy; Scoring center. <span class="d-none d-sm-inline-block"> <asp:Label ID="LbAnnee" runat="server"> 2017</asp:Label></span></p>
+          </div>
+          <div class="col-auto">
+            <div class="d-flex justify-content-end">
+              <!-- List Dot -->
+              <ul class="list-inline list-separator">
+                <li class="list-inline-item">
+                   <asp:Label ID="Label5" runat="server"></asp:Label>
+                </li>
+                <li class="list-inline-item">
+                   <asp:Label ID="utilisateur" runat="server"></asp:Label>
+                </li>
+                <li class="list-inline-item">
+                  <!-- Keyboard Shortcuts Toggle -->
+                  <div class="hs-unfold">
+                    <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;"
+                       data-hs-unfold-options='{
+                            "target": "#keyboardShortcutsSidebar",
+                            "type": "css-animation",
+                            "animationIn": "fadeInRight",
+                            "animationOut": "fadeOutRight",
+                            "hasOverlay": true,
+                            "smartPositionOff": true
+                           }'>
+                      <i class="tio-command-key"></i>
+                    </a>
+                  </div>
+                  <!-- End Keyboard Shortcuts Toggle -->
+                </li>
+              </ul>
+              <!-- End List Dot -->
+            </div>
+          </div>
+
+          <button type="button" style="display: none;" id="ShowDeconnexion" class="btn btn-primary btn-lg"
+              data-toggle="modal" data-target="#deconnexionmodal">
+              Launch demo modal
+          </button>
+          <input type="hidden" id="NoteFinp" value="" />
+          <input type="hidden" id="notifHiddenP" />
+        </div>
+      </div>
+      <!-- Fin Footer -->
+    </main>
+    <!-- ========== END MAIN CONTENT ========== -->
+
+    <!-- modal deconnexionmodal -->
+    <div id="deconnexionmodal" class="notification modal fade margin-intelligent timing row" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" id="vv">
+                    <button type="button" class="close closeX" data-dismiss="modal" style="color: white; margin-left: 10px;">&times;</button>
+                    <strong id="vvv" style="float: left; margin-left: 2%">Déconnexion </strong>
+                </div>
+                <div class="modal-body" id="ed" style="margin: 0%; padding: 0 !important">
+                    <div class="alert alert-info row" role="alert" style="margin: 2%">
+                        <p id="gfd" style="color: black; font-weight: bolder">
+                            <asp:Label ID="dec" Text="Voulez-vous vous déconnecter???" runat="server" />
+                        </p>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <%--<asp:Button ID="Button1" CssClass="btn btn-cergicolor" OnClick="ShowvalideOpen" runat="server" Text="Valider"  />--%>
+                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-dismiss="modal" id="deconnexionOpenConsult" onclick="deconnectoi()">OUI</button>
+                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-dismiss="modal" onclick="return;">NON</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- fin modal deconnexionmodal -->
+
+    <!-- modal helpmodal -->
+    <div id="helpmodal" class="notification modal fade margin-intelligent timing row" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" hidden id="hvv">
+                    <button type="button" class="close closeX" data-dismiss="modal" style="color: white; margin-left: 10px;">&times;</button>
+                    <strong id="hvvv" style="float: left; margin-left: 2%">Aide!!! </strong>
+                </div>
+                <div class="modal-body" id="hed" style="margin: 0%; padding: 0 !important">
+                    <div class="alert alert-info row" role="alert" style="margin: 2%">
+                        <p id="hgfd" style="color: black; font-weight: bolder">
+                            <center><asp:Label ID="Label1" Text="Raccourcis claviers" runat="server" /></center>
+
+                            <table class="table table-bordered table-dark" style="background-color: rgba(12, 11, 11, 0.83); color: #FFFFFF;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Claviers</th>
+                                        <th scope="col">Libellés</th>
+                                        <th scope="col">Descriptions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Alt+0</th>
+                                        <td>Aide</td>
+                                        <td>Aide</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Alt+1</th>
+                                        <td>Enregistrer</td>
+                                        <td>Action permettant l'enregistrement des informations saisies dans les champs figurants sur un ecran de Scoring... un racourci clavier d'acces aux bouttons Enregistrés</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Alt+2</th>
+                                        <td>Calculer</td>
+                                        <td>Calculer</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Alt+3</th>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Alt+4</th>
+                                        <td>Imprimer</td>
+                                        <td>Imprimer</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Alt+5</th>
+                                        <td>Rechercher</td>
+                                        <td>Rechercher</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Alt+6</th>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Alt+7</th>
+                                        <td>Precedent</td>
+                                        <td>Precedent</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Alt+8</th>
+                                        <td>Suivant</td>
+                                        <td>Suivant</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Alt+9</th>
+                                        <td>Supprimer</td>
+                                        <td>Supprimer</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Esc</th>
+                                        <td colspan="2">Annuler</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <%--<asp:Button ID="Button1" CssClass="btn btn-cergicolor" OnClick="ShowvalideOpen" runat="server" Text="Valider"  />--%>
+
+                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-dismiss="modal" onclick="return;">OK</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- fin modal helpmodal -->
+
+    <!-- div heba -->
+    <div id="heba" runat="server">
+
+    </div>
+    <!-- fin div heba -->
+
+
+  <!-- JS Implementing Plugins -->
+ <script src="../Content/js/vendor.min.js"></script>
+<script src="../Content/vendor/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js"></script>
+
+ <!-- JS Front -->
+ <script src="../Content/js/theme.min.js"></script>
+
+     <!-- JS Plugins Init. -->
+  <script>
+      $(document).on('ready', function () {
+          // INITIALIZATION OF NAVBAR VERTICAL NAVIGATION
+          // =======================================================
+          var sidebar = $('.js-navbar-vertical-aside').hsSideNav();
+
+
+          // INITIALIZATION OF TOOLTIP IN NAVBAR VERTICAL MENU
+          // =======================================================
+          $('.js-nav-tooltip-link').tooltip({ boundary: 'window' })
+
+          $(".js-nav-tooltip-link").on("show.bs.tooltip", function (e) {
+              if (!$("body").hasClass("navbar-vertical-aside-mini-mode")) {
+                  return false;
+              }
+          });
+
+
+          // INITIALIZATION OF UNFOLD
+          // =======================================================
+          $('.js-hs-unfold-invoker').each(function () {
+              var unfold = new HSUnfold($(this)).init();
+          });
+
+
+          // INITIALIZATION OF FORM SEARCH
+          // =======================================================
+          $('.js-form-search').each(function () {
+              new HSFormSearch($(this)).init()
+          });
+
+          // INITIALIZATION OF SELECT2
+          // =======================================================
+          $('.js-select2-custom').each(function () {
+              var select2 = $.HSCore.components.HSSelect2.init($(this));
+          });
+
+
+          // INITIALIZATION OF DATATABLES
+          // =======================================================
+          $.HSCore.components.HSDatatables.init($('#datatable_bord'));
+      });
+  </script>
+
+
+<script>
+
+    $('.clickable-row').click(function () {
+        var url = "FicheSignaletique.aspx?id=" + $(this).attr('id');
+        $(location).attr('href', url);
+    });
+
+    $(function () {
+        //loadNoteQualitative();
+        $("#dataTables-example").DataTable({
+            "paging": true,
+            "scrollY": "200px",
+            "scrollCollapse": true,
+        });
+
+
+        $("#dataTables-example_").DataTable({
+            "scrollY": "200px",
+            "scrollCollapse": true,
+        });
+
+        $('#dataTables-example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "scrollY": "200px",
+            "scrollCollapse": true,
+        });
+    });
+
+    function con007(obj, type) {
+        var chaine1 = "";
+        if (obj.val().trim() != "" && obj.val().trim() != null) {
+            chaine1 = "SC#" + type + ":" + obj.val();
+        } else {
+            chaine1 = "SC#" + type + ":***";
+        }
+        O42451(chaine1);
+    }
+    function combo007(obj, type) {
+
+        var chaine1 = "";
+        if (obj.find("option:selected").text().trim() != "" && obj.find("option:selected").text().trim() != null) {
+            chaine1 = "SC#" + type + ":" + obj.find("option:selected").text();
+        } else {
+            chaine1 = "SC#" + type + ":***";
+        }
+        O42451(chaine1);
+    }
+</script>
+
+<script>
+        $(document).keydown(function (event) {
+            // AIDES
+            //alert("" + event.which);
+            if (event.altKey && event.which == 48) {
+                //ALT && 0
+                $(".Aides").click();
+            }
+            if (event.altKey && event.which == 49) {
+                //ALT && 1
+                if ($(".EnregBtn").attr("disabled") == "disabled" || $(".EnregBtn").attr("disabled") == "true") {
+                }
+                else {
+                    $(".EnregBtn").mousedown();
+                    $(".EnregBtn").click();
+                    $(".EnregBtn").mouseover();
+                }
+            }
+            if (event.altKey && event.which == 50) {
+                //ALT && 2
+                if ($(".CalcBtn").attr("disabled") == "disabled" || $(".CalcBtn").attr("disabled") == "true") {
+                }
+                else {
+                    $(".CalcBtn").mousedown();
+                    $(".CalcBtn").click();
+                    $(".CalcBtn").mouseover();
+                }
+            }
+            if (event.altKey && event.which == 51) {
+                //ALT && 3
+            }
+            if (event.altKey && event.which == 52) {
+                //ALT && 4
+                if ($(".ImprimBtn").attr("disabled") == "disabled" || $(".ImprimBtn").attr("disabled") == "true") {
+                }
+                else {
+                    $(".ImprimBtn").mousedown();
+                    $(".ImprimBtn").click();
+                    $(".ImprimBtn").mouseover();
+                }
+            }
+            if (event.altKey && event.which == 53) {
+                //ALT && 5
+                if ($(".RecherchBtn").attr("disabled") == "disabled" || $(".RecherchBtn").attr("disabled") == "true") {
+                }
+                else {
+                    $(".RecherchBtn").mousedown();
+                    $(".RecherchBtn").click();
+                    $(".RecherchBtn").mouseover();
+                }
+            }
+            if (event.altKey && event.which == 54) {
+                //ALT && 6
+            }
+            if (event.altKey && event.which == 55) {
+                //ALT && 7
+            }
+            if (event.altKey && event.which == 56) {
+                //ALT && 8
+            }
+            if (event.altKey && event.which == 57) {
+                //ALT && 9
+                if ($(".SupprimBtn").attr("disabled") == "disabled" || $(".SupprimBtn").attr("disabled") == "true") {
+                }
+                else {
+                    $(".SupprimBtn").mousedown();
+                    $(".SupprimBtn").click();
+                    $(".SupprimBtn").mouseover();
+                }
+
+            }
+            if (event.which == 32) {
+                //ALT && 9
+                if ($(".AnnulBtn").attr("disabled") == "disabled" || $(".AnnulBtn").attr("disabled") == "true") {
+                }
+                else {
+                    $(".AnnulBtn").mousedown();
+                    $(".AnnulBtn").click();
+                    $(".AnnulBtn").mouseover();
+                }
+            }
+        });
+</script>
+    
+<%--REDIMENSIONNEMENT DE LA PAGE--%>
+<script>
+        // Actualiser grid lors du redimensionnement
+        (function ($, sr) {
+            var debounce = function (func, threshold, execAsap) {
+                var timeout;
+                return function debounced() {
+                    var obj = this, args = arguments;
+                    function delayed() {
+                        if (!execAsap)
+                            func.apply(obj, args);
+                        timeout = null;
+                    }
+                    if (timeout)
+                        clearTimeout(timeout);
+                    else if (execAsap)
+                        func.apply(obj, args);
+                    timeout = setTimeout(delayed, threshold || 100);
+                };
+            };
+
+            // smartresize 
+            jQuery.fn[sr] = function (fn) { return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
+
+        })(jQuery, 'smartresize');
+
+        function deconnectoi() {
+            window.location = "Connexion.aspx";
+        }
+        //raccourcie clavier
+        $(document).keydown(function (event) {
+            // flèche gauche avec alt
+            if (event.which == 46
+                //&& event.altKey
+                ) {
+
+                $("#ShowReconnexion").click();
+            }
+        });
+</script>
+
+<script>
+        $(document).keydown(function (event) {
+            // flèche gauche avec alt
+            //alert(event.which);
+
+            if (event.ctrlKey && event.keyCode == 70) {
+                disabledEvent(event);
+            }
+            if (event.ctrlKey && event.keyCode == 102) {
+                disabledEvent(event);
+            }
+            // "U" key
+            if (event.ctrlKey && event.keyCode == 85) {
+                disabledEvent(event);
+            }
+            // "F12" key
+            if (event.keyCode == 123) {
+                disabledEvent(event);
+            }
+
+            if (event.ctrlKey && event.keyCode == 85 && event.keyCode == 123) {
+                disabledEvent(event);
+            }
+            if (event.which == 123
+                //&& event.altKey
+                ) {
+                disabledEvent(event);
+                window.open("Connexion.aspx", "_blank", "toolbar=yes,scrollbars=yes,resizable=no,top=10,left=10,width=1200,height=800");
+                window.close();
+            }
+
+        });
+
+        window.onload = function () {
+            document.addEventListener("contextmenu", function (e) {
+                e.preventDefault();
+            }, false);
+            document.addEventListener("keydown", function (e) {
+                //document.onkeydown = function(e) {
+                // "I" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                    disabledEvent(e);
+                }
+                // "J" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+                    disabledEvent(e);
+                }
+                // "S" key + macOS
+                if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+                    disabledEvent(e);
+                }
+                // "U" key
+                if (e.ctrlKey && e.keyCode == 85) {
+                    disabledEvent(e);
+                }
+                // "F12" key
+                if (event.keyCode == 123) {
+                    disabledEvent(e);
+                }
+
+                if (e.ctrlKey && e.keyCode == 85 && event.keyCode == 123) {
+                    disabledEvent(e);
+                }
+            }, false);
+            function disabledEvent(e) {
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                } else if (window.event) {
+                    window.event.cancelBubble = true;
+                }
+                e.preventDefault();
+                return false;
+            }
+        };
+</script>
+
+<%--<script>
+        var stoccount = 0; var mainte = 0;
+
+        $("#<%=ReconnexionOpenConsult.ClientID%>").on("click", function (e) {
+
+            var ReconnexLogin = $("#<%=ReconnexLogin.ClientID%>").val(); var ReconnexPassword = $("#<%=ReconnexPassword.ClientID%>").val();
+            $.ajax({
+                type: "POST",
+                url: "../Scoringws.asmx/Connexion_Click",
+                data: "{'ReconnexLogin': '" + ReconnexLogin + "','ReconnexPassword': '" + ReconnexPassword + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                beforeSend: function () { },
+                success: function (response) {
+                    //alert(response.d[0]);
+                    if (response.d[0] != "true") {
+                        stoccount++;
+                        $("#<%=ReconnexPassword.ClientID%>").addClass("danger");
+                            //mainte = 0;
+                        }
+                        else {
+                            // mainte = 1;
+                            // btbtbt
+                            $("#btbtbt").click();
+                        }
+                        if (stoccount == 3) { stoccount = 0; window.location = "Connexion.aspx"; }
+                    },
+                    failure: function (response) {
+                        alert("failure");
+                    },
+                    error: function (response) {
+                        alert("error");
+                    }
+                });
+
+        });
+</script>--%>
+
+<script>
+        /*Affichage des sous menus du menu Effectuer une notation*/
+        $('#ContentMenu_NCP').click(function (e) {
+            $('.sub_menu_nop').hide('fast');
+            $('.sub_menu_ncp').toggle('fast');
+        });
+
+        $('#ContentMenu_NOP').click(function (e) {
+            $('.sub_menu_ncp').hide('fast');
+            $('.sub_menu_nop').toggle('fast');
+        });
+</script>
+
+    <!-- IE Support -->
+    <script>
+        if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="../Content/vendor/babel-polyfill/polyfill.min.js"><\/script>');
+    </script>
+</body>
+</html>

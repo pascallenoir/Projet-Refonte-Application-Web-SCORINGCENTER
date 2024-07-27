@@ -1,0 +1,3054 @@
+﻿using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+using ReportSource;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using CrystalDecisions.Shared.Json;
+using CrystalDecisions.Web;
+
+namespace ScoringCenter
+{
+    public partial class PrintPreview : System.Web.UI.Page
+    {
+        
+        string iddossierch="";
+        string connString = System.Configuration.ConfigurationManager.ConnectionStrings["ScoringDBConnectionString"].ConnectionString;
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+            if (Request.QueryString["id"]!=null)
+            {
+                if (Request.QueryString["id"].Trim() != "")
+                {
+                     iddossierch = Request.QueryString["id"];
+                     afficherRatio();
+                     afficherAutreRatio();
+                     affichebilan();
+                     affichecompteresultat();
+                     afficheBilanGrandeMasse();
+                }
+                else
+                {
+                    printReport();
+                }
+            }
+            else
+            {
+                printReport();
+            }
+            
+        }
+
+        public void printDossier()
+        {
+           
+        }
+        public void Etat_Prud(string rep)
+        {
+            try
+            {
+
+
+            }
+            catch (CrystalReportsException cre)
+            {
+                cre.Message.ToString();
+            }
+
+        }
+       
+
+
+        public void printReport()
+        {
+            //dynamic edem = Session["report"];
+            //CPTA_021C_Client_Alpha_par_intervenant reportDocument = new CPTA_021C_Client_Alpha_par_intervenant();
+            //ReportDocument report = new ReportDocument();
+
+            var NBE = Convert.ToInt32(Session["NBE"]);
+
+            for (var i = 0; i < NBE; i++)
+            {
+                CrystalReportViewer CrystalReportViewer1 = new CrystalReportViewer();
+                ReportDocument report = new ReportDocument();
+                //ReportDocument report = (ReportDocument)Session["report"+i];
+                report = (ReportDocument)Session["report" + i];
+                SqlConnectionStringBuilder sb = new SqlConnectionStringBuilder(connString);
+                foreach (InternalConnectionInfo io in report.DataSourceConnections)
+                {
+                    io.SetConnection(sb.DataSource, sb.InitialCatalog, sb.UserID, sb.Password);
+                    io.IntegratedSecurity = false;
+                }
+                report.SetDatabaseLogon(sb.UserID, sb.Password, sb.DataSource, sb.InitialCatalog, true);
+                ParameterFields paramFields = (ParameterFields)Session["paramFields"];
+                // CrystalReportViewer1.ReportSource = report;
+
+                CrystalReportViewer1.ReportSource = report;
+                CrystalReportViewer1.ParameterFieldInfo = paramFields;
+                CrystalReportViewer1.DataBind();
+
+                contentetat.Controls.Add(CrystalReportViewer1);
+
+            }
+
+            //report.Refresh();
+           
+           
+        }
+
+
+        public void afficherRatio()
+        {
+            
+                afficherRatioBN();
+
+        }
+        public void afficherAutreRatio()
+        {
+         
+            afficherAutreRatioBN();
+
+        }
+        public void afficherRatioBN()
+        {
+            StringBuilder sb = new StringBuilder();
+            Scoringws service = new Scoringws();
+
+            if (Session["id_dossier"] == null) Response.Redirect("~/Scoring/Connexion.aspx");
+
+            var idDossier = Session["id_dossier"].ToString();
+            //var idDossier = iddossierch;
+            Session.Add("id_dossier", idDossier);
+           
+               // Div1.Visible = true;
+                //Div2.Visible = true;
+
+                //CompteResult.Visible = false;
+                //divCharge.Visible = false;
+                //divProduit.Visible = false;
+
+                var liste_annee = service.AnafiAfficheLiasse(7, idDossier, "", "SN");
+                var nombre_annee = service.AnafiAfficheLiasse(8, idDossier, "", "SN");
+
+                if (liste_annee.Count != 0)
+                {
+                    sb.AppendLine("<div>");
+                    sb.AppendLine("<table id='' class=' table-bordered'>");
+                    sb.AppendLine("<thead class=''>");
+                    sb.AppendLine(string.Format("<tr><th>Ratios</th>"));
+
+                    if (liste_annee.Count > 3)
+                    {
+                        int j = 0;
+                        int v = 0;
+                        int i = 0;
+                        v = Convert.ToInt32(liste_annee.Count) - 3;
+                        foreach (var lr in liste_annee)
+                        {
+                            j++;
+                            if (v < j)
+                            {
+                                if (i < Convert.ToInt32(liste_annee.Count))
+                                {
+                                    sb.AppendLine(string.Format("<th width=15%>{0}</th>", lr.ANNEE_DETAIL));
+                                    //TabLOT[i] = lr.ANNEE_DETAIL;
+                                }
+                            }
+
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        int i = 0;
+                        foreach (var lr in liste_annee)
+                        {
+
+                            if (i < Convert.ToInt32(liste_annee.Count))
+                            {
+                                sb.AppendLine(string.Format("<th width=15%>{0}</th>", lr.ANNEE_DETAIL));
+                                //TabLOT[i] = lr.ANNEE_DETAIL;
+                            }
+                            i++;
+                        }
+                    }
+
+                    sb.AppendLine("</thead>");
+                    sb.AppendLine("<tbody>");
+
+                    var liste_libelle = service.AnafiAfficheLiasse(0, "", "", "RAT");
+
+                    foreach (var lr in liste_libelle)
+                    {
+
+                        sb.AppendLine(string.Format("<tr>"));
+
+                        sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE));
+                        // TabLOTA = new string[Convert.ToInt32(liste_annee.Count)];
+                        int p = 0;
+                        var liste_valeur = service.AnafiAfficheLiasse(6, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+
+                        int j = 0;
+                        int v = 0;
+                        v = Convert.ToInt32(liste_valeur.Count) - 3;
+                        foreach (var l in liste_valeur)
+                        {
+
+                            if (liste_valeur.Count > 3)
+                            {
+                                j++;
+                                if (v < j)
+                                {
+                                    if (l.TYPE_ANAFI_A.Trim() == "SN")
+                                    {
+                                        if (lr.RUBR_ETAT_CODE.ToString().Trim() == "R03" || lr.RUBR_ETAT_CODE.ToString().Trim() == "R04" || lr.RUBR_ETAT_CODE.ToString().Trim() == "R05" || lr.RUBR_ETAT_CODE.ToString().Trim() == "R06" || lr.RUBR_ETAT_CODE.ToString().Trim() == "R07" || lr.RUBR_ETAT_CODE.ToString().Trim() == "R08")
+                                            sb.AppendLine(string.Format("<td class='text-right'><strong>{0}</strong></td>", Convert.ToDecimal(l.VALEUR_RAT_AFF_DETAIL).ToString("#,##0.##")));
+                                        else
+                                            sb.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.VALEUR_RAT_AFF_DETAIL).ToString("#,##0.##")));
+                                        // TabLOTA[p] = l.VALEUR_RAT_AFF_DETAIL.ToString();
+                                        p++;
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                if (l.TYPE_ANAFI_A.Trim() == "SN")
+                                {
+                                    if (lr.RUBR_ETAT_CODE.ToString().Trim() == "R03" || lr.RUBR_ETAT_CODE.ToString().Trim() == "R04" || lr.RUBR_ETAT_CODE.ToString().Trim() == "R05" || lr.RUBR_ETAT_CODE.ToString().Trim() == "R06" || lr.RUBR_ETAT_CODE.ToString().Trim() == "R07" || lr.RUBR_ETAT_CODE.ToString().Trim() == "R08")
+                                        sb.AppendLine(string.Format("<td class='text-right'><strong>{0}</strong></td>", Convert.ToDecimal(l.VALEUR_RAT_AFF_DETAIL).ToString("#,##0.##")));
+                                    else
+                                        sb.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.VALEUR_RAT_AFF_DETAIL).ToString("#,##0.##")));
+                                    // TabLOTA[p] = l.VALEUR_RAT_AFF_DETAIL.ToString();
+                                    p++;
+                                }
+                            }
+                        }
+
+
+                        sb.AppendLine("</tr>");
+                    }
+
+                    sb.AppendLine("</tbody>");
+                    sb.AppendLine("</table>");
+                }
+                else
+                {
+                    sb.AppendLine("<div >");
+                    sb.AppendLine("<table id='' class='table-bordered'>");
+                    sb.AppendLine("<thead class='table-heigth'>");
+                    sb.AppendLine(string.Format("<tr><th>Ratios</th>"));
+                    sb.AppendLine(string.Format("<th width=23%></th>"));
+
+                    sb.AppendLine("</thead>");
+                    sb.AppendLine("<tbody>");
+
+                    var liste_libelle = service.AnafiAfficheLiasse(0, "", "", "RAT");
+
+                    foreach (var lr in liste_libelle)
+                    {
+
+                        sb.AppendLine(string.Format("<tr>"));
+
+                        sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE));
+                        sb.AppendLine(string.Format("<td ></td >"));
+
+                        sb.AppendLine("</tr>");
+                    }
+
+                    sb.AppendLine("</tbody>");
+                    sb.AppendLine("</table>");
+                }
+                sb.AppendLine("</div>");
+
+                ListDFinanciers1.InnerHtml = sb.ToString();
+        }
+
+        public void afficherAutreRatioBN()
+        {
+            StringBuilder sb = new StringBuilder();
+            Scoringws service = new Scoringws();
+
+            if (Session["id_dossier"] == null) Response.Redirect("~/Scoring/Connexion.aspx");
+
+            var idDossier = Session["id_dossier"].ToString();
+            Session.Add("id_dossier", idDossier);
+            
+                var liste_annee = service.AnafiAfficheLiasse(7, idDossier, "", "SN");
+                var nombre_annee = service.AnafiAfficheLiasse(8, idDossier, "", "SN");
+
+                if (liste_annee.Count != 0)
+                {
+                    sb.AppendLine("<div class='' >");
+                    sb.AppendLine("<table id='' class='table-bordered '>");
+                    sb.AppendLine("<thead class='table-heigth'>");
+                    sb.AppendLine(string.Format("<tr><th>Autres ratios</th>"));
+
+                    if (liste_annee.Count > 3)
+                    {
+                        int j = 0;
+                        int v = 0;
+                        int i = 0;
+                        v = Convert.ToInt32(liste_annee.Count) - 3;
+                        foreach (var lr in liste_annee)
+                        {
+                            j++;
+                            if (v < j)
+                            {
+                                if (i < Convert.ToInt32(liste_annee.Count))
+                                {
+                                    sb.AppendLine(string.Format("<th width=15%>{0}</th>", lr.ANNEE_DETAIL));
+                                    //TabLOT[i] = lr.ANNEE_DETAIL;
+                                }
+                            }
+
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        int i = 0;
+                        foreach (var lr in liste_annee)
+                        {
+
+                            if (i < Convert.ToInt32(liste_annee.Count))
+                            {
+                                sb.AppendLine(string.Format("<th width=15%>{0}</th>", lr.ANNEE_DETAIL));
+                                //TabLOT[i] = lr.ANNEE_DETAIL;
+                            }
+                            i++;
+                        }
+                    }
+
+                    sb.AppendLine("</thead>");
+                    sb.AppendLine("<tbody>");
+
+                    var liste_libelle = service.AnafiAfficheLiasse(0, "", "", "AUT");
+
+                    foreach (var lr in liste_libelle)
+                    {
+
+                        sb.AppendLine(string.Format("<tr>"));
+
+                        sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE));
+                        // TabLOTA = new string[Convert.ToInt32(liste_annee.Count)];
+                        int p = 0;
+                        var liste_valeur = service.AnafiAfficheLiasse(13, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+
+                        int j = 0;
+                        int v = 0;
+                        v = Convert.ToInt32(liste_valeur.Count) - 3;
+                        foreach (var l in liste_valeur)
+                        {
+
+                            if (liste_valeur.Count > 3)
+                            {
+                                j++;
+                                if (v < j)
+                                {
+                                    if (l.TYPE_ANAFI_A.Trim() == "SN")
+                                    {
+                                        if (lr.RUBR_ETAT_CODE.ToString().Trim() == "AU1")
+                                            sb.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.VALEUR_AUTRE_RAT_AFF_DETAIL).ToString("#,##0.##")));
+                                        else
+                                            sb.AppendLine(string.Format("<td class='text-right'><strong>{0}</strong></td>", Convert.ToDecimal(l.VALEUR_AUTRE_RAT_AFF_DETAIL).ToString("#,##0.##")));
+                                        // TabLOTA[p] = l.VALEUR_RAT_AFF_DETAIL.ToString();
+                                        p++;
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                if (l.TYPE_ANAFI_A.Trim() == "SN")
+                                {
+                                    if (lr.RUBR_ETAT_CODE.ToString().Trim() == "AU1")
+                                        sb.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.VALEUR_AUTRE_RAT_AFF_DETAIL).ToString("#,##0.##")));
+                                    else
+                                        sb.AppendLine(string.Format("<td class='text-right'><strong>{0}</strong></td>", Convert.ToDecimal(l.VALEUR_AUTRE_RAT_AFF_DETAIL).ToString("#,##0.##")));
+                                    // TabLOTA[p] = l.VALEUR_RAT_AFF_DETAIL.ToString();
+                                    p++;
+                                }
+                            }
+                        }
+
+
+                        sb.AppendLine("</tr>");
+                    }
+
+                    sb.AppendLine("</tbody>");
+                    sb.AppendLine("</table>");
+                }
+                else
+                {
+                    sb.AppendLine("<div class='' >");
+                    sb.AppendLine("<table id='' class='table-bordered'>");
+                    sb.AppendLine("<thead class='table-heigth'>");
+                    sb.AppendLine(string.Format("<tr><th>Autres ratios</th>"));
+                    sb.AppendLine(string.Format("<th width=23%></th>"));
+
+                    sb.AppendLine("</thead>");
+                    sb.AppendLine("<tbody>");
+
+                    var liste_libelle = service.AnafiAfficheLiasse(0, "", "", "AUT");
+
+                    foreach (var lr in liste_libelle)
+                    {
+
+                        sb.AppendLine(string.Format("<tr>"));
+
+                        sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE));
+                        sb.AppendLine(string.Format("<td ></td >"));
+
+                        sb.AppendLine("</tr>");
+                    }
+
+                    sb.AppendLine("</tbody>");
+                    sb.AppendLine("</table>");
+                }
+                sb.AppendLine("</div>");
+
+            ListDFinanciers2.InnerHtml = sb.ToString();
+        }
+
+        public void affichebilan()
+        {
+            
+                afficheBilanBN();
+
+        }
+
+        public void afficheBilanBN()
+        {
+            StringBuilder sb = new StringBuilder();
+            StringBuilder sbt = new StringBuilder();
+            StringBuilder sbe = new StringBuilder();
+            StringBuilder sbv = new StringBuilder();
+            Scoringws service = new Scoringws();
+            
+            if (Session["id_dossier"] == null) Response.Redirect("~/Scoring/Connexion.aspx");
+
+            var idDossier = Session["id_dossier"].ToString();
+            Session.Add("id_dossier", idDossier);
+            
+                
+               // Div1.Visible = true;
+                Div2.Visible = true;
+
+                
+                var liste_annee = service.AnafiAfficheLiasse(7, idDossier, "", "SN");
+                var nombre_annee = service.AnafiAfficheLiasse(8, idDossier, "", "SN");
+
+                if (liste_annee.Count != 0)
+                {
+                    sb.AppendLine("<Div class='' style='width:100%;' >");
+                    sb.AppendLine("<table id='' class='table table-hover table-bordered text-center'>");
+                    sb.AppendLine("<thead class='table-heigth'>");
+                    sb.AppendLine(string.Format("<tr><th>Actifs</th>"));
+                    if (liste_annee.Count > 3)
+                    {
+                        int j = 0;
+                        int v = 0;
+                        int i = 0;
+                        v = Convert.ToInt32(liste_annee.Count) - 3;
+                        foreach (var lr in liste_annee)
+                        {
+                            j++;
+                            if (v < j)
+                            {
+                                if (i < Convert.ToInt32(liste_annee.Count))
+                                {
+                                    sb.AppendLine(string.Format("<th onclick='transfertval($(this))' width=15%>{0}</th>", lr.ANNEE_DETAIL));
+                                    //TabLOT[i] = lr.ANNEE_DETAIL;
+                                }
+                            }
+
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        int i = 0;
+                        foreach (var lr in liste_annee)
+                        {
+
+                            if (i < Convert.ToInt32(liste_annee.Count))
+                            {
+                                sb.AppendLine(string.Format("<th onclick='transfertval($(this))' width=15%>{0}</th>", lr.ANNEE_DETAIL));
+                                //TabLOT[i] = lr.ANNEE_DETAIL;
+                            }
+                            i++;
+                        }
+                    }
+
+
+                    sb.AppendLine("</thead>");
+                    sb.AppendLine("<tbody>");
+
+                    var liste_libelle = service.AnafiAfficheLiasse(0, "", "", "BIN");
+
+                    sbt.AppendLine(string.Format("<table id='BA' class='table-bordered'>"));
+
+                    foreach (var lr in liste_libelle)
+                    {
+                        if (lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX12" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA12A" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA13A"
+                            || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA15A" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX53" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX54" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA1A"
+                            || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA22A" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA2X9" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA2A" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA3A"
+                            || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA4A" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX11" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA11B" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX13"
+                            || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA21A" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA2X4" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA14A")
+                        {
+                        }
+                        else
+                        {
+                            if (lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX21" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX22" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX23"
+                            || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX24" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX31" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX32" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX35"
+                            || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA22A" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX51" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX52" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA2X2"
+                            || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA2X3" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA2X8" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA2X6" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA2X7"
+                            || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA3X1" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA32A" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA33A"
+                             || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA2X5" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX34" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX33" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BXA")
+                            {
+                                if (lr.RUBR_ETAT_CODE.ToString().Trim() == "BXA")
+                                {
+
+                                    sbt.AppendLine(string.Format("<tr style='background-color:rgba(210, 210, 210, 1);'>"));
+
+                                    sbt.AppendLine(string.Format("<td class='text-left'><strong>&nbsp;&nbsp;&nbsp;<i class=\"glyphicon glyphicon-share-alt gly-flip-vertical \"></i><i style=\"color:#69a8f4\">{0}</i></strong></td>", lr.RUBR_ETAT_LIBELLE));
+                                    // TabLOTA = new string[Convert.ToInt32(liste_annee.Count)];
+                                    int p = 0;
+                                    var liste_valeur3 = service.AnafiAfficheLiasse(9, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+
+                                    int j = 0;
+                                    int v = 0;
+                                    v = Convert.ToInt32(liste_valeur3.Count) - 3;
+                                    foreach (var l in liste_valeur3)
+                                    {
+
+                                        if (liste_valeur3.Count > 3)
+                                        {
+                                            j++;
+                                            if (v < j)
+                                            {
+                                                sbt.AppendLine(string.Format("<td class='text-right' width=15%><i style=\"color:#69a8f4\">{0}</i></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL))));
+                                                // TabLOTA[p] = l.VALEUR_B_DETAIL.ToString();
+                                                p++;
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            sbt.AppendLine(string.Format("<td class='text-right' width=15%><i style=\"color:#69a8f4\">{0}</i></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL))));
+                                            // TabLOTA[p] = l.VALEUR_B_DETAIL.ToString();
+                                            p++;
+                                        }
+                                    }
+                                    sbt.AppendLine("</tr>");
+                                    //sbt.AppendLine("</table>");
+                                    //DIVtotauxActif.InnerHtml = sbt.ToString();
+                                }
+                                else
+                                {
+                                    sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                    // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+                                    sb.AppendLine(string.Format("<td class='text-left'>&nbsp;&nbsp;&nbsp;<i class=\"glyphicon glyphicon-share-alt gly-flip-vertical \"></i><i style=\"color:#69a8f4\">{0}</i></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+
+                                    var liste_valeur2 = service.AnafiAfficheLiasse(9, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+
+                                    int j = 0;
+                                    int v = 0;
+                                    v = Convert.ToInt32(liste_valeur2.Count) - 3;
+                                    foreach (var l in liste_valeur2)
+                                    {
+
+                                        if (liste_valeur2.Count > 3)
+                                        {
+                                            j++;
+                                            if (v < j)
+                                            {
+                                                if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                                {
+                                                    sb.AppendLine(string.Format("<td class='text-right'></td>"));
+                                                }
+                                                else
+                                                {
+                                                    sb.AppendLine(string.Format("<td class='text-right {1}'><i style=\"color:#69a8f4\">{0}</i></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                                }
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                            {
+                                                sb.AppendLine(string.Format("<td class='text-right'></td>"));
+                                            }
+                                            else
+                                            {
+                                                sb.AppendLine(string.Format("<td class='text-right {1}'><i style=\"color:#69a8f4\">{0}</i></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                            }
+                                        }
+                                    }
+
+                                    sb.AppendLine("</tr>");
+                                }
+
+
+
+                            }
+                            else
+                            {
+
+                                string SENS = "";
+                                if (lr.RUBR_ETAT_CODE.Trim().Length > 2)
+                                {
+                                    SENS = lr.RUBR_ETAT_CODE.ToString().Trim().Substring(0, 3);
+                                }
+
+                                if (SENS == "BA1" || SENS == "BA2" || SENS == "BA3" || SENS == "BA4" || SENS == "BAX")
+                                {
+                                    if (lr.RUBR_ETAT_CODE.ToString().Trim().Length == 3)
+                                    {
+                                        if (lr.RUBR_ETAT_CODE.ToString().Trim() == "BA4")
+                                        {
+                                            sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                            // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+                                            sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+
+                                            var liste_valeur2 = service.AnafiAfficheLiasse(9, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+
+                                            int j = 0;
+                                            int v = 0;
+                                            v = Convert.ToInt32(liste_valeur2.Count) - 3;
+                                            foreach (var l in liste_valeur2)
+                                            {
+
+                                                if (liste_valeur2.Count > 3)
+                                                {
+                                                    j++;
+                                                    if (v < j)
+                                                    {
+                                                        if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                                        {
+                                                            sb.AppendLine(string.Format("<td class='text-right'></td>"));
+                                                        }
+                                                        else
+                                                        {
+                                                            sb.AppendLine(string.Format("<td class='text-right {1}'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                                        }
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                                    {
+                                                        sb.AppendLine(string.Format("<td class='text-right'></td>"));
+                                                    }
+                                                    else
+                                                    {
+                                                        sb.AppendLine(string.Format("<td class='text-right {1}'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                                    }
+                                                }
+                                            }
+
+                                            sb.AppendLine("</tr>");
+                                        }
+                                        else
+                                        {
+
+                                            sb.AppendLine(string.Format("<tr data_code='{0}' style='background-color:#ddd'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                            // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+
+
+                                            if (lr.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                            {
+                                                sb.AppendLine(string.Format("<td class='text-left' style='color:#fff'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                            }
+                                            else
+                                            {
+                                                sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                            }
+                                            var liste_valeur1 = service.AnafiAfficheLiasse(9, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+                                            int j = 0;
+                                            int v = 0;
+                                            v = Convert.ToInt32(liste_valeur1.Count) - 3;
+                                            foreach (var l in liste_valeur1)
+                                            {
+
+                                                if (liste_valeur1.Count > 3)
+                                                {
+                                                    j++;
+                                                    if (v < j)
+                                                    {
+                                                        if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                                        {
+                                                            sb.AppendLine(string.Format("<td class='text-right'></td>"));
+                                                        }
+                                                        else
+                                                        {
+                                                            sb.AppendLine(string.Format("<td class='text-right {1}'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                                        }
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                                    {
+                                                        sb.AppendLine(string.Format("<td class='text-right'></td>"));
+                                                    }
+                                                    else
+                                                    {
+                                                        sb.AppendLine(string.Format("<td class='text-right {1}'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                                    }
+                                                }
+
+                                            }
+
+                                            sb.AppendLine("</tr>");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (lr.RUBR_ETAT_CODE.ToString().Trim().Length == 4)
+                                        {
+                                            if (lr.RUBR_ETAT_CODE.ToString() == "BA31" || lr.RUBR_ETAT_CODE.ToString() == "BA32" || lr.RUBR_ETAT_CODE.ToString() == "BA33")
+                                            {
+                                                sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                                // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+                                                sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+
+                                                var liste_valeur2 = service.AnafiAfficheLiasse(9, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+
+                                                int j = 0;
+                                                int v = 0;
+                                                v = Convert.ToInt32(liste_valeur2.Count) - 3;
+                                                foreach (var l in liste_valeur2)
+                                                {
+
+                                                    if (liste_valeur2.Count > 3)
+                                                    {
+                                                        j++;
+                                                        if (v < j)
+                                                        {
+                                                            if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                                            {
+                                                                sb.AppendLine(string.Format("<td class='text-right'></td>"));
+                                                            }
+                                                            else
+                                                            {
+                                                                sb.AppendLine(string.Format("<td class='text-right {1}'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                                            }
+                                                        }
+
+                                                    }
+                                                    else
+                                                    {
+                                                        if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                                        {
+                                                            sb.AppendLine(string.Format("<td class='text-right'></td>"));
+                                                        }
+                                                        else
+                                                        {
+                                                            sb.AppendLine(string.Format("<td class='text-right {1}'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                                        }
+                                                    }
+                                                }
+
+                                                sb.AppendLine("</tr>");
+                                            }
+                                            else
+                                            {
+                                                sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                                // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+                                                sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+
+                                                var liste_valeur2 = service.AnafiAfficheLiasse(9, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+
+                                                int j = 0;
+                                                int v = 0;
+                                                v = Convert.ToInt32(liste_valeur2.Count) - 3;
+                                                foreach (var l in liste_valeur2)
+                                                {
+
+                                                    if (liste_valeur2.Count > 3)
+                                                    {
+                                                        j++;
+                                                        if (v < j)
+                                                        {
+                                                            if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                                            {
+                                                                sb.AppendLine(string.Format("<td class='text-right'></td>"));
+                                                            }
+                                                            else
+                                                            {
+                                                                sb.AppendLine(string.Format("<td class='text-right {1}'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                                            }
+                                                        }
+
+                                                    }
+                                                    else
+                                                    {
+                                                        if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                                        {
+                                                            sb.AppendLine(string.Format("<td class='text-right'></td>"));
+                                                        }
+                                                        else
+                                                        {
+                                                            sb.AppendLine(string.Format("<td class='text-right {1}'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                                        }
+                                                    }
+                                                }
+
+                                                sb.AppendLine("</tr>");
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                            // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+                                            sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+
+                                            var liste_valeur2 = service.AnafiAfficheLiasse(9, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+
+                                            int j = 0;
+                                            int v = 0;
+                                            v = Convert.ToInt32(liste_valeur2.Count) - 3;
+                                            foreach (var l in liste_valeur2)
+                                            {
+
+                                                if (liste_valeur2.Count > 3)
+                                                {
+                                                    j++;
+                                                    if (v < j)
+                                                    {
+                                                        if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                                        {
+                                                            sb.AppendLine(string.Format("<td class='text-right'></td>"));
+                                                        }
+                                                        else
+                                                        {
+                                                            sb.AppendLine(string.Format("<td class='text-right {1}'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                                        }
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                                    {
+                                                        sb.AppendLine(string.Format("<td class='text-right'></td>"));
+                                                    }
+                                                    else
+                                                    {
+                                                        sb.AppendLine(string.Format("<td class='text-right {1}'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                                    }
+                                                }
+                                            }
+
+                                            sb.AppendLine("</tr>");
+                                        }
+
+
+                                    }
+                                }
+
+                                if (lr.RUBR_ETAT_CODE.Trim() == "BA")
+                                {
+                                    //string[]  // TabLOTP = null;
+
+                                    sbt.AppendLine(string.Format("<table id='{0}' class='table-hover table table-bordered text-center'>", lr.RUBR_ETAT_CODE.Trim()));
+                                    sbt.AppendLine(string.Format("<tr style='background-color:rgba(210, 210, 210, 1);'>"));
+
+                                    sbt.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE));
+                                    // TabLOTA = new string[Convert.ToInt32(liste_annee.Count)];
+                                    int p = 0;
+                                    var liste_valeur3 = service.AnafiAfficheLiasse(9, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+
+                                    int j = 0;
+                                    int v = 0;
+                                    v = Convert.ToInt32(liste_valeur3.Count) - 3;
+                                    foreach (var l in liste_valeur3)
+                                    {
+
+                                        if (liste_valeur3.Count > 3)
+                                        {
+                                            j++;
+                                            if (v < j)
+                                            {
+                                                sbt.AppendLine(string.Format("<td class='text-right' width=15%>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL))));
+                                                // TabLOTA[p] = l.VALEUR_B_DETAIL.ToString();
+                                                p++;
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            sbt.AppendLine(string.Format("<td class='text-right' width=15%>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL))));
+                                            // TabLOTA[p] = l.VALEUR_B_DETAIL.ToString();
+                                            p++;
+                                        }
+                                    }
+                                    sbt.AppendLine("</tr>");
+                                    //sbt.AppendLine("</table>");
+                                    //DIVtotauxActif.InnerHtml = sbt.ToString();
+
+
+                                }
+                            }
+
+                        }
+
+
+                    }
+
+                    sb.AppendLine("</tbody>");
+                    sb.AppendLine("</table>");
+                }
+                else
+                {
+                    sb.AppendLine("<Div class='' style='width:100%;' >");
+                    sb.AppendLine("<table id='' class='table table-hover table-bordered text-center'>");
+                    sb.AppendLine("<thead class='table-heigth'>");
+                    sb.AppendLine(string.Format("<tr><th>Actifs</th>"));
+                    sb.AppendLine(string.Format("<th width=23%></th>"));
+
+
+                    sb.AppendLine("</thead>");
+                    sb.AppendLine("<tbody>");
+
+                    var liste_libelle = service.AnafiAfficheLiasse(0, "", "", "BIN");
+
+                    foreach (var lr in liste_libelle)
+                    {
+                        if (lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX12" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA12A" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA13A"
+                           || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA15A" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX53" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX54" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA1A"
+                           || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA22A" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA2X9" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA2A" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA3A"
+                           || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA4A" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX11" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA11B" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX13"
+                           || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA21A" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA2X4" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA14A"
+                            || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX21" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX22" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX23"
+                            || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX24" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX31" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX32" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX35"
+                            || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA22A" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX51" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BAX52" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA2X2"
+                            || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA2X3" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA2X8" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA2X6" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA2X7"
+                            || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA3X1" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA32A" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BA33A"
+                            )
+                        {
+                        }
+                        else
+                        {
+
+                            string SENS = "";
+                            if (lr.RUBR_ETAT_CODE.Trim().Length > 2)
+                            {
+                                SENS = lr.RUBR_ETAT_CODE.ToString().Trim().Substring(0, 3);
+                            }
+
+                            if (SENS == "BA1" || SENS == "BA2" || SENS == "BA3" || SENS == "BA4" || SENS == "BAX")
+                            {
+                                if (lr.RUBR_ETAT_CODE.ToString().Trim().Length == 3)
+                                {
+                                    if (lr.RUBR_ETAT_CODE.ToString().Trim() == "BA4")
+                                    {
+                                        sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                        // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+                                        sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                        sb.AppendLine(string.Format("<td></td>"));
+
+                                        sb.AppendLine("</tr>");
+
+                                    }
+                                    else
+                                    {
+                                        sb.AppendLine(string.Format("<tr data_code='{0}' style='background-color:#ddd'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                        // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+
+
+                                        if (lr.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                        {
+                                            sb.AppendLine(string.Format("<td class='text-left' style='color:#fff'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                            sb.AppendLine(string.Format("<td></td>"));
+                                        }
+                                        else
+                                        {
+                                            sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                            sb.AppendLine(string.Format("<td></td>"));
+                                        }
+
+
+
+                                        sb.AppendLine("</tr>");
+                                    }
+
+                                }
+                                else
+                                {
+                                    if (lr.RUBR_ETAT_CODE.ToString().Trim().Length == 4)
+                                    {
+                                        if (lr.RUBR_ETAT_CODE.ToString() == "BA31" || lr.RUBR_ETAT_CODE.ToString() == "BA32" || lr.RUBR_ETAT_CODE.ToString() == "BA33")
+                                        {
+                                            sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                            // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+                                            sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                            sb.AppendLine(string.Format("<td></td>"));
+
+                                            sb.AppendLine("</tr>");
+                                        }
+                                        else
+                                        {
+                                            sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                            // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+                                            sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                            sb.AppendLine(string.Format("<td></td>"));
+
+                                            sb.AppendLine("</tr>");
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                        // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+                                        sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                        sb.AppendLine(string.Format("<td></td>"));
+
+                                        sb.AppendLine("</tr>");
+                                    }
+
+                                }
+                            }
+
+                            if (lr.RUBR_ETAT_CODE.Trim() == "BA")
+                            {
+                                //string[]  // TabLOTP = null;
+
+                                //sbt.AppendLine("<table id='totauxActif' class='table-hover table table-bordered text-center'>");
+                                sbt.AppendLine(string.Format("<table id='{0}' class='table-hover table table-bordered text-center'>", lr.RUBR_ETAT_CODE.Trim()));
+                                sbt.AppendLine(string.Format("<tr style='background-color:rgba(210, 210, 210, 1);'>"));
+
+                                sbt.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE));
+                                sbt.AppendLine(string.Format("<td width=23%></td>"));
+                                sbt.AppendLine("</table>");
+                               // DIVtotauxActif.InnerHtml = sbt.ToString();
+
+
+                            }
+                        }
+                    }
+
+                    sb.AppendLine("</tbody>");
+                    sb.AppendLine("</table>");
+                }
+                sb.AppendLine("</Div>");
+
+                //var list_all = service.Listbilan(idDossier);
+                //sb.AppendLine("<div class='' >");
+                sbt.AppendLine("</table>");
+                sb.AppendLine("<div style='width:100%; margin-top:125px;' >");
+                sb.AppendLine(sbt.ToString());
+                sb.AppendLine("</div>");
+
+                if (liste_annee.Count != 0)
+                {
+                    sb.AppendLine("<br /><br /><br /><Div class='' style='width:100%;  margin-top:100px;' >");
+                    sb.AppendLine("<table id='' class='table table-hover table-bordered text-center'>");
+                    sb.AppendLine("<thead class='table-heigth'>");
+                    sb.AppendLine(string.Format("<tr><th>Passifs</th>"));
+
+                    if (liste_annee.Count > 3)
+                    {
+                        int j = 0;
+                        int v = 0;
+                        int i = 0;
+                        v = Convert.ToInt32(liste_annee.Count) - 3;
+                        foreach (var lr in liste_annee)
+                        {
+                            j++;
+                            if (v < j)
+                            {
+                                if (i < Convert.ToInt32(liste_annee.Count))
+                                {
+                                    sb.AppendLine(string.Format("<th onclick='transfertval($(this))' width=15%>{0}</th>", lr.ANNEE_DETAIL));
+                                    //TabLOT[i] = lr.ANNEE_DETAIL;
+                                }
+                            }
+
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        int i = 0;
+                        foreach (var lr in liste_annee)
+                        {
+
+                            if (i < Convert.ToInt32(liste_annee.Count))
+                            {
+                                sb.AppendLine(string.Format("<th onclick='transfertval($(this))' width=15%>{0}</th>", lr.ANNEE_DETAIL));
+                                //TabLOT[i] = lr.ANNEE_DETAIL;
+                            }
+                            i++;
+                        }
+                    }
+
+                    sb.AppendLine("</thead>");
+                    sb.AppendLine("<tbody>");
+
+                    var liste_libelle = service.AnafiAfficheLiasse(0, "", "", "BIN");
+
+                    foreach (var lr in liste_libelle)
+                    {
+                        string SENS = "";
+                        if (lr.RUBR_ETAT_CODE.Trim().Length > 2)
+                        {
+                            SENS = lr.RUBR_ETAT_CODE.ToString().Trim().Substring(0, 3);
+                        }
+
+                        if (SENS == "BP1" || SENS == "BP2" || SENS == "BP3" || SENS == "BP4" || SENS == "BP5" || SENS == "BP")
+                        {
+                            if (lr.RUBR_ETAT_CODE.ToString().Trim() == "BP1A" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BP1B" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BP2" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BP3")
+                            {
+                                sb.AppendLine(string.Format("<tr data_code='{0}' style='background-color:#ddd'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+                                //sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+
+                                if (lr.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                {
+                                    sb.AppendLine(string.Format("<td class='text-left' style='color:#fff'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                }
+                                else
+                                {
+                                    sb.AppendLine(string.Format("<td class='text-left'><strong><strong>{0}</strong></strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                }
+                                var liste_valeur4 = service.AnafiAfficheLiasse(9, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+                                int j = 0;
+                                int v = 0;
+                                v = Convert.ToInt32(liste_valeur4.Count) - 3;
+                                foreach (var l in liste_valeur4)
+                                {
+
+                                    if (liste_valeur4.Count > 3)
+                                    {
+                                        j++;
+                                        if (v < j)
+                                        {
+                                            sb.AppendLine(string.Format("<td class='text-right {1}' width=15%><strong><strong>{0}</strong></strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        sb.AppendLine(string.Format("<td class='text-right {1}' width=15%><strong><strong>{0}</strong></strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                    }
+                                }
+
+
+                                sb.AppendLine("</tr>");
+                            }
+                            else
+                            {
+                                if (lr.RUBR_ETAT_CODE.ToString().Trim() == "BP1")
+                                {
+                                    sb.AppendLine(string.Format("<tr data_code='{0}' style='background-color:#b7abab'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                    // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+                                    //sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+
+                                    if (lr.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                    {
+                                        sb.AppendLine(string.Format("<td class='text-left' style='color:#fff'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                    }
+                                    else
+                                    {
+                                        sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                    }
+                                    var liste_valeur4 = service.AnafiAfficheLiasse(9, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+                                    int j = 0;
+                                    int v = 0;
+                                    v = Convert.ToInt32(liste_valeur4.Count) - 3;
+                                    foreach (var l in liste_valeur4)
+                                    {
+
+                                        if (liste_valeur4.Count > 3)
+                                        {
+                                            j++;
+                                            if (v < j)
+                                            {
+                                                sb.AppendLine(string.Format("<td class='text-right {1}' width=15%>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            sb.AppendLine(string.Format("<td class='text-right {1}' width=15%>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                        }
+                                    }
+
+
+                                    sb.AppendLine("</tr>");
+                                }
+                                else
+                                {
+                                    if (lr.RUBR_ETAT_CODE.ToString().Trim() == "BP1A1" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BP1A3" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BP1A9" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BP1AX")
+                                    {
+                                        sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                        // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+                                        sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+
+                                        var liste_valeur5 = service.AnafiAfficheLiasse(9, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+                                        int j = 0;
+                                        int v = 0;
+                                        v = Convert.ToInt32(liste_valeur5.Count) - 3;
+                                        foreach (var l in liste_valeur5)
+                                        {
+
+                                            if (liste_valeur5.Count > 3)
+                                            {
+                                                j++;
+                                                if (v < j)
+                                                {
+                                                    if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                                    {
+                                                        sb.AppendLine(string.Format("<td class='text-right' width=15%></td>"));
+                                                    }
+                                                    else
+                                                    {
+                                                        sb.AppendLine(string.Format("<td class='text-right {1}' width=15%><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                                    }
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                                {
+                                                    sb.AppendLine(string.Format("<td class='text-right' width=15%></td>"));
+                                                }
+                                                else
+                                                {
+                                                    sb.AppendLine(string.Format("<td class='text-right {1}' width=15%><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                                }
+                                            }
+                                        }
+
+                                        sb.AppendLine("</tr>");
+
+                                    }
+                                    else
+                                    {
+
+                                        sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                        // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+                                        sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+
+                                        var liste_valeur5 = service.AnafiAfficheLiasse(9, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+                                        int j = 0;
+                                        int v = 0;
+                                        v = Convert.ToInt32(liste_valeur5.Count) - 3;
+                                        foreach (var l in liste_valeur5)
+                                        {
+
+                                            if (liste_valeur5.Count > 3)
+                                            {
+                                                j++;
+                                                if (v < j)
+                                                {
+                                                    if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                                    {
+                                                        sb.AppendLine(string.Format("<td class='text-right' width=15%></td>"));
+                                                    }
+                                                    else
+                                                    {
+                                                        sb.AppendLine(string.Format("<td class='text-right {1}' width=15%>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                                    }
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                                {
+                                                    sb.AppendLine(string.Format("<td class='text-right' width=15%></td>"));
+                                                }
+                                                else
+                                                {
+                                                    sb.AppendLine(string.Format("<td class='text-right {1}' width=15%>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL)), l.ANNEE_B_DETAIL.Replace("/", "")));
+                                                }
+                                            }
+                                        }
+
+                                        sb.AppendLine("</tr>");
+                                    }
+
+                                }
+                            }
+                        }
+                        if (lr.RUBR_ETAT_CODE.Trim() == "BP")
+                        {
+                            //string[]  // TabLOTP = null;
+
+                            //sbv.AppendLine("<table id='totauxPassif' class='table-hover table table-bordered text-center'>");
+                            sbv.AppendLine(string.Format("<table id='{0}' class='table-hover table table-bordered text-center matb'>", lr.RUBR_ETAT_CODE.Trim()));
+
+                            sbv.AppendLine(string.Format("<tr style='background-color:rgba(210, 210, 210, 1);'>"));
+
+                            sbv.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE));
+                            // TabLOTP = new string[Convert.ToInt32(liste_annee.Count)];
+                            int p = 0;
+                            var liste_valeur6 = service.AnafiAfficheLiasse(9, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+                            int j = 0;
+                            int v = 0;
+                            v = Convert.ToInt32(liste_valeur6.Count) - 3;
+                            foreach (var l in liste_valeur6)
+                            {
+
+                                if (liste_valeur6.Count > 3)
+                                {
+                                    j++;
+                                    if (v < j)
+                                    {
+                                        sbv.AppendLine(string.Format("<td class='text-right' width=15%>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL))));
+                                        // TabLOTP[p] = l.VALEUR_B_DETAIL.ToString();
+                                        p++;
+                                    }
+
+                                }
+                                else
+                                {
+                                    sbv.AppendLine(string.Format("<td class='text-right' width=15%>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL))));
+                                    // TabLOTP[p] = l.VALEUR_B_DETAIL.ToString();
+                                    p++;
+                                }
+                            }
+                            sbv.AppendLine("</tr>");
+                            sbv.AppendLine("</table>");
+                           // DIVtotauxPassif.InnerHtml = sbv.ToString();
+
+
+                            sbe.AppendLine("<table id='totauxEcart' class='table-hover table table-bordered text-center'>");
+                            sbe.AppendLine(string.Format("<tr style='background-color:rgba(210, 210, 210, 1);'>"));
+
+                            sbe.AppendLine(string.Format("<td class='text-left'><strong>Ecart</strong></td>"));
+                            // TabLOTP = new string[Convert.ToInt32(liste_annee.Count)];
+                            p = 0;
+                            //var liste_valeur = service.AnafiAfficheLiasse(1, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "");
+                            j = 0;
+                            v = 0;
+                            v = Convert.ToInt32(liste_valeur6.Count) - 3;
+                            foreach (var l in liste_valeur6)
+                            {
+
+                                if (liste_valeur6.Count > 3)
+                                {
+                                    j++;
+                                    if (v < j)
+                                    {
+                                        sbe.AppendLine(string.Format("<td class='text-right' width=15%></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL))));
+                                        // TabLOTP[p] = l.VALEUR_B_DETAIL.ToString();
+                                        p++;
+                                    }
+
+                                }
+                                else
+                                {
+                                    sbe.AppendLine(string.Format("<td class='text-right' width=15%></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_B_DETAIL))));
+                                    // TabLOTP[p] = l.VALEUR_B_DETAIL.ToString();
+                                    p++;
+                                }
+                            }
+
+                            sbe.AppendLine("</tr>");
+
+                            sbe.AppendLine("</table>");
+                            DivecartsActifPassif.InnerHtml = sbe.ToString();
+                            //TPAnnee3.InnerHtml = "<strong>" + Convert.ToString(string.Format("{0:#,##0}", lr.ANNEE3)) + "</strong>";
+                        }
+                    }
+
+                    sb.AppendLine("</tbody>");
+                    sb.AppendLine("</table>");
+
+                    //DIVtotauxActif.Visible = true;
+                   // DIVtotauxPassif.Visible = true;
+                    DivecartsActifPassif.Visible = true;
+                }
+                else
+                {
+                    sb.AppendLine("<br /><br /><br /><Div class='' style='width:100%;  margin-top:100px;' >");
+                    sb.AppendLine("<table id='' class='table table-hover table-bordered text-center'>");
+                    sb.AppendLine("<thead class='table-heigth'>");
+                    sb.AppendLine(string.Format("<tr><th>Passifs</th>"));
+                    sb.AppendLine(string.Format("<th width=23%></th>"));
+
+                    sb.AppendLine("</thead>");
+                    sb.AppendLine("<tbody>");
+
+                    var liste_libelle = service.AnafiAfficheLiasse(0, "", "", "BIN");
+
+                    foreach (var lr in liste_libelle)
+                    {
+                        string SENS = "";
+                        if (lr.RUBR_ETAT_CODE.Trim().Length > 2)
+                        {
+                            SENS = lr.RUBR_ETAT_CODE.ToString().Trim().Substring(0, 3);
+                        }
+
+
+
+
+
+
+                        if (SENS == "BP1" || SENS == "BP2" || SENS == "BP3" || SENS == "BP4" || SENS == "BP5" || SENS == "BP")
+                        {
+                            if (lr.RUBR_ETAT_CODE.ToString().Trim() == "BP1A" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BP1B" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BP2" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BP3")
+                            {
+                                sb.AppendLine(string.Format("<tr data_code='{0}' style='background-color:#ddd'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+                                //sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                if (lr.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                {
+                                    sb.AppendLine(string.Format("<td class='text-left' style='color:#fff'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                    sb.AppendLine(string.Format("<td></td>"));
+                                }
+                                else
+                                {
+                                    sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                    sb.AppendLine(string.Format("<td></td>"));
+                                }
+                                sb.AppendLine("</tr>");
+                            }
+                            else
+                            {
+                                if (lr.RUBR_ETAT_CODE.ToString().Trim() == "BP1")
+                                {
+                                    sb.AppendLine(string.Format("<tr data_code='{0}' style='background-color:#b7abab'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                    // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+                                    //sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+
+                                    if (lr.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                    {
+                                        sb.AppendLine(string.Format("<td class='text-left' style='color:#fff'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                        sb.AppendLine(string.Format("<td></td>"));
+                                    }
+                                    else
+                                    {
+                                        sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                        sb.AppendLine(string.Format("<td></td>"));
+                                    }
+                                    sb.AppendLine("</tr>");
+                                }
+                                else
+                                {
+                                    if (lr.RUBR_ETAT_CODE.ToString().Trim() == "BP1A1" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BP1A3" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BP1A9" || lr.RUBR_ETAT_CODE.ToString().Trim() == "BP1AX")
+                                    {
+                                        sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                        // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+                                        sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+
+                                        sb.AppendLine(string.Format("<td></td>"));
+
+                                        sb.AppendLine("</tr>");
+
+                                    }
+                                    else
+                                    {
+
+                                        sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                        // sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.CODE_POSTE.ToString()));
+                                        sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                        sb.AppendLine(string.Format("<td></td>"));
+
+
+                                        sb.AppendLine("</tr>");
+                                    }
+
+                                }
+                            }
+                        }
+                        if (lr.RUBR_ETAT_CODE.Trim() == "BP")
+                        {
+                            //string[]  // TabLOTP = null;
+
+                            //sbv.AppendLine("<table id='totauxPassif' class='table-hover table table-bordered text-center'>");
+                            sbv.AppendLine(string.Format("<table id='{0}' class='table-hover table table-bordered text-center matb'>", lr.RUBR_ETAT_CODE.Trim()));
+
+                            sbv.AppendLine(string.Format("<tr style='background-color:rgba(210, 210, 210, 1);'>"));
+
+                            sbv.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE));
+                            sbv.AppendLine(string.Format("<td width=23%></td>"));
+                            sbv.AppendLine("</table>");
+                            //DIVtotauxPassif.InnerHtml = sbv.ToString();
+
+
+                            sbe.AppendLine("<table id='totauxPassif' class='table-hover table table-bordered text-center'>");
+                            sbe.AppendLine(string.Format("<tr style='background-color:rgba(210, 210, 210, 1);'>"));
+
+                            sbe.AppendLine(string.Format("<td class='text-left'>Ecart</td>"));
+                            sbe.AppendLine(string.Format("<td width=23%></td>"));
+                            sbe.AppendLine("</table>");
+                            DivecartsActifPassif.InnerHtml = sbe.ToString();
+                        }
+                    }
+
+                    sb.AppendLine("</tbody>");
+                    sb.AppendLine("</table>");
+
+                    //DIVtotauxActif.Visible = true;
+                    //DIVtotauxPassif.Visible = true;
+                    DivecartsActifPassif.Visible = true;
+                }
+
+
+
+                sb.AppendLine("</Div>");
+                sb.AppendLine("<div style='width:100%; margin-top:125px;' >");
+                sb.AppendLine(sbv.ToString());
+                sb.AppendLine("</div>");
+               
+                ListDFinanciers3.InnerHtml = "" + sb.ToString() + "";
+            //sbt.AppendLine("</table>");
+           // DIVtotauxActif.InnerHtml = sbt.ToString();
+
+        }
+
+         public void affichecompteresultat()
+        {
+         
+                affichecompteresultatBN();
+       }
+         public void affichecompteresultatBN()
+         {
+
+             StringBuilder sb = new StringBuilder();
+             StringBuilder sbt = new StringBuilder();
+             StringBuilder sbe = new StringBuilder();
+             StringBuilder sbv = new StringBuilder();
+             Scoringws service = new Scoringws();
+
+             if (Session["id_dossier"] == null) Response.Redirect("~/Scoring/Connexion.aspx");
+
+             var idDossier = Session["id_dossier"].ToString();
+             Session.Add("id_dossier", idDossier);
+             
+                 
+
+                 var liste_annee = service.AnafiAfficheLiasse(7, idDossier, "", "SN");
+                 var nombre_annee = service.AnafiAfficheLiasse(8, idDossier, "", "SN");
+
+                 if (liste_annee.Count != 0)
+                 {
+                     sb.AppendLine("<div class='' >");
+                     sb.AppendLine("<table id='' class='table table-hover table-bordered text-center'>");
+                     sb.AppendLine("<thead class='table-heigth'>");
+                     sb.AppendLine(string.Format("<tr><th>Charges</th>"));
+
+                     if (liste_annee.Count > 3)
+                     {
+                         int j = 0;
+                         int v = 0;
+                         int i = 0;
+                         v = Convert.ToInt32(liste_annee.Count) - 3;
+                         foreach (var lr in liste_annee)
+                         {
+                             j++;
+                             if (v < j)
+                             {
+                                 if (i < Convert.ToInt32(liste_annee.Count))
+                                 {
+                                     sb.AppendLine(string.Format("<th onclick='transfertval($(this))' width=15%>{0}</th>", lr.ANNEE_DETAIL));
+                                     //TabLOT[i] = lr.ANNEE_DETAIL;
+                                 }
+                             }
+
+                             i++;
+                         }
+                     }
+                     else
+                     {
+                         int i = 0;
+                         foreach (var lr in liste_annee)
+                         {
+
+                             if (i < Convert.ToInt32(liste_annee.Count))
+                             {
+                                 sb.AppendLine(string.Format("<th onclick='transfertval($(this))' width=15%>{0}</th>", lr.ANNEE_DETAIL));
+                                 //TabLOT[i] = lr.ANNEE_DETAIL;
+                             }
+                             i++;
+                         }
+                     }
+                     sb.AppendLine("</thead>");
+                     sb.AppendLine("<tbody>");
+
+                     var liste_libelle = service.AnafiAfficheLiasse(0, "", "", "CRN");
+
+                     foreach (var lr in liste_libelle)
+                     {
+                         string SENS = "";
+                         if (lr.RUBR_ETAT_CODE.Trim().Length > 2)
+                         {
+                             SENS = lr.RUBR_ETAT_CODE.ToString().Trim().Substring(0, 3);
+                         }
+
+                         if (SENS == "CC0" || SENS == "CC1" || SENS == "CC2" || SENS == "CC3" || SENS == "CC4" || SENS == "CC5")
+                         {
+                             if (lr.RUBR_ETAT_CODE.ToString().Trim().Length == 3)
+                             {
+                                 sb.AppendLine(string.Format("<tr data_code='{0}' style='background-color:#ddd'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+
+
+                                 if (lr.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                 {
+                                     sb.AppendLine(string.Format("<td class='text-left' style='color:#fff'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                 }
+                                 else
+                                 {
+                                     sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                 }
+
+                                 var liste_valeur = service.AnafiAfficheLiasse(10, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+
+                                 int j = 0;
+                                 int v = 0;
+                                 v = Convert.ToInt32(liste_valeur.Count) - 3;
+                                 foreach (var l in liste_valeur)
+                                 {
+
+                                     if (liste_valeur.Count > 3)
+                                     {
+                                         j++;
+                                         if (v < j)
+                                         {
+                                             if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                             {
+                                                 sb.AppendLine(string.Format("<td class='text-right'></td>"));
+                                             }
+                                             else
+                                             {
+                                                 sb.AppendLine(string.Format("<td class='text-right {1}'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL)), l.ANNEE_CR_DETAIL.Replace("/", "")));
+
+                                                 // sb.AppendLine(string.Format("<td class='text-right'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL))));
+                                             }
+                                         }
+
+                                     }
+                                     else
+                                     {
+                                         if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                         {
+                                             sb.AppendLine(string.Format("<td class='text-right'></td>"));
+                                         }
+                                         else
+                                         {
+                                             sb.AppendLine(string.Format("<td class='text-right {1}'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL)), l.ANNEE_CR_DETAIL.Replace("/", "")));
+
+                                             // sb.AppendLine(string.Format("<td class='text-right'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL))));
+                                         }
+                                     }
+                                 }
+
+
+
+
+                                 sb.AppendLine("</tr>");
+                             }
+                             else
+                             {
+                                 sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                 sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+
+                                 var liste_valeur = service.AnafiAfficheLiasse(10, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+                                 int j = 0;
+                                 int v = 0;
+                                 v = Convert.ToInt32(liste_valeur.Count) - 3;
+                                 foreach (var l in liste_valeur)
+                                 {
+
+                                     if (liste_valeur.Count > 3)
+                                     {
+                                         j++;
+                                         if (v < j)
+                                         {
+                                             if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                             {
+                                                 sb.AppendLine(string.Format("<td class='text-right'></td>"));
+                                             }
+                                             else
+                                             {
+                                                 sb.AppendLine(string.Format("<td class='text-right {1}'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL)), l.ANNEE_CR_DETAIL.Replace("/", "")));
+
+                                                 //sb.AppendLine(string.Format("<td class='text-right'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL))));
+                                             }
+                                         }
+
+                                     }
+                                     else
+                                     {
+                                         if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                         {
+                                             sb.AppendLine(string.Format("<td class='text-right'></td>"));
+                                         }
+                                         else
+                                         {
+                                             sb.AppendLine(string.Format("<td class='text-right {1}'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL)), l.ANNEE_CR_DETAIL.Replace("/", "")));
+
+                                             // sb.AppendLine(string.Format("<td class='text-right'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL))));
+                                         }
+                                     }
+                                 }
+
+
+                                 sb.AppendLine("</tr>");
+
+                             }
+                         }
+
+                         if (lr.RUBR_ETAT_CODE.Trim() == "CC")
+                         {
+
+
+
+                             sbt.AppendLine(string.Format("<table id='{0}' class='table-hover table table-bordered text-center'>", lr.RUBR_ETAT_CODE.Trim()));
+                             sbt.AppendLine(string.Format("<tr style='background-color:rgba(210, 210, 210, 1);'>"));
+
+                             sbt.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE));
+                             int p = 0;
+                             var liste_valeur = service.AnafiAfficheLiasse(10, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+
+                             int j = 0;
+                             int v = 0;
+                             v = Convert.ToInt32(liste_valeur.Count) - 3;
+                             foreach (var l in liste_valeur)
+                             {
+
+                                 if (liste_valeur.Count > 3)
+                                 {
+                                     j++;
+                                     if (v < j)
+                                     {
+                                         sbt.AppendLine(string.Format("<td  width=15% class='text-right'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL))));
+                                         // TabLOTA[p] = l.VALEUR_B_DETAIL.ToString();
+                                         p++;
+                                     }
+
+                                 }
+                                 else
+                                 {
+                                     sbt.AppendLine(string.Format("<td  width=15% class='text-right'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL))));
+                                     // TabLOTA[p] = l.VALEUR_B_DETAIL.ToString();
+                                     p++;
+                                 }
+                             }
+                            // sbt.AppendLine("</table>");
+
+                             sbt.AppendLine("</table>");
+                             sb.AppendLine("<div style='width:100%; margin-top:125px;' >");
+                             sb.AppendLine(sbt.ToString());
+                             sb.AppendLine("</div>");
+
+                            // divCharge.InnerHtml = sbt.ToString();
+
+                             //sb.AppendLine(string.Format("<tr data_code='{0}' style='background-color:rgba(210, 210, 210, 1);'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+
+                             //sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE));
+                             // TabLOTA = new string[Convert.ToInt32(liste_annee.Count)];
+                             //int p = 0;
+                             //var liste_valeur = service.AnafiAfficheLiasse(10, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+
+                             //int j = 0;
+                             //int v = 0;
+                             //v = Convert.ToInt32(liste_valeur.Count) - 3;
+                             //foreach (var l in liste_valeur)
+                             //{
+
+                             //    if (liste_valeur.Count > 3)
+                             //    {
+                             //        j++;
+                             //        if (v < j)
+                             //        {
+                             //            sb.AppendLine(string.Format("<td class='text-right'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL))));
+                             //            // TabLOTA[p] = l.VALEUR_B_DETAIL.ToString();
+                             //            p++;
+                             //        }
+
+                             //    }
+                             //    else
+                             //    {
+                             //        sb.AppendLine(string.Format("<td class='text-right'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL))));
+                             //        // TabLOTA[p] = l.VALEUR_B_DETAIL.ToString();
+                             //        p++;
+                             //    }
+                             //}
+
+                         }
+
+                     }
+
+                     sb.AppendLine("</tbody>");
+                     sb.AppendLine("</table>");
+                 }
+                 else
+                 {
+                     sb.AppendLine("<div class='' >");
+                     sb.AppendLine("<table id='' class='table table-hover table-bordered text-center'>");
+                     sb.AppendLine("<thead class='table-heigth'>");
+                     sb.AppendLine(string.Format("<tr><th>Charges</th>"));
+                     sb.AppendLine(string.Format("<th width=23%></th>"));
+
+                     sb.AppendLine("</thead>");
+                     sb.AppendLine("<tbody>");
+
+                     var liste_libelle = service.AnafiAfficheLiasse(0, "", "", "CRN");
+
+                     foreach (var lr in liste_libelle)
+                     {
+                         string SENS = "";
+                         if (lr.RUBR_ETAT_CODE.Trim().Length > 2)
+                         {
+                             SENS = lr.RUBR_ETAT_CODE.ToString().Trim().Substring(0, 3);
+                         }
+
+                         if (SENS == "CC0" || SENS == "CC1" || SENS == "CC2" || SENS == "CC3" || SENS == "CC4" || SENS == "CC5")
+                         {
+                             if (lr.RUBR_ETAT_CODE.ToString().Trim().Length == 3)
+                             {
+                                 sb.AppendLine(string.Format("<tr data_code='{0}' style='background-color:#ddd'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+
+
+                                 if (lr.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                 {
+                                     sb.AppendLine(string.Format("<td class='text-left' style='color:#fff'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                     sb.AppendLine(string.Format("<td></td>"));
+                                 }
+                                 else
+                                 {
+                                     sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                     sb.AppendLine(string.Format("<td></td>"));
+                                 }
+
+
+                                 sb.AppendLine("</tr>");
+                             }
+                             else
+                             {
+                                 sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                 sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                 sb.AppendLine(string.Format("<td></td>"));
+                                 sb.AppendLine("</tr>");
+
+                             }
+                         }
+
+                         if (lr.RUBR_ETAT_CODE.Trim() == "CC")
+                         {
+                             sbt.AppendLine(string.Format("<table id='{0}' class='table-hover table table-bordered text-center'>", lr.RUBR_ETAT_CODE.Trim()));
+                             sbt.AppendLine(string.Format("<tr style='background-color:rgba(210, 210, 210, 1);'>"));
+
+                             sbt.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE));
+                             sbt.AppendLine(string.Format("<td width='23%'></td>"));
+                             sbt.AppendLine("</table>");
+                            // divCharge.InnerHtml = sbt.ToString();
+
+                             //sb.AppendLine(string.Format("<tr style='background-color:rgba(210, 210, 210, 1);'>"));
+
+                             //sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE));
+                             //sb.AppendLine(string.Format("<td></td>"));
+
+                         }
+
+                     }
+
+                     sb.AppendLine("</tbody>");
+                     sb.AppendLine("</table>");
+                 }
+                 sb.AppendLine("</div>");
+
+                 if (liste_annee.Count != 0)
+                 {
+                     sb.AppendLine("<br /><br /><br /><Div class='' style='width:100%;  margin-top:100px;' >");
+                     //sb.AppendLine("<div class='' >");
+                     sb.AppendLine("<table id='' class='table table-hover table-bordered text-center'>");
+                     sb.AppendLine("<thead class='table-heigth'>");
+                     sb.AppendLine(string.Format("<tr><th>Produits</th>"));
+
+                     if (liste_annee.Count > 3)
+                     {
+                         int j = 0;
+                         int v = 0;
+                         int i = 0;
+                         v = Convert.ToInt32(liste_annee.Count) - 3;
+                         foreach (var lr in liste_annee)
+                         {
+                             j++;
+                             if (v < j)
+                             {
+                                 if (i < Convert.ToInt32(liste_annee.Count))
+                                 {
+                                     sb.AppendLine(string.Format("<th onclick='transfertval($(this))' width=15%>{0}</th>", lr.ANNEE_DETAIL));
+                                     //TabLOT[i] = lr.ANNEE_DETAIL;
+                                 }
+                             }
+
+                             i++;
+                         }
+                     }
+                     else
+                     {
+                         int i = 0;
+                         foreach (var lr in liste_annee)
+                         {
+
+                             if (i < Convert.ToInt32(liste_annee.Count))
+                             {
+                                 sb.AppendLine(string.Format("<th onclick='transfertval($(this))' width=15%>{0}</th>", lr.ANNEE_DETAIL));
+                                 //TabLOT[i] = lr.ANNEE_DETAIL;
+                             }
+                             i++;
+                         }
+                     }
+
+                     sb.AppendLine("</thead>");
+                     sb.AppendLine("<tbody>");
+
+                     var liste_libelle = service.AnafiAfficheLiasse(0, "", "", "CRN");
+
+                     //sbv.AppendLine(string.Format("<table id='' class='table-hover table table-bordered text-center matb'>", lr.RUBR_ETAT_CODE.Trim()));
+                     sbv.AppendLine(string.Format("<table id='' class='table-hover table table-bordered text-center matb'>"));
+                     foreach (var lr in liste_libelle)
+                     {
+                         string SENS = "";
+                         if (lr.RUBR_ETAT_CODE.Trim().Length > 2)
+                         {
+                             SENS = lr.RUBR_ETAT_CODE.ToString().Trim().Substring(0, 3);
+                         }
+
+                         if (SENS == "CP0" || SENS == "CP1" || SENS == "CP2" || SENS == "CP3" || SENS == "CP4" || SENS == "CP5" || SENS == "CP6" || SENS == "CP7" || SENS == "CP8")
+                         {
+                             if (lr.RUBR_ETAT_CODE.ToString().Trim().Length == 3)
+                             {
+
+
+                                 if (lr.RUBR_ETAT_CODE.ToString().Trim() == "CP7" || lr.RUBR_ETAT_CODE.ToString().Trim() == "CP8")
+                                 {
+
+
+                                     if (SENS == "CP8")
+                                     {
+                                         sbv.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                         sbv.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+
+                                         var liste_valeur = service.AnafiAfficheLiasse(10, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+                                         int j = 0;
+                                         int v = 0;
+                                         v = Convert.ToInt32(liste_valeur.Count) - 3;
+                                         foreach (var l in liste_valeur)
+                                         {
+
+                                             if (liste_valeur.Count > 3)
+                                             {
+                                                 j++;
+                                                 if (v < j)
+                                                 {
+                                                     if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                                     {
+                                                         sbv.AppendLine(string.Format("<td class='text-right'></td>"));
+                                                     }
+                                                     else
+                                                     {
+                                                         sbv.AppendLine(string.Format("<td class='text-right {1}'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL)), l.ANNEE_CR_DETAIL.Replace("/", "")));
+
+                                                         //sbv.AppendLine(string.Format("<td class='text-right'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL))));
+                                                     }
+                                                 }
+
+                                             }
+                                             else
+                                             {
+                                                 if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                                 {
+                                                     sbv.AppendLine(string.Format("<td class='text-right'></td>"));
+                                                 }
+                                                 else
+                                                 {
+                                                     sbv.AppendLine(string.Format("<td class='text-right {1}'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL)), l.ANNEE_CR_DETAIL.Replace("/", "")));
+
+                                                     //sbv.AppendLine(string.Format("<td class='text-right'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL))));
+                                                 }
+                                             }
+                                         }
+
+                                         sbv.AppendLine("</tr>");
+                                     }
+                                     else
+                                     {
+                                         sbv.AppendLine(string.Format("<tr style='background-color:rgba(210, 210, 210, 1);'>"));
+
+                                         if (lr.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                         {
+                                             sbv.AppendLine(string.Format("<td class='text-left' style='color:#fff'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                         }
+                                         else
+                                         {
+                                             sbv.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                         }
+                                         var liste_valeur = service.AnafiAfficheLiasse(10, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+                                         int j = 0;
+                                         int v = 0;
+                                         v = Convert.ToInt32(liste_valeur.Count) - 3;
+                                         foreach (var l in liste_valeur)
+                                         {
+
+                                             if (liste_valeur.Count > 3)
+                                             {
+                                                 j++;
+                                                 if (v < j)
+                                                 {
+                                                     sbv.AppendLine(string.Format("<td width=15% class='text-right {1}'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL)), l.ANNEE_CR_DETAIL.Replace("/", "")));
+
+                                                     // sbv.AppendLine(string.Format("<td  width=15% class='text-right'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL))));
+                                                 }
+
+                                             }
+                                             else
+                                             {
+                                                 sbv.AppendLine(string.Format("<td width=15% class='text-right {1}'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL)), l.ANNEE_CR_DETAIL.Replace("/", "")));
+
+                                                 //sbv.AppendLine(string.Format("<td  width=15% class='text-right'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL))));
+                                             }
+                                         }
+                                         sbv.AppendLine("</tr>");
+                                     }
+
+                                 }
+                                 else
+                                 {
+
+                                     sb.AppendLine(string.Format("<tr data_code='{0}' style='background-color:#ddd'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+
+                                     if (lr.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                     {
+                                         sb.AppendLine(string.Format("<td class='text-left' style='color:#fff'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                     }
+                                     else
+                                     {
+                                         sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                     }
+                                     var liste_valeur = service.AnafiAfficheLiasse(10, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+                                     int j = 0;
+                                     int v = 0;
+                                     v = Convert.ToInt32(liste_valeur.Count) - 3;
+                                     foreach (var l in liste_valeur)
+                                     {
+
+                                         if (liste_valeur.Count > 3)
+                                         {
+                                             j++;
+                                             if (v < j)
+                                             {
+                                                 sb.AppendLine(string.Format("<td width=15% class='text-right {1}'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL)), l.ANNEE_CR_DETAIL.Replace("/", "")));
+
+                                                 //sb.AppendLine(string.Format("<td class='text-right'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL))));
+                                             }
+
+                                         }
+                                         else
+                                         {
+                                             sb.AppendLine(string.Format("<td width=15% class='text-right {1}'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL)), l.ANNEE_CR_DETAIL.Replace("/", "")));
+
+                                             // sb.AppendLine(string.Format("<td class='text-right'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL))));
+                                         }
+                                     }
+
+                                     sb.AppendLine("</tr>");
+                                 }
+                             }
+                             else
+                             {
+                                 if (lr.RUBR_ETAT_CODE.ToString().Trim() != "CP6C")
+                                 {
+                                     sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                     sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+
+                                     var liste_valeur = service.AnafiAfficheLiasse(10, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+                                     int j = 0;
+                                     int v = 0;
+                                     v = Convert.ToInt32(liste_valeur.Count) - 3;
+                                     foreach (var l in liste_valeur)
+                                     {
+
+                                         if (liste_valeur.Count > 3)
+                                         {
+                                             j++;
+                                             if (v < j)
+                                             {
+                                                 if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                                 {
+                                                     sb.AppendLine(string.Format("<td class='text-right'></td>"));
+                                                 }
+                                                 else
+                                                 {
+                                                     sb.AppendLine(string.Format("<td class='text-right {1}'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL)), l.ANNEE_CR_DETAIL.Replace("/", "")));
+
+                                                     // sb.AppendLine(string.Format("<td class='text-right'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL))));
+                                                 }
+                                             }
+
+                                         }
+                                         else
+                                         {
+                                             if (l.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                             {
+                                                 sb.AppendLine(string.Format("<td class='text-right'></td>"));
+                                             }
+                                             else
+                                             {
+                                                 sb.AppendLine(string.Format("<td class='text-right {1}'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL)), l.ANNEE_CR_DETAIL.Replace("/", "")));
+
+                                                 //sb.AppendLine(string.Format("<td class='text-right'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL))));
+                                             }
+                                         }
+                                     }
+
+                                     sb.AppendLine("</tr>");
+                                 }
+
+                             }
+                         }
+
+                         if (lr.RUBR_ETAT_CODE.Trim() == "CP")
+                         {
+                             sb.AppendLine(string.Format("<tr style='background-color:rgba(210, 210, 210, 1);'>"));
+
+                             sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE));
+                             // TabLOTP = new string[Convert.ToInt32(liste_annee.Count)];
+                             int p = 0;
+                             var liste_valeur = service.AnafiAfficheLiasse(10, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+                             int j = 0;
+                             int v = 0;
+                             v = Convert.ToInt32(liste_valeur.Count) - 3;
+                             foreach (var l in liste_valeur)
+                             {
+
+                                 if (liste_valeur.Count > 3)
+                                 {
+                                     j++;
+                                     if (v < j)
+                                     {
+                                         sb.AppendLine(string.Format("<td class='text-right'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL))));
+                                         // TabLOTP[p] = l.VALEUR_B_DETAIL.ToString();
+                                         p++;
+                                     }
+
+                                 }
+                                 else
+                                 {
+                                     sb.AppendLine(string.Format("<td class='text-right'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_CR_DETAIL))));
+                                     // TabLOTP[p] = l.VALEUR_B_DETAIL.ToString();
+                                     p++;
+                                 }
+                             }
+
+                         }
+                     }
+
+                     sb.AppendLine("</tbody>");
+                     sb.AppendLine("</table>");
+
+                     sbv.AppendLine("</table>");
+                     //divProduit.InnerHtml = sbv.ToString();
+
+                 }
+                 else
+                 {
+                     //sb.AppendLine("<div class='' >");
+                     sb.AppendLine("<br /><br /><br /><Div class='' style='width:100%;  margin-top:100px;' >");
+                     sb.AppendLine("<table id='' class='table table-hover table-bordered text-center'>");
+                     sb.AppendLine("<thead class='table-heigth'>");
+                     sb.AppendLine(string.Format("<tr><th>Produits</th>"));
+                     sb.AppendLine(string.Format("<th width=23%></th>"));
+
+                     sb.AppendLine("</thead>");
+                     sb.AppendLine("<tbody>");
+
+                     var liste_libelle = service.AnafiAfficheLiasse(0, "", "", "CRN");
+
+                     //sbv.AppendLine(string.Format("<table id='{0}' class='table-hover table table-bordered text-center matb'>", lr.RUBR_ETAT_CODE.Trim()));
+                     sbv.AppendLine(string.Format("<table id='' class='table-hover table table-bordered text-center matb'>"));
+
+                     foreach (var lr in liste_libelle)
+                     {
+                         string SENS = "";
+                         if (lr.RUBR_ETAT_CODE.Trim().Length > 2)
+                         {
+                             SENS = lr.RUBR_ETAT_CODE.ToString().Trim().Substring(0, 3);
+                         }
+
+                         if (SENS == "CP0" || SENS == "CP1" || SENS == "CP2" || SENS == "CP3" || SENS == "CP4" || SENS == "CP5" || SENS == "CP6" || SENS == "CP7" || SENS == "CP8")
+                         {
+                             if (lr.RUBR_ETAT_CODE.ToString().Trim().Length == 3)
+                             {
+
+                                 if (lr.RUBR_ETAT_CODE.ToString().Trim() == "CP7" || lr.RUBR_ETAT_CODE.ToString().Trim() == "CP8")
+                                 {
+
+
+                                     if (SENS == "CP8")
+                                     {
+                                         sbv.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                         sbv.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                         sbv.AppendLine(string.Format("<td width='15%' ></td>"));
+                                         sbv.AppendLine("</tr>");
+                                     }
+                                     else
+                                     {
+                                         //sbv.AppendLine(string.Format("<tr  width=15% style='background-color:rgba(210, 210, 210, 1);'>"));
+
+                                         //sbv.AppendLine(string.Format("<tr data_code='{0}' style='background-color:#ddd'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                         sbv.AppendLine(string.Format("<tr data_code='{0}' style='background-color:rgba(210, 210, 210, 1);'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+
+                                         if (lr.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                         {
+                                             sbv.AppendLine(string.Format("<td class='text-left' style='color:#fff'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                             sbv.AppendLine(string.Format("<td width='23%'></td>"));
+                                         }
+                                         else
+                                         {
+                                             sbv.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                             sbv.AppendLine(string.Format("<td width='23%'></td>"));
+                                         }
+                                         sbv.AppendLine("</tr>");
+                                     }
+
+
+
+                                 }
+                                 else
+                                 {
+
+                                     sb.AppendLine(string.Format("<tr data_code='{0}' style='background-color:#ddd'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+
+                                     if (lr.RUBR_ETAT_LIBELLE.Trim().Length <= 1)
+                                     {
+                                         sb.AppendLine(string.Format("<td class='text-left' style='color:#fff'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                         sb.AppendLine(string.Format("<td></td>"));
+                                     }
+                                     else
+                                     {
+                                         sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                         sb.AppendLine(string.Format("<td></td>"));
+                                     }
+
+                                     sb.AppendLine("</tr>");
+                                 }
+
+
+                             }
+                             else
+                             {
+                                 if (lr.RUBR_ETAT_CODE.ToString().Trim() != "CP6C")
+                                 {
+                                     sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                     sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                     sb.AppendLine(string.Format("<td></td>"));
+
+                                     sb.AppendLine("</tr>");
+                                 }
+
+                             }
+                         }
+
+
+                         if (lr.RUBR_ETAT_CODE.Trim() == "CP")
+                         {
+                             sb.AppendLine(string.Format("<tr style='background-color:rgba(210, 210, 210, 1);'>"));
+
+                             sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE));
+                             sb.AppendLine(string.Format("<td></td>"));
+                         }
+                     }
+
+                     sb.AppendLine("</tbody>");
+                     sb.AppendLine("</table>");
+
+
+                     sbv.AppendLine("</table>");
+                     //divProduit.InnerHtml = sbv.ToString();
+
+                   
+                 }
+
+
+
+
+                 sb.AppendLine("</Div>");
+                 sb.AppendLine("<div style='width:100%; margin-top:125px;' >");
+                 sb.AppendLine(sbv.ToString());
+                 sb.AppendLine("</div>");
+
+                 ListDFinanciers4.InnerHtml = "" + sb.ToString() + "";
+             
+           
+
+            
+         }
+
+       public void afficheBilanGrandeMasse()
+        {
+           
+                afficheBilanGrandeMasseBN();
+
+        }
+
+       public void afficheBilanGrandeMasseBN()
+       {
+
+           StringBuilder sb = new StringBuilder();
+           StringBuilder sbt = new StringBuilder();
+           StringBuilder sbe = new StringBuilder();
+           StringBuilder sbv = new StringBuilder();
+           Scoringws service = new Scoringws();
+
+           if (Session["id_dossier"] == null) Response.Redirect("~/Scoring/Connexion.aspx");
+
+           var idDossier = Session["id_dossier"].ToString();
+           Session.Add("id_dossier", idDossier);
+           
+              
+
+               var liste_annee = service.AnafiAfficheLiasse(7, idDossier, "", "SN");
+               var nombre_annee = service.AnafiAfficheLiasse(8, idDossier, "", "SN");
+
+               if (liste_annee.Count != 0)
+               {
+                   sb.AppendLine("<div class='' style=\"overflow-x:auto\" >");
+                   sb.AppendLine("<table id='' class='table table-hover table-bordered text-center'>");
+                   sb.AppendLine("<thead class='table-heigth'>");
+                   sb.AppendLine(string.Format("<tr><th>Actifs</th>"));
+
+                   if (liste_annee.Count > 3)
+                   {
+                       int j = 0;
+                       int v = 0;
+                       int i = 0;
+                       v = Convert.ToInt32(liste_annee.Count) - 3;
+                       foreach (var lr in liste_annee)
+                       {
+                           j++;
+                           if (v < j)
+                           {
+                               if (i < Convert.ToInt32(liste_annee.Count))
+                               {
+                                   sb.AppendLine(string.Format("<th colspan=\"2\" width=15%>{0}</th>", lr.ANNEE_DETAIL));
+                                   //TabLOT[i] = lr.ANNEE_DETAIL;
+                               }
+                           }
+
+                           i++;
+                       }
+                   }
+                   else
+                   {
+                       int i = 0;
+                       foreach (var lr in liste_annee)
+                       {
+
+                           if (i < Convert.ToInt32(liste_annee.Count))
+                           {
+                               sb.AppendLine(string.Format("<th colspan=\"2\" width=15%>{0}</th>", lr.ANNEE_DETAIL));
+                               //TabLOT[i] = lr.ANNEE_DETAIL;
+                           }
+                           i++;
+                       }
+                   }
+
+                   sb.AppendLine("</thead>");
+                   sb.AppendLine("<tbody>");
+
+                   var liste_libelle = service.AnafiAfficheLiasse(0, "", "", "BIL");
+                   string[] TabLOTN = null;
+                   sbt.AppendLine("<table id='totauxActif' class='table-hover table table-bordered text-center'>");
+                   foreach (var lr in liste_libelle)
+                   {
+
+                       string SENS = lr.RUBR_ETAT_CODE.ToString().Trim().Substring(0, 3);
+                       if (SENS == "BI1" || SENS == "BI2" || SENS == "BI3")
+                       {
+                           if (lr.RUBR_ETAT_CODE.Trim().Length == 4)
+                           {
+                               if (lr.RUBR_ETAT_CODE.Trim() == "BI3Z")
+                               {
+                                   //sbt.AppendLine("<table id='totauxActif' class='table-hover table table-bordered text-center'>");
+                                   sbt.AppendLine(string.Format("<tr style='background-color:rgba(210, 210, 210, 1);'>"));
+
+                                   sbt.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE));
+                                   // TabLOTA = new string[Convert.ToInt32(liste_annee.Count)];
+                                   int pa = 0;
+                                   var liste_valeur = service.AnafiAfficheLiasse(3, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+
+                                   int j = 0;
+                                   int v = 0;
+                                   v = Convert.ToInt32(liste_valeur.Count) - 3;
+                                   foreach (var l in liste_valeur)
+                                   {
+
+                                       if (liste_valeur.Count > 3)
+                                       {
+                                           j++;
+                                           if (v < j)
+                                           {
+                                               //string k = "";
+                                               //k = TabLOTN[1];
+                                               //sbt.AppendLine(string.Format("<td class='text-left'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", k))));
+                                               sbt.AppendLine(string.Format("<td class='text-left' width=16%><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_BGR_DETAIL))));
+                                               sbt.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+
+                                               //pa++;
+                                           }
+
+                                       }
+                                       else
+                                       {
+                                           //string k = "";
+                                           //k = TabLOTN[1];
+                                           //sbt.AppendLine(string.Format("<td class='text-left'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", k))));
+                                           sbt.AppendLine(string.Format("<td class='text-left' width=16%><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_BGR_DETAIL))));
+                                           sbt.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+
+                                           //pa++;
+                                       }
+                                   }
+
+                                   sbt.AppendLine("</tr>");
+
+                               }
+                               else
+                               {
+                                   if (lr.RUBR_ETAT_CODE.ToString().Trim() == "BI7Z")
+                                   {
+
+
+                                   }
+                                   else
+                                   {
+
+                                       sb.AppendLine(string.Format("<tr data_code='{0}' style='background-color:rgba(210, 210, 210, 1);'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                       sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                       // TabLOTP = new string[Convert.ToInt32(liste_annee.Count)];
+                                       int p = 0;
+                                       var liste_valeur = service.AnafiAfficheLiasse(3, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+
+                                       int j = 0;
+                                       int v = 0;
+                                       v = Convert.ToInt32(liste_valeur.Count) - 3;
+                                       foreach (var l in liste_valeur)
+                                       {
+
+                                           if (liste_valeur.Count > 3)
+                                           {
+                                               j++;
+                                               if (v < j)
+                                               {
+                                                   if (l.TYPE_ANAFI_A.Trim() == "SN")
+                                                   {
+                                                       sb.AppendLine(string.Format("<td class='text-right'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_BGR_DETAIL))));
+                                                       sb.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+
+                                                       // TabLOTA[p] = l.VALEUR_BGR_DETAIL.ToString();
+
+                                                   }
+                                               }
+
+                                           }
+                                           else
+                                           {
+                                               if (l.TYPE_ANAFI_A.Trim() == "SN")
+                                               {
+                                                   sb.AppendLine(string.Format("<td class='text-right'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_BGR_DETAIL))));
+                                                   sb.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+                                                   // TabLOTA[p] = l.VALEUR_BGR_DETAIL.ToString();
+
+                                               }
+                                           }
+                                       }
+
+                                       sb.AppendLine("</tr>");
+                                   }
+                               }
+
+                               //sb.AppendLine("</tr>");
+
+                           }
+                           else
+                           {
+                               if (lr.RUBR_ETAT_CODE.Trim() == "BI3Z1")
+                               {
+
+                                   sbt.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                   sbt.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                   // TabLOTP = new string[Convert.ToInt32(liste_annee.Count)];
+                                   int p = 0;
+                                   var liste_valeur = service.AnafiAfficheLiasse(3, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+
+                                   int j = 0;
+                                   int v = 0;
+                                   v = Convert.ToInt32(liste_valeur.Count) - 3;
+                                   foreach (var l in liste_valeur)
+                                   {
+
+                                       if (liste_valeur.Count > 3)
+                                       {
+                                           j++;
+                                           if (v < j)
+                                           {
+                                               if (l.TYPE_ANAFI_A.Trim() == "SN")
+                                               {
+                                                   if (l.VALEUR_BGR_DETAIL == 0)
+                                                   {
+                                                       sbt.AppendLine(string.Format("<td class='text-left'></td>"));
+                                                       sbt.AppendLine(string.Format("<td class='text-right'><strong></strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+
+                                                       // TabLOTA[p] = l.VALEUR_BGR_DETAIL.ToString();
+                                                   }
+                                                   else
+                                                   {
+                                                       sbt.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_BGR_DETAIL))));
+                                                       sbt.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+
+                                                       // TabLOTA[p] = l.VALEUR_BGR_DETAIL.ToString();
+                                                   }
+
+
+                                               }
+                                           }
+
+                                       }
+                                       else
+                                       {
+                                           if (l.TYPE_ANAFI_A.Trim() == "SN")
+                                           {
+                                               if (l.VALEUR_BGR_DETAIL == 0)
+                                               {
+                                                   sbt.AppendLine(string.Format("<td class='text-right'></td>"));
+                                                   sbt.AppendLine(string.Format("<td class='text-right'><strong></strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+
+                                                   // TabLOTA[p] = l.VALEUR_BGR_DETAIL.ToString();
+                                               }
+                                               else
+                                               {
+                                                   sbt.AppendLine(string.Format("<td class='text-right'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_BGR_DETAIL))));
+                                                   sbt.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+                                                   // TabLOTA[p] = l.VALEUR_BGR_DETAIL.ToString();
+                                               }
+
+
+                                           }
+                                       }
+                                   }
+
+                                   sbt.AppendLine("</tr>");
+                               }
+                               else
+                               {
+                                   sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+
+
+                                   sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+
+
+                                   var liste_valeur = service.AnafiAfficheLiasse(3, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+
+
+                                   int j = 0;
+                                   int v = 0;
+                                   v = Convert.ToInt32(liste_valeur.Count) - 3;
+                                   foreach (var l in liste_valeur)
+                                   {
+
+                                       if (liste_valeur.Count > 3)
+                                       {
+                                           j++;
+                                           if (v < j)
+                                           {
+                                               if (l.TYPE_ANAFI_A.Trim() == "SN")
+                                               {
+                                                   sb.AppendLine(string.Format("<td class='text-right'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_BGR_DETAIL))));
+                                                   sb.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+                                               }
+                                           }
+
+                                       }
+                                       else
+                                       {
+                                           if (l.TYPE_ANAFI_A.Trim() == "SN")
+                                           {
+                                               sb.AppendLine(string.Format("<td class='text-right'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_BGR_DETAIL))));
+                                               sb.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+                                           }
+                                       }
+                                   }
+
+                                   sb.AppendLine("</tr>");
+                               }
+
+
+                           }
+                       }
+                   }
+
+                   sb.AppendLine("</tbody>");
+                   sb.AppendLine("</table>");
+
+                   
+               }
+               else
+               {
+                   sb.AppendLine("<div class='' style=\"overflow-x:auto\" >");
+                   sb.AppendLine("<table id='' class='table table-hover table-bordered text-center'>");
+                   sb.AppendLine("<thead class='table-heigth'>");
+                   sb.AppendLine(string.Format("<tr><th>Actifs</th>"));
+                   sb.AppendLine(string.Format("<th width=23%></th>"));
+
+                   sb.AppendLine("</thead>");
+                   sb.AppendLine("<tbody>");
+
+                   var liste_libelle = service.AnafiAfficheLiasse(0, "", "", "BIL");
+                   string[] TabLOTN = null;
+                   sbt.AppendLine("<table id='totauxActif' class='table-hover table table-bordered text-center'>");
+                   foreach (var lr in liste_libelle)
+                   {
+
+                       string SENS = lr.RUBR_ETAT_CODE.ToString().Trim().Substring(0, 3);
+                       if (SENS == "BI1" || SENS == "BI2" || SENS == "BI3")
+                       {
+                           if (lr.RUBR_ETAT_CODE.Trim().Length == 4)
+                           {
+                               if (lr.RUBR_ETAT_CODE.Trim() == "BI3Z")
+                               {
+
+
+                                   sbt.AppendLine(string.Format("<tr style='background-color:rgba(210, 210, 210, 1);'>"));
+
+                                   sbt.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE));
+                                   sbt.AppendLine(string.Format("<td width=23%></td>"));
+
+                                   //sbt.AppendLine("</table>");
+                                   //DIVtotauxActif.InnerHtml = sbt.ToString();
+                               }
+                               else
+                               {
+                                   if (lr.RUBR_ETAT_CODE.ToString().Trim() == "BI7Z")
+                                   {
+                                   }
+                                   else
+                                   {
+                                       sb.AppendLine(string.Format("<tr data_code='{0}' style='background-color:rgba(210, 210, 210, 1);'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                       sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                       sb.AppendLine(string.Format("<td></td>"));
+
+                                       sb.AppendLine("</tr>");
+                                   }
+                               }
+
+                               //sb.AppendLine("</tr>");
+
+                           }
+                           else
+                           {
+                               if (lr.RUBR_ETAT_CODE.Trim() == "BI3Z1")
+                               {
+                                   sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+
+
+                                   sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                   sb.AppendLine(string.Format("<td></td>"));
+
+                                   sb.AppendLine("</tr>");
+                               }
+                               else
+                               {
+                                   sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+
+
+                                   sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                   sb.AppendLine(string.Format("<td></td>"));
+
+                                   sb.AppendLine("</tr>");
+                               }
+
+
+                           }
+                       }
+                   }
+
+                   sb.AppendLine("</tbody>");
+                   sb.AppendLine("</table>");
+
+               }
+              // sb.AppendLine("</div>");
+
+               sbt.AppendLine("</table>");
+
+               sbt.AppendLine("</table>");
+               sb.AppendLine("<div style='width:100%; margin-top:125px;' >");
+               sb.AppendLine(sbt.ToString());
+               sb.AppendLine("</div>");
+
+               if (liste_annee.Count != 0)
+               {
+                   sb.AppendLine("<div class='' style=\"overflow-x:auto\" >");
+                   sb.AppendLine("<table id='' class='table table-hover table-bordered text-center'>");
+                   sb.AppendLine("<thead class='table-heigth'>");
+                   sb.AppendLine(string.Format("<tr><th>Passifs</th>"));
+
+                   if (liste_annee.Count > 3)
+                   {
+                       int j = 0;
+                       int v = 0;
+                       int i = 0;
+                       v = Convert.ToInt32(liste_annee.Count) - 3;
+                       foreach (var lr in liste_annee)
+                       {
+                           j++;
+                           if (v < j)
+                           {
+                               if (i < Convert.ToInt32(liste_annee.Count))
+                               {
+                                   sb.AppendLine(string.Format("<th colspan=\"2\" width=15%>{0}</th>", lr.ANNEE_DETAIL));
+                                   //TabLOT[i] = lr.ANNEE_DETAIL;
+                               }
+                           }
+
+                           i++;
+                       }
+                   }
+                   else
+                   {
+                       int i = 0;
+                       foreach (var lr in liste_annee)
+                       {
+
+                           if (i < Convert.ToInt32(liste_annee.Count))
+                           {
+                               sb.AppendLine(string.Format("<th colspan=\"2\" width=15%>{0}</th>", lr.ANNEE_DETAIL));
+                               //TabLOT[i] = lr.ANNEE_DETAIL;
+                           }
+                           i++;
+                       }
+                   }
+
+                   sb.AppendLine("</thead>");
+                   sb.AppendLine("<tbody>");
+
+                   var liste_libelle = service.AnafiAfficheLiasse(0, "", "", "BIL");
+                   string[] TabLOTN = null;
+                   sbv.AppendLine("<table id='totauxPassif' class='table-hover table table-bordered text-center'>");
+                   foreach (var lr in liste_libelle)
+                   {
+
+
+
+                       string SENS = lr.RUBR_ETAT_CODE.ToString().Trim().Substring(0, 3);
+                       if (SENS == "BI4" || SENS == "BI5" || SENS == "BI6" || SENS == "BI7")
+                       {
+                           if (lr.RUBR_ETAT_CODE.Trim().Length == 4)
+                           {
+                               if (lr.RUBR_ETAT_CODE.ToString().Trim() == "BI7Z")
+                               {
+
+
+                                   sbv.AppendLine(string.Format("<tr style='background-color:rgba(210, 210, 210, 1);'>"));
+
+                                   sbv.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE));
+                                   int iv = 0;
+                                   var liste_valeur = service.AnafiAfficheLiasse(3, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+
+                                   int j = 0;
+                                   int v = 0;
+                                   v = Convert.ToInt32(liste_valeur.Count) - 3;
+                                   foreach (var l in liste_valeur)
+                                   {
+
+                                       if (liste_valeur.Count > 3)
+                                       {
+                                           j++;
+                                           if (v < j)
+                                           {
+                                               sbv.AppendLine(string.Format("<td class='text-left' width=16%><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_BGR_DETAIL))));
+                                               sbv.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+
+                                               //sbv.AppendLine(string.Format("<td class='text-left'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", TabLOTN[iv]))));
+                                               //iv++;
+                                           }
+
+                                       }
+                                       else
+                                       {
+                                           sbv.AppendLine(string.Format("<td class='text-left' width=16%><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_BGR_DETAIL))));
+                                           sbv.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+
+                                           //sbv.AppendLine(string.Format("<td class='text-left'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", TabLOTN[iv]))));
+                                           //iv++;
+                                       }
+                                   }
+
+
+                               }
+                               else
+                               {
+                                   sb.AppendLine(string.Format("<tr data_code='{0}' style='background-color:rgba(210, 210, 210, 1);'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                   sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                   // TabLOTA = new string[Convert.ToInt32(liste_annee.Count)];
+                                   int p = 0;
+                                   var liste_valeur = service.AnafiAfficheLiasse(3, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+
+                                   int j = 0;
+                                   int v = 0;
+                                   v = Convert.ToInt32(liste_valeur.Count) - 3;
+                                   foreach (var l in liste_valeur)
+                                   {
+
+                                       if (liste_valeur.Count > 3)
+                                       {
+                                           j++;
+                                           if (v < j)
+                                           {
+                                               sb.AppendLine(string.Format("<td class='text-right'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_BGR_DETAIL))));
+                                               sb.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+
+
+                                           }
+
+                                       }
+                                       else
+                                       {
+                                           sb.AppendLine(string.Format("<td class='text-right'><strong>{0}</strong></td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_BGR_DETAIL))));
+                                           sb.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+                                           //sb.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", l.TAUX_BGR_DETAIL));
+
+
+                                       }
+                                   }
+
+                                   sb.AppendLine("</tr>");
+                               }
+
+
+                           }
+                           else
+                           {
+                               if (lr.RUBR_ETAT_CODE.ToString().Trim() == "BI7Z1")
+                               {
+                                   sbv.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                   sbv.AppendLine(string.Format("<td  class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+
+                                   var liste_valeur = service.AnafiAfficheLiasse(3, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+                                   int j = 0;
+                                   int v = 0;
+                                   v = Convert.ToInt32(liste_valeur.Count) - 3;
+                                   foreach (var l in liste_valeur)
+                                   {
+
+                                       if (liste_valeur.Count > 3)
+                                       {
+                                           j++;
+                                           if (v < j)
+                                           {
+                                               if (l.TYPE_ANAFI_A.Trim() == "SN")
+                                               {
+                                                   if (l.VALEUR_BGR_DETAIL == 0)
+                                                   {
+                                                       sbv.AppendLine(string.Format("<td class='text-right'></td>"));
+                                                   }
+                                                   else
+                                                   {
+                                                       sbv.AppendLine(string.Format("<td class='text-right'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_BGR_DETAIL))));
+                                                       sbv.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+                                                   }
+
+                                               }
+                                           }
+
+                                       }
+                                       else
+                                       {
+                                           if (l.TYPE_ANAFI_A.Trim() == "SN")
+                                           {
+                                               if (l.VALEUR_BGR_DETAIL == 0)
+                                               {
+                                                   sbv.AppendLine(string.Format("<td class='text-right'></td>"));
+                                                   sbv.AppendLine(string.Format("<td class='text-right'><strong></strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+
+                                               }
+                                               else
+                                               {
+                                                   sbv.AppendLine(string.Format("<td class='text-right'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_BGR_DETAIL))));
+                                                   sbv.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+                                               }
+
+                                           }
+                                       }
+                                   }
+
+
+
+
+                                   sbv.AppendLine("</tr>");
+                               }
+                               else
+                               {
+                                   sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+
+
+                                   sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+
+
+                                   var liste_valeur = service.AnafiAfficheLiasse(3, idDossier, lr.RUBR_ETAT_CODE.ToString().Trim(), "SN");
+                                   int j = 0;
+                                   int v = 0;
+                                   v = Convert.ToInt32(liste_valeur.Count) - 3;
+                                   foreach (var l in liste_valeur)
+                                   {
+
+                                       if (liste_valeur.Count > 3)
+                                       {
+                                           j++;
+                                           if (v < j)
+                                           {
+                                               if (l.TYPE_ANAFI_A.Trim() == "SN")
+                                               {
+                                                   sb.AppendLine(string.Format("<td class='text-right'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_BGR_DETAIL))));
+                                                   sb.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+                                               }
+                                           }
+
+                                       }
+                                       else
+                                       {
+                                           if (l.TYPE_ANAFI_A.Trim() == "SN")
+                                           {
+                                               sb.AppendLine(string.Format("<td class='text-right'>{0}</td>", Convert.ToString(string.Format("{0:#,##0}", l.VALEUR_BGR_DETAIL))));
+                                               sb.AppendLine(string.Format("<td class='text-right'><strong>{0}%</strong></td>", Convert.ToDecimal(l.TAUX_BGR_DETAIL).ToString("#,##0.##")));
+                                           }
+                                       }
+                                   }
+
+
+
+
+                                   sb.AppendLine("</tr>");
+                               }
+
+
+                           }
+                       }
+                   }
+
+                   sb.AppendLine("</tbody>");
+                   sb.AppendLine("</table>");
+
+               }
+               else
+               {
+                   sb.AppendLine("<div class='' style=\"overflow-x:auto\" >");
+                   sb.AppendLine("<table id='' class='table table-hover table-bordered text-center'>");
+                   sb.AppendLine("<thead class='table-heigth'>");
+                   sb.AppendLine(string.Format("<tr><th>Passifs</th>"));
+                   sb.AppendLine(string.Format("<th width=23%></th>"));
+
+                   sb.AppendLine("</thead>");
+                   sb.AppendLine("<tbody>");
+
+                   var liste_libelle = service.AnafiAfficheLiasse(0, "", "", "BIL");
+                   string[] TabLOTN = null;
+                   sbv.AppendLine("<table id='totauxPassif' class='table-hover table table-bordered text-center'>");
+                   foreach (var lr in liste_libelle)
+                   {
+
+
+
+                       string SENS = lr.RUBR_ETAT_CODE.ToString().Trim().Substring(0, 3);
+                       if (SENS == "BI4" || SENS == "BI5" || SENS == "BI6" || SENS == "BI7")
+                       {
+                           if (lr.RUBR_ETAT_CODE.Trim().Length == 4)
+                           {
+                               if (lr.RUBR_ETAT_CODE.ToString().Trim() == "BI7Z")
+                               {
+
+
+                                   sbv.AppendLine(string.Format("<tr style='background-color:rgba(210, 210, 210, 1);'>"));
+
+                                   sbv.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE));
+                                   sbv.AppendLine(string.Format("<th width=23%></th>"));
+                                   //sbv.AppendLine("</table>");
+                                   //DIVtotauxPassif.InnerHtml = sbv.ToString();
+                               }
+                               else
+                               {
+                                   sb.AppendLine(string.Format("<tr data_code='{0}' style='background-color:rgba(210, 210, 210, 1);'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+                                   sb.AppendLine(string.Format("<td class='text-left'><strong>{0}</strong></td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                   sb.AppendLine(string.Format("<th width=23%></th>"));
+
+                                   sb.AppendLine("</tr>");
+                               }
+
+
+                               //sb.AppendLine("</tr>");
+
+                           }
+                           else
+                           {
+                               if (lr.RUBR_ETAT_CODE.ToString().Trim() == "BI7Z1")
+                               {
+                                   sbv.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+
+                                   sbv.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                   sbv.AppendLine(string.Format("<th width=23%></th>"));
+
+                                   sbv.AppendLine("</tr>");
+                               }
+                               else
+                               {
+                                   sb.AppendLine(string.Format("<tr data_code='{0}'>", lr.RUBR_ETAT_CODE.ToString().Trim()));
+
+
+                                   sb.AppendLine(string.Format("<td class='text-left'>{0}</td>", lr.RUBR_ETAT_LIBELLE.ToString()));
+                                   sb.AppendLine(string.Format("<th width=23%></th>"));
+
+                                   sb.AppendLine("</tr>");
+                               }
+
+
+                           }
+                       }
+                   }
+
+                   sb.AppendLine("</tbody>");
+                   sb.AppendLine("</table>");
+
+                   
+               }
+
+
+
+               sb.AppendLine("</div>");
+          
+
+           //sbt.AppendLine("</table>");
+           //DIVtotauxActif.InnerHtml = sbt.ToString();
+           
+          
+           sb.AppendLine("</Div>");
+           sb.AppendLine("<div style='width:100%; margin-top:125px;' >");
+           sb.AppendLine(sbv.ToString());
+           sb.AppendLine("</div>");
+
+           ListDFinanciers5.InnerHtml = "" + sb.ToString() + "";
+       }
+    }
+}

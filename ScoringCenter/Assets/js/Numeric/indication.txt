@@ -1,0 +1,7 @@
+
+---------- DANS LE _LAYOUT ---------
+
+$(document).ready(function () {
+
+$('.numeric').numeric();
+});

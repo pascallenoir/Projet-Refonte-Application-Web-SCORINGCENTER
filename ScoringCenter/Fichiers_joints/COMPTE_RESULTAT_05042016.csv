@@ -1,0 +1,28 @@
+C0101;Ventes de marchandises;0;0;0
+C0102;Vente de produits fabriqués;346000;404200;453800
+C0103;Travaux, services;0;0;0
+C0104;Produits accessoires;0;0;0
+C0201;Production stockee (+) ou destockage (-);5400;-400;13000
+C0202;Production immobilisée;0;0;0
+C0301;Consommation de marchandises;0;0;0
+C0401;Consommation de matières premières;24600;19600;19000
+C0501;Subventions d'exploitation;0;0;0
+C0502;Autres produits;1400;0;1000
+C0503;Autres consommations et charges externes;139400;121600;102400
+C0504;Impôts et taxes;6800;3200;10200
+C0505;Autres charges;600;0;2200
+C0601;Charges de personnel;157800;215600;259800
+C0701;Reprises de provisions d'exploitation;0;0;1200
+C0702;Transferts de charges;0;0;0
+C0703;Dotations aux amort. et prov. d'exploitation;14600;17800;27000
+C0801;Produits financiers;0;0;0
+C0802;Charges financières;7400;7800;9200
+C0901;Total des produits HAO;400;0;0
+C0902;Total des charges HAO;1400;200;0
+C0903;Participation;0;0;0
+C0904;Impôt sur le résultat;200;6000;13000
+C1001;Dotations aux amortissements et provisions;14600;17800;27000
+C1002;Valeurs comptables des cessions d'immobilisations;0;0;0
+C1003;Reprises de provisions;0;0;1200
+C1004;Produits des cessions d'immobilisations;0;0;0
+C1101;Distributions de dividendes;0;400;4800
