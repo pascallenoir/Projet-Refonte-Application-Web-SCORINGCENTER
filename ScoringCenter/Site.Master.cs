@@ -22,7 +22,10 @@ namespace ScoringCenter
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
         private string _antiXsrfTokenValue;
         Scoringws service1 = new Scoringws();
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sbLogoBanque = new StringBuilder();
+        StringBuilder sbNomBanque = new StringBuilder();
+
+
         protected void Page_Init(object sender, EventArgs e)
         {
             // The code below helps to protect against XSRF attacks
@@ -57,7 +60,6 @@ namespace ScoringCenter
 
         protected void master_Page_PreLoad(object sender, EventArgs e)
         {
-            ControllerPage();
             if (!IsPostBack)
             {
                 // Set Anti-XSRF token
@@ -73,6 +75,34 @@ namespace ScoringCenter
                     throw new InvalidOperationException("Validation of Anti-XSRF token failed.");
                 }
 
+            }
+
+            AfficheLogoBank();
+        }
+
+        public void AfficheLogoBank()
+        {
+            if (Session["code_banque"] != null)
+            {
+                string code_banque;
+                try
+                {
+                    code_banque = ScorCryptage.Decrypt(Session["code_banque"].ToString());
+                }
+                catch (Exception e)
+                {
+                    code_banque = Session["code_banque"].ToString();
+                }
+                var bankInfo = service1.AfficheLogoBank(code_banque);
+                foreach (var banque in bankInfo)
+                {
+
+                    if (banque.IMG_BANQUE != "" && banque.IMG_BANQUE != null)
+                    {
+                        sbLogoBanque.AppendLine(string.Format("<img src=\"../Images/Logo/{0}\"style=\"width: 100% ;height:100%\" />", banque.IMG_BANQUE.ToString().Trim()));
+                    }
+                }
+                idimgLogoBanque.InnerHtml = sbLogoBanque.ToString();
             }
         }
 
@@ -279,102 +309,6 @@ namespace ScoringCenter
 
 
             }
-        }
-
-        public void ControllerPage()
-        {
-            ////Debut_Controle///////////////////////////////////////////////////
-            if (Session["login"] == null) Response.Redirect("~/Scoring/Connexion.aspx");
-            else
-            {
-                var idprofil = Session["id_profil"].ToString();
-                var elements = service1.VHABILITATION(idprofil);
-                TB.Visible = false;
-                GP.Visible = false;
-                GU.Visible = false;
-                GPA.Visible = false;
-                PARAM.Visible = false;
-                //Cen.Visible = false;
-                //CC.Visible = false;
-                Pay.Visible = false;
-                Con.Visible = false;
-                //CC
-                var test = 0;
-                foreach (var element in elements)
-                {
-                    if (element.ID_DROIT.ToString().Trim() == "TB")
-                    {
-                        if (element.ID_TYPE_DROIT.ToString().Trim() != "0") TB.Visible = true;
-                    }
-
-                    if (element.ID_DROIT.ToString().Trim() == "PARAM")
-                    {
-                        if (element.ID_TYPE_DROIT.ToString().Trim() != "0") PARAM.Visible = true;
-                    }
-
-                    if (element.ID_DROIT.ToString().Trim() == "GP")
-                    {
-                        if (element.ID_TYPE_DROIT.ToString().Trim() != "0") GP.Visible = true;
-                    }
-
-                    if (element.ID_DROIT.ToString().Trim() == "GU")
-                    {
-                        if (element.ID_TYPE_DROIT.ToString().Trim() != "0") GU.Visible = true;
-                    }
-
-                    if (element.ID_DROIT.ToString().Trim() == "GPA")
-                    {
-                        if (element.ID_TYPE_DROIT.ToString().Trim() != "0") GPA.Visible = true;
-                    }
-                    if (element.ID_DROIT.ToString().Trim() == "Cen")
-                    {
-                        //if (element.ID_TYPE_DROIT.ToString().Trim() != "0") //Cen.Visible = true;
-                    }
-                    if (element.ID_DROIT.ToString().Trim() == "CC")
-                    {
-                        //if (element.ID_TYPE_DROIT.ToString().Trim() != "0") //CC.Visible = true;
-                    }
-                    if (element.ID_DROIT.ToString().Trim() == "Pay")
-                    {
-                        if (element.ID_TYPE_DROIT.ToString().Trim() != "0") Pay.Visible = true;
-                    }
-                    if (element.ID_DROIT.ToString().Trim() == "Con")
-                    {
-                        if (element.ID_TYPE_DROIT.ToString().Trim() != "0") Con.Visible = true;
-                    }
-
-
-                    //et pour les actions sur la page
-                    if (element.ID_DROIT.ToString().Trim() == "AD")
-                    {
-                        // if (element.ID_TYPE_DROIT.ToString().Trim() != "0") AD.Visible = true;
-
-
-                        switch (element.ID_TYPE_DROIT.ToString().Trim())
-                        {
-                            case "1":
-
-                                test = 1;
-                                Scriptos1.InnerHtml = "<script>$(':input').removeAttr('disabled');</script>";
-
-                                break;
-                            case "2":
-                                if (test != 1)
-                                {
-
-                                    Scriptos1.InnerHtml = "<script>$(':input').attr('disabled','disabled');</script>";
-                                }
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-
-
-
-                }
-            }
-            //getInfoClient(); EBF.Visible = false; ////Fin_Controle////////////////////////////////////////////////////
         }
     }
 }

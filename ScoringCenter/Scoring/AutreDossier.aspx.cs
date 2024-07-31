@@ -13,6 +13,8 @@ namespace ScoringCenter
     using Scoring;
     using ScoringCenter.Models;
     using System.Configuration;
+    using System.Web.UI.WebControls.WebParts;
+
     public partial class AutreDossier : System.Web.UI.Page
     {
         Scoringws service = new Scoringws();
@@ -33,134 +35,114 @@ namespace ScoringCenter
             }
         }
 
-        
         protected void Page_Init(object sender, EventArgs e)
         {
             LoadAgences();
             ListeTableParam();
-            AfficherDernieresNotes();
         }
 
-        //public void ControllerPage()
-        //{
-        //    ////Debut_Controle///////////////////////////////////////////////////
-        //    if (Session["login"] == null) Response.Redirect("~/Scoring/Connexion.aspx");
-        //    else
-        //    {
-        //        var idprofil = Session["id_profil"].ToString();
-        //        var elements = service.VHABILITATION(idprofil);
-        //        TB.Visible = false;
-        //        GP.Visible = false;
-        //        GU.Visible = false;
-        //        GPA.Visible = false;
-        //        PARAM.Visible = false;
-        //        //Cen.Visible = false;
-        //        //CC.Visible = false;
-        //        Pay.Visible = false;
-        //        Con.Visible = false;
-        //        //CC
-        //        var test = 0;
-        //        foreach (var element in elements)
-        //        {
-        //            if (element.ID_DROIT.ToString().Trim() == "TB")
-        //            {
-        //                if (element.ID_TYPE_DROIT.ToString().Trim() != "0") TB.Visible = true;
-        //            }
-
-        //            if (element.ID_DROIT.ToString().Trim() == "PARAM")
-        //            {
-        //                if (element.ID_TYPE_DROIT.ToString().Trim() != "0") PARAM.Visible = true;
-        //            }
-
-        //            if (element.ID_DROIT.ToString().Trim() == "GP")
-        //            {
-        //                if (element.ID_TYPE_DROIT.ToString().Trim() != "0") GP.Visible = true;
-        //            }
-                       
-        //            if (element.ID_DROIT.ToString().Trim() == "GU")
-        //            {
-        //                if (element.ID_TYPE_DROIT.ToString().Trim() != "0") GU.Visible = true;
-        //            }
-                    
-        //            if (element.ID_DROIT.ToString().Trim() == "GPA")
-        //            {
-        //                if (element.ID_TYPE_DROIT.ToString().Trim() != "0") GPA.Visible = true;
-        //            }
-        //            if (element.ID_DROIT.ToString().Trim() == "Cen")
-        //            {
-        //                //if (element.ID_TYPE_DROIT.ToString().Trim() != "0") //Cen.Visible = true;
-        //            }
-        //            if (element.ID_DROIT.ToString().Trim() == "CC")
-        //            {
-        //                //if (element.ID_TYPE_DROIT.ToString().Trim() != "0") //CC.Visible = true;
-        //            }
-        //            if (element.ID_DROIT.ToString().Trim() == "Pay")
-        //            {
-        //                if (element.ID_TYPE_DROIT.ToString().Trim() != "0") Pay.Visible = true;
-        //            }
-        //            if (element.ID_DROIT.ToString().Trim() == "Con")
-        //            {
-        //                if (element.ID_TYPE_DROIT.ToString().Trim() != "0") Con.Visible = true;
-        //            }
-                    
-                    
-        //            //et pour les actions sur la page
-        //            if (element.ID_DROIT.ToString().Trim() == "AD")
-        //            {
-        //               // if (element.ID_TYPE_DROIT.ToString().Trim() != "0") AD.Visible = true;
-                        
-                        
-        //                switch (element.ID_TYPE_DROIT.ToString().Trim())
-        //                {
-        //                    case "1": 
-                               
-        //                            test = 1;
-        //                            Scriptos.InnerHtml = "<script>$(':input').removeAttr('disabled');</script>";
-                                
-        //                        break;
-        //                    case "2":
-        //                        if (test != 1)
-        //                        {
-                                    
-        //                            Scriptos.InnerHtml = "<script>$(':input').attr('disabled','disabled');</script>";
-        //                        }
-        //                        break;
-        //                    default:
-        //                        break;
-        //                }
-        //            }
-
-
-
-        //        }
-        //    }
-        //    //getInfoClient(); EBF.Visible = false; ////Fin_Controle////////////////////////////////////////////////////
-        //}
-
-         //Derniers notés
-        void AfficherDernieresNotes()
+        public void ControllerPage()
         {
-            var listesDernieresNotes = service.ListeDerniersNotes();
-
-            if (listesDernieresNotes.Count != 0)
-            {
-                StringBuilder sc = new StringBuilder();
-                foreach (var note in listesDernieresNotes)
-                {
-                    sc.AppendLine("<tr>");
-                    sc.AppendLine(string.Format("<td align= 'left'>{0}</td>", note.ETCIV_NOMREDUIT));
-                    sc.AppendLine(string.Format("<td align= 'left'>{0}</td>", note.NOM_AGENCE));
-                    sc.AppendLine(string.Format("<td align= 'center'>{0}</td>", note.NOTE_VAL.Trim() != "" ? note.DATE_VAL.ToShortDateString() : note.DATE_PROP.ToShortDateString()));
-                    sc.AppendLine(string.Format("<td align= 'center'>{0}</td>", note.NOTE_VAL.Trim() != "" ? note.NOTE_VAL : note.NOTE_PROP));
-                    sc.AppendLine("</tr>");
-                }
-                DerniersNotesTable.InnerHtml = sc.ToString();
-            }
+            ////Debut_Controle///////////////////////////////////////////////////
+            if (Session["login"] == null) Response.Redirect("~/Scoring/Connexion.aspx");
             else
             {
-                DerniersNotesTable.InnerHtml = "<tr><td colspan='4'>Aucune note disponible.</td></tr>";
+                var idprofil = Session["id_profil"].ToString();
+                var elements = service.VHABILITATION(idprofil);
+                TB.Visible = false;
+                GP.Visible = false;
+                GU.Visible = false;
+                GPA.Visible = false;
+                PARAM.Visible = false;
+                //Cen.Visible = false;
+                //CC.Visible = false;
+                Pay.Visible = false;
+                Con.Visible = false;
+                //CC
+                var test = 0;
+                foreach (var element in elements)
+                {
+                    if (element.ID_DROIT.ToString().Trim() == "TB")
+                    {
+                        if (element.ID_TYPE_DROIT.ToString().Trim() != "0") TB.Visible = true;
+                    }
+
+                    if (element.ID_DROIT.ToString().Trim() == "PARAM")
+                    {
+                        if (element.ID_TYPE_DROIT.ToString().Trim() != "0") PARAM.Visible = true;
+                    }
+
+                    if (element.ID_DROIT.ToString().Trim() == "GP")
+                    {
+                        if (element.ID_TYPE_DROIT.ToString().Trim() != "0") GP.Visible = true;
+                    }
+
+                    if (element.ID_DROIT.ToString().Trim() == "GU")
+                    {
+                        if (element.ID_TYPE_DROIT.ToString().Trim() != "0") GU.Visible = true;
+                    }
+
+                    if (element.ID_DROIT.ToString().Trim() == "GPA")
+                    {
+                        if (element.ID_TYPE_DROIT.ToString().Trim() != "0") GPA.Visible = true;
+                    }
+                    if (element.ID_DROIT.ToString().Trim() == "Cen")
+                    {
+                        //if (element.ID_TYPE_DROIT.ToString().Trim() != "0") //Cen.Visible = true;
+                    }
+                    if (element.ID_DROIT.ToString().Trim() == "CC")
+                    {
+                        //if (element.ID_TYPE_DROIT.ToString().Trim() != "0") //CC.Visible = true;
+                    }
+                    if (element.ID_DROIT.ToString().Trim() == "Pay")
+                    {
+                        if (element.ID_TYPE_DROIT.ToString().Trim() != "0") Pay.Visible = true;
+                    }
+                    if (element.ID_DROIT.ToString().Trim() == "Con")
+                    {
+                        if (element.ID_TYPE_DROIT.ToString().Trim() != "0") Con.Visible = true;
+                    }
+
+
+                    //et pour les actions sur la page
+                    if (element.ID_DROIT.ToString().Trim() == "AD")
+                    {
+                        // if (element.ID_TYPE_DROIT.ToString().Trim() != "0") AD.Visible = true;
+
+
+                        switch (element.ID_TYPE_DROIT.ToString().Trim())
+                        {
+                            case "1":
+
+                                test = 1;
+                                Scriptos.InnerHtml = "<script>$(':input').removeAttr('disabled');</script>";
+
+                                break;
+                            case "2":
+                                if (test != 1)
+                                {
+
+                                    Scriptos.InnerHtml = "<script>$(':input').attr('disabled','disabled');</script>";
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+
+
+                }
             }
+            //getInfoClient(); EBF.Visible = false; ////Fin_Controle////////////////////////////////////////////////////
         }
+
+
+        protected void ShowvalideOpenConsult_ServerClick(object sender, EventArgs e)
+        {
+
+        }
+       
 
         void OpenShowPasvalideConsult(string titre, string msg)
         {
@@ -240,7 +222,7 @@ namespace ScoringCenter
                 {
                     //dataTables-example
                     sc.AppendLine("<div class='row'>");
-                    sc.AppendLine("<div class='col-lg-12 col-sm-12 col-md-12'>");
+                    sc.AppendLine("<div class='table-responsive col-lg-12 col-sm-12 col-md-12' datatable-custom>");
                     sc.AppendLine("<table id='datatable_bord' class='table table-borderless table-thead-bordered table-nowrap table-align-middle card-table table-hover'>");
                     sc.AppendLine("<thead class='thead-light'>");
                     sc.AppendLine("<tr>");
@@ -303,18 +285,8 @@ namespace ScoringCenter
 
             }
 
-            // Masquer le spinner après l'exécution de la recherche
-            //if (Spinner != null)
-            //{
-            //    if (!Spinner.Attributes["class"].Contains("d-none"))
-            //    {
-            //        Spinner.Attributes["class"] += " d-none";
-            //    }
-            //}
-
-            Spinner.Visible = false;
+           
             // Afficher le spinner
-            //Spinner.Visible = false;
             getMessage.InnerHtml = sb.ToString();
 
             ListDFinanciers.InnerHtml = sc.ToString();
@@ -323,21 +295,16 @@ namespace ScoringCenter
 
         protected void Ok_Click1(object sender, EventArgs e)
         {
+            // Afficher le spinner avant de commencer le traitement
+
             if (Session["id_user"] == null) Response.Redirect("~/Scoring/Connexion.aspx"); 
 
             service.PS_SCOR_SPY(Session["id_user"].ToString().Trim(), "AutreDossier", connmou007.Value.ToString(), "R");
 
-            // Afficher le spinner
-            Spinner.Visible = true;
-            //if (Spinner != null)
-            //{
-            //    if (Spinner.Attributes["class"].Contains("d-none"))
-            //    {
-            //        Spinner.Attributes["class"] = Spinner.Attributes["class"].Replace("d-none", "").Trim();
-            //    }
-            //}
-            recherche();
            
+            recherche();
+
+            // Masquer le spinner après le traitement
         }
 
     }
