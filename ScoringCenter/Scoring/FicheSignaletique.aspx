@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" EnableSessionState="True" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="FicheSignaletique.aspx.cs" Inherits="ScoringCenter.FicheSignaletique" %>
 
+<%--CONTENU DU MENU LATERAL--%>
 <asp:Content ID="FicheSignaletiqueMenu" ContentPlaceHolderID="ContentMenu" runat="server">
     <style>
         .scor_input_transparent {
@@ -65,7 +66,8 @@
     <input type="text" value="1" id="TextBoxDate" hidden />
 
 </asp:Content>
-
+<%-- FIN CONTENU DU MENU LATERAL --%>
+ <%--CONTENU DE LA PAGE --%>
 <asp:Content ID="FicheSignaletiqueBody" ContentPlaceHolderID="ContentBody" runat="server">
 
     <div id="Content" class="Content">
@@ -1050,6 +1052,7 @@
         </div>
     </div>
     <div id="ses" runat="server"></div>
+
     <script>
         $(function () {
 
@@ -1445,3 +1448,4 @@
 
     </script>
 </asp:Content>
+<%-- FIN CONTENU DE LA PAGE--%>

@@ -62,7 +62,7 @@
             <!-- fin Logo -->
             <div style="max-width: 23rem;">
               <div class="text-center mb-5">
-                <img class="img-fluid" src="../Images/svg/Tax-amico_3.svg" alt="logo Scoring" style="width: 12rem;"/>
+                <img class="img-fluid" src="../Images/svg/Tax-amico_3.svg" alt="logo Scoring" style="width: 9rem;"/>
               </div>
 
                 <!-- Title cover page -->

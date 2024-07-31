@@ -1,12 +1,158 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AutreDossier.aspx.cs"
     Inherits="ScoringCenter.AutreDossier" %>
 
+<%--CONTENU DU MENU LATERAL --%>
+<asp:Content ID="AutreDossierMenu" ContentPlaceHolderID="ContentMenu" runat="server">
+   
+        <ul class="navbar-nav navbar-nav-lg nav-tabs">
+          <%--Tableau de bord--%>
+            <li class="nav-item " id="TB" runat="server">
+              <a class="js-nav-tooltip-link nav-link " href="TableauBordAutreDossier.aspx" title="Tableau de bord" data-placement="left">
+                <i class="tio-home-vs-1-outlined nav-icon"></i>
+                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Tableau de bord</span>
+              </a>
+            </li>
+            <%--Tableau de bord--%>
+            <!-- Noter -->
+            <li class="nav-item " id="AD" runat="server">
+              <a class="js-nav-tooltip-link nav-link active" href="#" title="Noter" data-placement="left">
+                <i class="tio-documents-outlined nav-icon"></i>
+                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Noter</span>
+              </a>
+            </li>
+            <!-- Noter -->
+            <%--MENU GENERAL--%>
+            <!-- Notifications -->
+            <li class="nav-item ">
+              <a class="js-nav-tooltip-link nav-link " href="#" title="Notifications" data-placement="left">
+                <i class="tio-notifications-outlined nav-icon"></i>
+                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Notifications</span>
+              </a>
+            </li>
+            <!-- Notifications -->
+            <!-- Reporting -->
+            <li class="nav-item ">
+              <a class="js-nav-tooltip-link nav-link " href="#" title="Reporting" data-placement="left">
+                <i class="tio-report-outlined nav-icon"></i>
+                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Reporting</span>
+              </a>
+            </li>
+            <!-- Reporting -->
+            <!-- Documentation -->
+            <li class="nav-item ">
+              <a class="js-nav-tooltip-link nav-link " href="#" title="Documentation" data-placement="left">
+                <i class="tio-book-opened nav-icon"></i>
+                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Documentation</span>
+              </a>
+            </li>
+            <!-- Documentation -->
+            <!-- Créer Prospect -->
+            <li class="nav-item " id="Con" runat="server">
+              <a class="js-nav-tooltip-link nav-link " href="Contrepartie.aspx" title="Créer Prospect" data-placement="left">
+                <i class="tio-add-circle-outlined nav-icon"></i>
+                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Créer Prospect</span>
+              </a>
+            </li>
+            <!-- Créer Prospect -->
+            <%-- FIN MENU GENERAL--%>
+            <!-- Guide Utilisateur -->
+            <li class="navbar-vertical-aside-has-menu " id="DOC" runat="server">
+                <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle " href="javascript:;" title="Guide utilisateur">
+                  <i class="tio-book-opened nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Guide utilisateur</span>
+                </a>
+                <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
+                     <li class="nav-item" runat="server">
+                       <a class="nav-link " href="../index.html" title="Aide">
+                         <span class="tio-circle nav-indicator-icon"></span>
+                         <span class="text-truncate">Aide</span>
+                       </a>
+                     </li>
+                     <li class="nav-item" runat="server">
+                       <a class="nav-link " href="../index.html" title="Modèle de notation">
+                         <span class="tio-circle nav-indicator-icon"></span>
+                         <span class="text-truncate">Modèle de notation</span>
+                       </a>
+                     </li>
+                </ul>
+            </li>
+            <!-- Guide Utilisateur -->
+            <!-- Parametres -->
+            <li class="navbar-vertical-aside-has-menu " id="PARAM" runat="server">
+              <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle " href="javascript:;" title="Parametres">
+                 <i class="tio-settings-outlined nav-icon"></i>
+                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Parametres</span>
+              </a>
+              <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
+                <li class="nav-item" id="GP" runat="server">
+                  <a class="nav-link " href="../index.html" title="Gestion des profils">
+                    <span class="tio-circle nav-indicator-icon"></span>
+                    <span class="text-truncate">Gestion des profils</span>
+                  </a>
+                </li>
+                <li class="nav-item" id="GU" runat="server">
+                  <a class="nav-link " href="../dashboard-alternative.html" title="Gestion des utilisateurs">
+                    <span class="tio-circle nav-indicator-icon"></span>
+                    <span class="text-truncate">Gestion des utilisateurs</span>
+                  </a>
+                </li>
+                <li class="nav-item" id="GPA" runat="server">
+                  <a class="nav-link " href="../dashboard-alternative.html" title="Gestion des paramètres">
+                    <span class="tio-circle nav-indicator-icon"></span>
+                    <span class="text-truncate">Gestion des paramètres</span>
+                  </a>
+                </li>
+                <li class="nav-item" id="SD" runat="server">
+                  <a class="nav-link " href="../dashboard-alternative.html" title="Schémas délégataires">
+                    <span class="tio-circle nav-indicator-icon"></span>
+                    <span class="text-truncate">Schémas délégataires</span>
+                  </a>
+                </li>
+                <li class="nav-item" id="Pay" runat="server">
+                  <a class="nav-link " href="../dashboard-alternative.html" title="Paramètres Pays">
+                    <span class="tio-circle nav-indicator-icon"></span>
+                    <span class="text-truncate">Paramètres Pays</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!-- fin Parametres -->
+            <!-- Language -->
+            <li class="navbar-vertical-aside-has-menu nav-footer-item ">
+              <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle " href="javascript:;" title="Langue">
+                <img class="avatar avatar-xss avatar-circle" src="../Content/vendor/flag-icon-css/flags/1x1/gb.svg" alt="Anglais"/>
+                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Langue</span>
+              </a>
+            
+              <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
+                <li class="nav-item">
+                  <a class="nav-link" href="#" title="English (US)">
+                    <img class="avatar avatar-xss avatar-circle mr-2" src="../Content/vendor/flag-icon-css/flags/1x1/gb.svg" alt="Flag"/>
+                    Anglais
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#" title="English (UK)">
+                    <img class="avatar avatar-xss avatar-circle mr-2" src="../Content/vendor/flag-icon-css/flags/1x1/fr.svg" alt="Flag"/>
+                    Français
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!-- End Language -->
+        </ul>
+ 
+    <input type="text" value="1" id="TextBoxrec" hidden />
+    <input type="text" value="1" id="TextBoxaff" hidden />
+    <input type="text" value="1" id="TextBoxDate" hidden />
+
+</asp:Content>
+<%--FIN CONTENU DU MENU LATERAL--%>
+<%--CONTENU DE LA PAGE --%>
 <asp:Content ID="AutreDossierBody" ContentPlaceHolderID="ContentBody" runat="server">
 
-     <input type="text" runat="server" id="connmou007" hidden />
-    <!-- Card -->
-    <!-- Step Form -->
-    <form id="form_scoring" class="py-md-5"  runat="server">
+    <input type="text" runat="server" id="connmou007" hidden />
+    <!-- Row -->
       <div class="row justify-content-lg-start">
         <div class="col-lg-10">
          
@@ -14,6 +160,11 @@
           <div>
             <!-- Card -->
             <div class="card card-lg">
+                <!-- Body -->
+              <div class="card-header">
+                <h4 class="card-header-title">Recherche du tiers</h4>
+              </div>
+              <!-- Body -->
               <!-- Body -->
               <div class="card-body">
                 <!-- Form Group -->
@@ -36,10 +187,9 @@
                         </div>
                 </div>
                 <!-- End Form Group -->
-
                 <!-- Form Group -->
                 <div class="row form-group">
-                      <label for="TbIContrepartie" class="col-sm-2 col-form-label input-label">Client <i style="color: red">*</i></label>
+                      <label for="TbIContrepartie" class="col-sm-2 col-form-label input-label">Client</label>
 
                       <div class="row col-sm-10">
                            <!-- TextBox -->
@@ -72,7 +222,7 @@
               <!-- Footer -->
               <div class="card-footer d-flex justify-content-start align-items-center">
                 <button type="button" id="Ok" class="btn btn-primary" runat="server" onmousedown="con007($(this),'B')"  onserverclick="Ok_Click1">Rechercher</button>
-                 <span id="Spinner" visible="false" class="spinner-border spinner-border-sm" role="status" runat="server" ></span>
+                 <span id="Spinner" class="spinner-border spinner-border-sm" role="status" runat="server" Style="display: none;"></span>
               </div>
               <!-- End Footer -->
 
@@ -89,189 +239,105 @@
              
           <!-- ... fin formulaire ... -->
           </div>
-
-          <!-- Tableau Derniers notes -->
-          <div class="row justify-content-lg-start">
-              <div class="col-lg-8 col-md-8">
-                  <h3 style="font-size: 18px;">Derniers notés</h3>
-                  <table class="table table-bordered" style="margin: 10px;">
-                      <thead style="background-color: #022D65; color: #FFFFFF;">
-                          <tr>
-                              <th>Tiers</th>
-                              <th>Agence</th>
-                              <th>Date</th>
-                              <th>Note</th>
-                          </tr>
-                      </thead>
-                      <tbody id="DerniersNotesTable" runat="server">
-                          <!-- Ici sera injecté le contenu du tableau généré par la méthode -->
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-          <!-- Fin Tableau Derniers notes -->
          </div>
          <!-- End Card -->
 
       </div>
-      <!-- End Content Step Form -->
-      <!-- End Row -->
-          <div id="Select_Choix" class="chargement modal fade margin-intelligent row" role="dialog" data-keyboard="false" data-backdrop="static">
-           <div class="modal-dialog">
-               <!-- Modal content-->
-               <div class="modal-content">
-                   <div class="modal-header">
-                       <button type="button" class="close closeX" data-dismiss="modal" style="color: white; margin-left: 10px;">&times;</button>
-                       <strong>INFORMATION</strong>
-                   </div>
-                   <div class="modal-body">
-                       <label>Veuillez choisir la périodicité</label>
-                   </div>
-                   <div class="modal-footer">
-                       <%--<asp:Button ID="Btn_ControlePoste" runat="server" onclick="ControlePost();" Text="Calculer" class="btn btn-warning" />--%>
-                       <button type="button" class="btn btn-cergicolor" id="Btn_Select_Periodicite" onclick="Afficher_Modal_Traitement_et_Edition();">Ok</button>
-                       <asp:TextBox Style="display: none" ID="TextBox2" runat="server"></asp:TextBox>
-                       <%--<button type="button" class="btn btn-cergicolor" id="AnnulerButton" data-dismiss="modal">Annuler</button>--%>
-                   </div>
-               </div>
-           </div>
-       </div>
-       <div id="Reconnexionmodal" class="notification modal fade margin-intelligent timing row" role="dialog">
-          <div class="modal-dialog">
-             <!-- Modal content-->
-             <div class="modal-content">
-                 <div class="modal-header" id="vv">
-                     <button type="button" class="close closeX" data-dismiss="modal" style="color: white; margin-left: 10px;">&times;</button>
-                     <strong id="rvv" style="float: left; margin-left: 2%">Reconnexion </strong>
-                 </div>
-                 <div class="modal-body" id="red" style="margin: 0%; padding: 0 !important">
-                     <div class="alert alert-info row" role="alert" style="margin: 2%">
-                         <p id="rfd" style="color: black; font-weight: bolder">
-                             <asp:Label CssClass="text-center" ID="Label3" Text="Veuillez saisir votre identifiant et votre mot de passe" runat="server" />
-                         </p>
-                     </div>
-                     <div class="row push_right" style="margin-left: 6%;">
-                         <label class="control-label col-lg-5 col-sm-5 col-md-5 col-lg-pull-1 text-right" for="ReconnexLogin">Identifiant:</label>
-                         <div class="col-lg-7 col-sm-7 col-md-7 col-lg-pull-1">
-                             <input runat="server" type="text" id="ReconnexLogin" autocomplete="off" class="form-control" style="width: 100%; height: 24px; padding-top: 0px; padding-bottom: 0px;" />
-                         </div>
-                     </div>
-                     <div class="row push_right" style="margin-left: 6%;">
-                         <label class="control-label col-lg-5 col-sm-5 col-md-5 col-lg-pull-1 text-right" for="ReconnexPassword">Mot de Passe:</label>
-                         <div class="col-lg-7 col-sm-7 col-md-7 col-lg-pull-1">
-                             <input runat="server" type="password" id="ReconnexPassword" autocomplete="off" class="form-control" style="width: 100%; height: 24px; padding-top: 0px; padding-bottom: 0px;" />
-                         </div>
-                     </div>
-                 </div>
-  
-                 <div class="modal-footer">
-                     <button type="button" runat="server" class="btn btn-primary" data-toggle="tooltip" id="ReconnexionOpenConsult">Valider</button>
-                     <button type="button" style="display: none;" id="btbtbt" class="btn btn-primary" data-toggle="tooltip" data-dismiss="modal">Fermer</button>
-                 </div>
-             </div>
+    <!-- End Row -->
+
+    <!-- modal timing -->
+    <div id="timing" class="notification modal fade margin-intelligent timing row" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" id="vv">
+                    <button type="button" class="close closeX" data-dismiss="modal"
+                        style="color: white; margin-left: 10px;">&times;</button>
+                    <strong id="vvv" style="float: left; margin-left: 2%">Gestion des alerts</strong>
+                </div>
+                <div class="modal-body" id="ed" style="margin: 0%; padding: 0 !important">
+                    <div class="row push_entete">
+                        <div class="col-lg-4 col-sm-4 col-md-4 col-lg-offset-1 col-sm-offset-1 col-md-offset-1"
+                            style="text-align: right;">
+                            Nombres du jours<label style="color: red">*</label>
+                        </div>
+                        <div class="col-lg-2 col-sm-2 col-md-2">
+                            <input type="text" class="form-control Compte_Caisse" runat="server" id="nombre"
+                                aria-describedby="telbur" />
+                        </div>
+                    </div>
+                    <div class="row push_entete">
+                        <div class="col-lg-4 col-sm-4 col-md-4 col-lg-offset-1 col-sm-offset-1 col-md-offset-1"
+                            style="text-align: right;">
+                            Couleur<label style="color: red">*</label>
+                        </div>
+                        <div class="col-lg-2 col-sm-2 col-md-2">
+                            <input type="color" value="#FFFFFF" class="form-control Compte_Caisse" runat="server"
+                                id="couleur" aria-describedby="telbur" />
+                        </div>
+                    </div>
+                    <div class="row push_entete">
+                        <div class="col-lg-4 col-sm-4 col-md-4 col-lg-offset-3 col-sm-offset-3 col-md-offset-3"
+                            style="padding-left: 4.8%;">
+                            (
+                            <label style="color: red">*</label>) Champs Obligatoires
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-dismiss="modal"
+                        id="ShowvalideOpenConsult" onserverclick="ShowvalideOpenConsult_ServerClick"
+                        runat="server">Valider</button>
+                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-dismiss="modal"
+                        onclick="return;">Annuler</button>
+                </div>
             </div>
-         </div>
-  
-  <button type="button" style="display: none;" id="ShowReconnexion" class="btn btn-primary btn-lg"
-      data-toggle="modal" data-target="#Reconnexionmodal">
-      Launch demo modal
-  </button>
+            <!-- fin Modal content-->
+        </div>
+    </div>
+    <!-- fin modal timing -->
 
+    <!-- div button demo -->
+    <button type="button" style="display: none;" id="ShowPasvalideConsult" class="btn btn-primary btn-lg"
+        data-toggle="modal" data-target="#PasvalideConsult">
+        Launch demo modal
+    </button>
+    <!-- fin div button demo -->
 
-  <!-- modal timing -->
-  <div id="timing" class="notification modal fade margin-intelligent timing row" role="dialog">
-      <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-              <div class="modal-header" id="vv">
-                  <button type="button" class="close closeX" data-dismiss="modal"
-                      style="color: white; margin-left: 10px;">&times;</button>
-                  <strong id="vvv" style="float: left; margin-left: 2%">Gestion des alerts</strong>
-              </div>
-              <div class="modal-body" id="ed" style="margin: 0%; padding: 0 !important">
-                  <div class="row push_entete">
-                      <div class="col-lg-4 col-sm-4 col-md-4 col-lg-offset-1 col-sm-offset-1 col-md-offset-1"
-                          style="text-align: right;">
-                          Nombres du jours<label style="color: red">*</label>
-                      </div>
-                      <div class="col-lg-2 col-sm-2 col-md-2">
-                          <input type="text" class="form-control Compte_Caisse" runat="server" id="nombre"
-                              aria-describedby="telbur" />
-                      </div>
-                  </div>
-                  <div class="row push_entete">
-                      <div class="col-lg-4 col-sm-4 col-md-4 col-lg-offset-1 col-sm-offset-1 col-md-offset-1"
-                          style="text-align: right;">
-                          Couleur<label style="color: red">*</label>
-                      </div>
-                      <div class="col-lg-2 col-sm-2 col-md-2">
-                          <input type="color" value="#FFFFFF" class="form-control Compte_Caisse" runat="server"
-                              id="couleur" aria-describedby="telbur" />
-                      </div>
-                  </div>
-                  <div class="row push_entete">
-                      <div class="col-lg-4 col-sm-4 col-md-4 col-lg-offset-3 col-sm-offset-3 col-md-offset-3"
-                          style="padding-left: 4.8%;">
-                          (
-                          <label style="color: red">*</label>) Champs Obligatoires
-                      </div>
-                  </div>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" data-toggle="tooltip" data-dismiss="modal"
-                      id="ShowvalideOpenConsult" onserverclick="ShowvalideOpenConsult_ServerClick"
-                      runat="server">Valider</button>
-                  <button type="button" class="btn btn-primary" data-toggle="tooltip" data-dismiss="modal"
-                      onclick="return;">Annuler</button>
-              </div>
-          </div>
-      </div>
-  </div>
-  <!-- fin modal timing -->
-
-  <!-- div button demo -->
-  <button type="button" style="display: none;" id="ShowPasvalideConsult" class="btn btn-primary btn-lg"
-      data-toggle="modal" data-target="#PasvalideConsult">
-      Launch demo modal
-  </button>
-  <!-- fin div button demo -->
-
-  <!--Modal Notification-->
-  <div id="PasvalideConsult" class="notification modal fade margin-intelligent  row" role="dialog">
-      <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-              <div class="modal-header" id="vvPas">
-                  <button type="button" class="close closeX" data-dismiss="modal"
-                      style="color: white; margin-left: 10px;">&times;</button>
-                      <strong id="vvvPas" style="float: left; margin-left: 2%">
-                          <asp:Label ID="lblPasValideTitreConsult" runat="server" />
-                      </strong>
-              </div>
-              <div class="modal-body" id="edPas" style="margin: 0%; padding: 0 !important">
-                  <div class="alert alert-info row" role="alert" style="margin: 2%">
-                      <p id="gfdPas" style="color: black; font-weight: bolder">
-                          <asp:Label ID="lblPasValidemessageConsult" runat="server" />
-                      </p>
-                  </div>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" data-toggle="tooltip" data-dismiss="modal"
-                      onclick="return;">OK </button>
-              </div>
-          </div>
-      </div>
-  </div>
-  <!--fin Modal Notification-->
+    <!--Modal Notification-->
+    <div id="PasvalideConsult" class="notification modal fade margin-intelligent  row" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" id="vvPas">
+                    <button type="button" class="close closeX" data-dismiss="modal"
+                        style="color: white; margin-left: 10px;">&times;</button>
+                        <strong id="vvvPas" style="float: left; margin-left: 2%">
+                            <asp:Label ID="lblPasValideTitreConsult" runat="server" />
+                        </strong>
+                </div>
+                <div class="modal-body" id="edPas" style="margin: 0%; padding: 0 !important">
+                    <div class="alert alert-info row" role="alert" style="margin: 2%">
+                        <p id="gfdPas" style="color: black; font-weight: bolder">
+                            <asp:Label ID="lblPasValidemessageConsult" runat="server" />
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-dismiss="modal"
+                        onclick="return;">OK </button>
+                </div>
+            </div>
+            <!-- Modal content-->
+        </div>
+    </div>
+    <!--fin Modal Notification-->
 
   <input type="hidden" id="notifHiddenF" />
-  </form>
-  <!-- End Step Form -->
-    <!-- End Card -->
+  <!-- End Card -->
   
-
     <script>
-
+      
         $(document).change(function () {
             $("#<%=TbIContrepartie.ClientID%>")
                 .val($("#<%=TbIContrepartie.ClientID%>")
@@ -315,43 +381,7 @@
             chaine = chaine + "@" + chain;
             $("#<%=connmou007.ClientID%>").val(chaine);
         }
-
-        var stoccount = 0; var mainte = 0;
-
-            $("#<%=ReconnexionOpenConsult.ClientID%>").on("click", function (e) {
-
-            var ReconnexLogin = $("#<%=ReconnexLogin.ClientID%>").val(); var ReconnexPassword = $("#<%=ReconnexPassword.ClientID%>").val();
-            $.ajax({
-                type: "POST",
-                url: "../Scoringws.asmx/Connexion_Click",
-                data: "{'ReconnexLogin': '" + ReconnexLogin + "','ReconnexPassword': '" + ReconnexPassword + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                beforeSend: function () { },
-                success: function (response) {
-                    //alert(response.d[0]);
-                    if (response.d[0] != "true") {
-                        stoccount++;
-                        $("#<%=ReconnexPassword.ClientID%>").addClass("danger");
-                            //mainte = 0;
-                        }
-            else {
-                // mainte = 1;
-                // btbtbt
-                $("#btbtbt").click();
-                        }
-            if (stoccount == 3) {stoccount = 0; window.location = "Connexion.aspx"; }
-                    },
-            failure: function (response) {
-                alert("failure");
-                    },
-            error: function (response) {
-                alert("error");
-                    }
-                });
-
-            });
-        
     </script>
     <div id="Scriptos" runat="server"></div>
 </asp:Content>
+ <%--FIN CONTENU DE LA PAGE--%>
